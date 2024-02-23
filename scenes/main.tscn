@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://dmphhgc0nm3es"]
+
+[ext_resource type="PackedScene" uid="uid://vrrsoyx44kxt" path="res://scenes/xr_origin_3d.tscn" id="1_74tjq"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="2_t3a2c"]
+[ext_resource type="PackedScene" uid="uid://tsw88hasqgbb" path="res://objects/pickable_object.tscn" id="4_s3lpw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3ae61"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5a3xy"]
+sky_material = SubResource("ProceduralSkyMaterial_3ae61")
+
+[sub_resource type="Environment" id="Environment_qsaeq"]
+background_mode = 2
+sky = SubResource("Sky_5a3xy")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r7pe4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r8bbw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13gc7"]
+albedo_color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kj31f"]
+material = SubResource("StandardMaterial3D_13gc7")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3q8cs"]
+height = 1.5
+radius = 0.1
+
+[node name="Main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00227356, 0.0209987, -0.00725222)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qsaeq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 0.354
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_r7pe4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_r8bbw")
+
+[node name="XROrigin3D" parent="." instance=ExtResource("1_74tjq")]
+script = ExtResource("2_t3a2c")
+
+[node name="Item1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767979, -0.758066)
+mesh = SubResource("CylinderMesh_kj31f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Item1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Item1/StaticBody3D"]
+shape = SubResource("CylinderShape3D_3q8cs")
+
+[node name="PickableObject" parent="." instance=ExtResource("4_s3lpw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76166, -0.780846)
