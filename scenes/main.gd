@@ -1,15 +1,26 @@
-extends XROrigin3D
+extends Node3D
 
-var xr_interface: XRInterface
+var pause_menu_container: Node
+var paused = false
 
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	xr_interface = XRServer.find_interface("OpenXR")
+	pause_menu_container = $PauseMenuContainer
+
+	if not pause_menu_container:
+		print("PauseMenuContainer not found!")
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		handlePause()
+		
+func handlePause():
+	paused = !paused
 	
-	if xr_interface and xr_interface.is_initialized():
-		print("OpenXR connected")
-		
-		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-		
-		get_viewport().use_xr = true
+	if paused:
+		# Engine.time_scale = 0 - Can't use time_scale with XR
+		pause_menu_container.show()
 	else:
-		print(("OpenXR not connected !"))
+		pause_menu_container.hide()
