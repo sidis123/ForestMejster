@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmphhgc0nm3es"]
+[gd_scene load_steps=17 format=3 uid="uid://dmphhgc0nm3es"]
 
 [ext_resource type="PackedScene" uid="uid://vrrsoyx44kxt" path="res://scenes/xr_origin_3d.tscn" id="1_74tjq"]
-[ext_resource type="Script" path="res://scenes/main.gd" id="2_t3a2c"]
+[ext_resource type="Script" path="res://scenes/Main.cs" id="1_q0anv"]
 [ext_resource type="Script" path="res://scenes/xr.gd" id="3_15x41"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="4_6jim4"]
 [ext_resource type="PackedScene" uid="uid://tsw88hasqgbb" path="res://objects/pickable_object.tscn" id="4_s3lpw"]
 [ext_resource type="PackedScene" uid="uid://bloamgvsdf5yg" path="res://scenes/pause_menu.tscn" id="5_kob5k"]
+[ext_resource type="Script" path="res://scenes/PauseTestCube.cs" id="7_lfw2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3ae61"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,19 +39,33 @@ height = 1.5
 height = 1.5
 radius = 0.1
 
+[sub_resource type="BoxMesh" id="BoxMesh_tduxl"]
+
 [node name="Main" type="Node3D"]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00227356, 0.0209987, -0.00725222)
-script = ExtResource("2_t3a2c")
+script = ExtResource("1_q0anv")
+
+[node name="PauseMenuContainer" parent="." instance=ExtResource("4_6jim4")]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81139, -0.513022)
+visible = false
+screen_size = Vector2(1, 0.75)
+scene = ExtResource("5_kob5k")
+viewport_size = Vector2(500, 375)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 1
 environment = SubResource("Environment_qsaeq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+process_mode = 1
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_energy = 0.354
 shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
@@ -59,11 +74,13 @@ shape = SubResource("BoxShape3D_socox")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_r8bbw")
 
-[node name="XROrigin3D" parent="." instance=ExtResource("1_74tjq")]
+[node name="XROrigin3D" parent="." groups=["Player"] instance=ExtResource("1_74tjq")]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79843, 0)
 script = ExtResource("3_15x41")
 
 [node name="Item1" type="MeshInstance3D" parent="."]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767979, -0.758066)
 mesh = SubResource("CylinderMesh_kj31f")
 
@@ -73,9 +90,11 @@ mesh = SubResource("CylinderMesh_kj31f")
 shape = SubResource("CylinderShape3D_3q8cs")
 
 [node name="PickableObject" parent="." instance=ExtResource("4_s3lpw")]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76166, -0.780846)
 
-[node name="PauseMenuContainer" parent="." instance=ExtResource("4_6jim4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81139, -0.513022)
-screen_size = Vector2(1, 0.75)
-scene = ExtResource("5_kob5k")
+[node name="PauseTestCube" type="MeshInstance3D" parent="."]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5883, -5.96988)
+mesh = SubResource("BoxMesh_tduxl")
+script = ExtResource("7_lfw2m")
