@@ -12,9 +12,9 @@ public partial class PauseMenu : Control
 	private Node3D pauseMenuContainer;
 	private bool paused = false;
 	
-	[Export]
 	public float DistanceInFront = 1.0f; // Distance in front of the player to place the container
 	private XROrigin3D player;
+	private XRCamera3D camera;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -34,11 +34,25 @@ public partial class PauseMenu : Control
 		{
 			GD.Print("Pause menu error: Player node was not found!");
 		}
+		else
+		{
+			camera = player.GetNode<XRCamera3D>("XRCamera3D");
+			if(camera == null)
+			{
+				GD.Print("Pause menu error: Player camera was not found!");
+			}
+		}
+		
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if(paused){
+			PositionMenuInFrontOfPlayer();
+		}
+		
 		if (Input.IsActionJustPressed("pause"))
 		{
 			paused = !paused; // change the current pause state
@@ -53,18 +67,16 @@ public partial class PauseMenu : Control
 	
 	private void PositionMenuInFrontOfPlayer()
 	{
-		// Calculate the forward direction of the player from their rotation
-		Vector3 forwardDir = player.GlobalTransform.Basis.Z.Normalized();
-		// Calculate the new position for the menu, a certain distance in front of the player
-		Vector3 newPosition = player.GlobalTransform.Origin - forwardDir * DistanceInFront;
-
-		// Set the menu's position
+		// Calculate the forward direction of the player camera from its rotation
+		Vector3 forwardDir = camera.GlobalTransform.Basis.Z.Normalized();
+		
+		// Calculate and set new position for menu, in front of camera
+		Vector3 newPosition = camera.GlobalTransform.Origin - forwardDir * DistanceInFront;
 		pauseMenuContainer.Position = new Vector3(newPosition.X, newPosition.Y, newPosition.Z);
 
 		// Make the menu face the player
-		pauseMenuContainer.LookAt(player.GlobalTransform.Origin, Vector3.Up);
-		//pauseMenuContainer.RotateZ(Mathf.Pi);
-		pauseMenuContainer.Rotate(Vector3.Up, Mathf.Pi);
+		pauseMenuContainer.LookAt(camera.GlobalTransform.Origin, Vector3.Up);
+		pauseMenuContainer.Rotate(pauseMenuContainer.Transform.Basis.Y.Normalized(), Mathf.Pi);
 	}
 	
 	private void Pause(){
@@ -72,6 +84,7 @@ public partial class PauseMenu : Control
 		{
 			PositionMenuInFrontOfPlayer();
 			pauseMenuContainer.Visible = true;
+			pauseMenuContainer.Set("enabled", true);
 		}
 		GetTree().Paused = true;
 		EmitSignal(SignalName.Paused);
@@ -81,6 +94,7 @@ public partial class PauseMenu : Control
 		if (pauseMenuContainer != null)
 		{
 			pauseMenuContainer.Visible = false;
+			pauseMenuContainer.Set("enabled", false);
 		}
 		GetTree().Paused = false;
 		EmitSignal(SignalName.Unpaused);

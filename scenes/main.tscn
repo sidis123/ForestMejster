@@ -42,7 +42,6 @@ radius = 0.1
 [sub_resource type="BoxMesh" id="BoxMesh_tduxl"]
 
 [node name="Main" type="Node3D"]
-process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00227356, 0.0209987, -0.00725222)
 script = ExtResource("1_q0anv")
 
@@ -51,21 +50,19 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81139, -0.513022)
 visible = false
 screen_size = Vector2(1, 0.75)
+enabled = false
 scene = ExtResource("5_kob5k")
 viewport_size = Vector2(500, 375)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-process_mode = 1
 environment = SubResource("Environment_qsaeq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-process_mode = 1
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_energy = 0.354
 shadow_enabled = true
 
 [node name="Ground" type="StaticBody3D" parent="."]
-process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
@@ -75,12 +72,10 @@ shape = SubResource("BoxShape3D_socox")
 mesh = SubResource("BoxMesh_r8bbw")
 
 [node name="XROrigin3D" parent="." groups=["Player"] instance=ExtResource("1_74tjq")]
-process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79843, 0)
 script = ExtResource("3_15x41")
 
 [node name="Item1" type="MeshInstance3D" parent="."]
-process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.767979, -0.758066)
 mesh = SubResource("CylinderMesh_kj31f")
 
@@ -90,11 +85,9 @@ mesh = SubResource("CylinderMesh_kj31f")
 shape = SubResource("CylinderShape3D_3q8cs")
 
 [node name="PickableObject" parent="." instance=ExtResource("4_s3lpw")]
-process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.76166, -0.780846)
 
 [node name="PauseTestCube" type="MeshInstance3D" parent="."]
-process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5883, -5.96988)
 mesh = SubResource("BoxMesh_tduxl")
 script = ExtResource("7_lfw2m")

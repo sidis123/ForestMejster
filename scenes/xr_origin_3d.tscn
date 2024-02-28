@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="5_a54i3"]
 
 [node name="XROrigin3D" type="XROrigin3D"]
+process_mode = 3
 
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 
