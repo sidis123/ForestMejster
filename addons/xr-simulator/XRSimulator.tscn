@@ -5,4 +5,3 @@
 [node name="XRSimulator" type="Node"]
 process_mode = 3
 script = ExtResource("1_uljju")
-enabled = true
