@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://db6uhm7fvy5kx"]
+
+[ext_resource type="Script" path="res://addons/godot-xr-tools/objects/pickable.gd" id="1_3usp4"]
+[ext_resource type="ArrayMesh" uid="uid://qxhls53pab30" path="res://objects/axe.tres" id="2_r8qhr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbxw2"]
+height = 1.98517
+radius = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2jg8l"]
+size = Vector3(0.973633, 0.765625, 0.232666)
+
+[node name="axe" type="RigidBody3D"]
+script = ExtResource("1_3usp4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.929875, 0, -0.955348)
+shape = SubResource("CylinderShape3D_jbxw2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_r8qhr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.717998, 0.691982, -0.931306)
+shape = SubResource("BoxShape3D_2jg8l")

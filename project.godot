@@ -26,7 +26,7 @@ project/assembly_name="FNAF VR"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/dreadpon.spatial_gardener/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg")
 
 [filesystem]
 
