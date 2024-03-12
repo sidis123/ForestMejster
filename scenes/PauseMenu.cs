@@ -14,6 +14,7 @@ public partial class PauseMenu : Control
 	
 	public float DistanceInFront = 1.0f; // Distance in front of the player to place the container
 	private XROrigin3D player;
+	private XRController3D lefthand;
 	private XRCamera3D camera;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -41,6 +42,9 @@ public partial class PauseMenu : Control
 			{
 				GD.Print("Pause menu error: Player camera was not found!");
 			}
+			// Get the left hand controller and connect the button_pressed signal
+			lefthand = player.GetNode<XRController3D>("LeftHand");
+			lefthand.Connect("button_pressed", new Callable(this, nameof(OnButtonPressed)));
 		}
 		
 		
@@ -55,14 +59,27 @@ public partial class PauseMenu : Control
 		
 		if (Input.IsActionJustPressed("pause"))
 		{
-			paused = !paused; // change the current pause state
+			TogglePauseMenu();
+		}
+	}
+	
+	// Called when left hand controller button is pressed
+	private void OnButtonPressed(string buttonName)
+	{
+		if(buttonName == "menu_button"){
+			TogglePauseMenu();
+		}
+	}
+	
+	private void TogglePauseMenu()
+	{
+		paused = !paused; // change the current pause state
 			if (paused) {
 				Pause();
 			}
 			else{
 				Unpause();
 			}
-		}
 	}
 	
 	private void PositionMenuInFrontOfPlayer()

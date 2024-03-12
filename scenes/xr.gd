@@ -26,15 +26,19 @@ func _ready():
 		pause_menu.Unpaused.connect(_on_unpaused)
 
 func _on_paused():
-	# Disables the player's ability to move (seems to not work in simulation)
-	$LeftHand/MovementDirect.set_process(false)
+	# Disables the player's ability to move and interact
+	$LeftHand/MovementDirect.enabled = false
+	$LeftHand/FunctionPickup.enabled = false
+	$RightHand/FunctionPickup.enabled = false
 	# Enables the pointers so the player could interact with the menu
 	$LeftHand/FunctionPointer.enabled = true
 	$RightHand/FunctionPointer.enabled = true
 
 func _on_unpaused():
-	# Enables the player's ability to move
-	$LeftHand/MovementDirect.set_process(true)
+	# Enables the player's ability to move and interact
+	$LeftHand/MovementDirect.enabled = true
+	$LeftHand/FunctionPickup.enabled = true
+	$RightHand/FunctionPickup.enabled = true
 	# Disables the pointers
 	$LeftHand/FunctionPointer.enabled = false
 	$RightHand/FunctionPointer.enabled = false

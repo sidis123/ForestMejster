@@ -41,22 +41,26 @@ alignment = 1
 
 [node name="ResumeButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Settings
 "
 
 [node name="ExitToMenuButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Exit To Main Menu"
 
 [node name="ExitGameButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
 text = "Exit Game"
 
