@@ -1,26 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsotifvyxaf5u"]
+[gd_scene load_steps=8 format=3 uid="uid://bsotifvyxaf5u"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_wl3mh"]
-size = Vector3(0.1, 0.1, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7u5wu"]
-size = Vector3(0.1, 0.1, 0.1)
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_i0vxa"]
+[ext_resource type="PackedScene" uid="uid://bq86r4yll8po" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_fullglove_low.tscn" id="1_xn7kd"]
+[ext_resource type="PackedScene" uid="uid://xqimcf20s2jp" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_fullglove_low.tscn" id="2_uiry7"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="3_xk607"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_y5i8i"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="6_gddok"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_ls5gy"]
 
 [node name="PlayerOrigin" type="XROrigin3D"]
 
 [node name="PlayerCamera" type="XRCamera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 
+[node name="XRToolsShaderCache" parent="PlayerCamera" instance=ExtResource("1_i0vxa")]
+
 [node name="LeftHand" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
 tracker = &"left_hand"
 
-[node name="TestMeshLeft" type="MeshInstance3D" parent="LeftHand"]
-mesh = SubResource("BoxMesh_wl3mh")
+[node name="LeftHand" parent="LeftHand" instance=ExtResource("1_xn7kd")]
+
+[node name="MovementDirect" parent="LeftHand" instance=ExtResource("3_xk607")]
+strafe = true
+
+[node name="FunctionPickup" parent="LeftHand" instance=ExtResource("6_gddok")]
+grab_distance = 0.2
 
 [node name="RightHand" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
 tracker = &"right_hand"
 
-[node name="TestMeshRight" type="MeshInstance3D" parent="RightHand"]
-mesh = SubResource("BoxMesh_7u5wu")
+[node name="RightHand" parent="RightHand" instance=ExtResource("2_uiry7")]
+
+[node name="MovementTurn" parent="RightHand" instance=ExtResource("5_y5i8i")]
+turn_mode = 2
+step_turn_angle = 45.0
+
+[node name="FunctionPickup" parent="RightHand" instance=ExtResource("6_gddok")]
+grab_distance = 0.2
+
+[node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]

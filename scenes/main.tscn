@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=11 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_w3t85"]
+[ext_resource type="PackedScene" uid="uid://bdmtj8pyblxl5" path="res://scenes/pickable_cube.tscn" id="3_5rs3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0xy5"]
 sky_top_color = Color(0.494118, 0.733333, 1, 1)
@@ -23,6 +24,12 @@ size = Vector3(10, 0.2, 10)
 [sub_resource type="BoxMesh" id="BoxMesh_ubxwe"]
 size = Vector3(10, 0.2, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_kiri2"]
+size = Vector3(5, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qo0d2"]
+size = Vector3(5, 0.1, 1)
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -33,13 +40,31 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 light_color = Color(1, 0.858824, 0.654902, 1)
 shadow_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_e77tj")]
+[node name="PlayerInstance" parent="." instance=ExtResource("1_e77tj")]
 script = ExtResource("2_w3t85")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_kg28b")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_ubxwe")
+
+[node name="Table" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -4.078)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+shape = SubResource("BoxShape3D_kiri2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table/CollisionShape3D"]
+mesh = SubResource("BoxMesh_qo0d2")
+
+[node name="PickableCube0" parent="Table" instance=ExtResource("3_5rs3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137565, -0.0382729)
+
+[node name="PickableCube1" parent="Table" instance=ExtResource("3_5rs3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189554, 0.137565, -0.0382729)
+
+[node name="PickableCube2" parent="Table" instance=ExtResource("3_5rs3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.166407, 0.137565, -0.0382729)
