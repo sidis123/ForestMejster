@@ -13,6 +13,7 @@ var xr_controller_left: XRController3D
 var movement_direct_left: XRToolsMovementDirect
 var function_pickup_left: XRToolsFunctionPickup
 var function_pointer_left: XRToolsFunctionPointer
+var function_pointer_collision_left: CollisionShape3D
 
 # Signals
 signal pause_toggled
@@ -48,8 +49,8 @@ func init_controllers() -> void:
 		if not function_pointer_right:
 			push_error("The right function pointer was not found")
 		else:
-			function_pointer_right.visible = false
-			function_pointer_right.set_process(false)
+			function_pointer_right.set_enabled(false)
+			function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 	
 	# Initialise the left controller and its children
 	xr_controller_left = XRHelpers.get_left_controller(self)
@@ -64,8 +65,8 @@ func init_controllers() -> void:
 		if not function_pointer_left:
 			push_error("The left function pointer was not found")
 		else:
-			function_pointer_left.visible = false
-			function_pointer_left.set_process(false)
+			function_pointer_left.set_enabled(false)
+			function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 
 func toggle_pause() -> void:
 	pause_toggled.emit()
@@ -75,14 +76,15 @@ func _on_right_controller_button_pressed(p_button: String) -> void:
 	match p_button:
 		"ax_button":
 			function_pointer_right.set_enabled(true)
+			function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.SHOW)
 		_: 
-			print("Button input unhandled")
-			
+			print("Button input unhandled")			
 func _on_right_controller_button_released(p_button: String) -> void:
 	print(p_button + " was released on the right controller")
 	match p_button:
 		"ax_button":
 			function_pointer_right.set_enabled(false)
+			function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 		_: 
 			print("Button release unhandled")
 			
@@ -90,8 +92,8 @@ func _on_left_controller_button_pressed(p_button: String) -> void:
 	print(p_button + " was pressed on the left controller")
 	match p_button:
 		"ax_button":
-			function_pointer_left.visible = true
-			function_pointer_left.set_process(true)
+			function_pointer_left.set_enabled(true)
+			function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.SHOW)
 		"menu_button":
 			toggle_pause()
 		_: 
@@ -101,8 +103,8 @@ func _on_left_controller_button_released(p_button: String) -> void:
 	print(p_button + " was released on the left controller")
 	match p_button:
 		"ax_button":
-			function_pointer_left.visible = false
-			function_pointer_left.set_process(false)
+			function_pointer_left.set_enabled(false)
+			function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 		_: 
 			print("Button release unhandled")
 	

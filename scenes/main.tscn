@@ -60,9 +60,12 @@ mesh = SubResource("BoxMesh_qo0d2")
 
 [node name="PickableCube0" parent="Table" instance=ExtResource("3_5rs3s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137565, -0.0382729)
+ranged_grab_method = 2
 
 [node name="PickableCube1" parent="Table" instance=ExtResource("3_5rs3s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189554, 0.137565, -0.0382729)
+ranged_grab_method = 2
 
 [node name="PickableCube2" parent="Table" instance=ExtResource("3_5rs3s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.166407, 0.137565, -0.0382729)
+ranged_grab_method = 2

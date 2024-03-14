@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsotifvyxaf5u"]
+[gd_scene load_steps=11 format=3 uid="uid://bsotifvyxaf5u"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_524a5"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_i0vxa"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="5_y5i8i"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="6_gddok"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_ls5gy"]
+[ext_resource type="Material" path="res://addons/godot-xr-tools/materials/pointer.tres" id="7_cl1xv"]
 
 [node name="PlayerOrigin" type="XROrigin3D"]
 script = ExtResource("1_524a5")
@@ -32,8 +33,11 @@ step_turn_angle = 45.0
 grab_distance = 0.2
 
 [node name="FunctionPointer" parent="RightHandController" instance=ExtResource("5_5oj1i")]
+enabled = false
 distance = 2.0
+show_laser = 0
 laser_length = 1
+laser_material = ExtResource("7_cl1xv")
 show_target = true
 
 [node name="LeftHandController" type="XRController3D" parent="."]
@@ -49,8 +53,10 @@ strafe = true
 grab_distance = 0.2
 
 [node name="FunctionPointer" parent="LeftHandController" instance=ExtResource("5_5oj1i")]
+enabled = false
 distance = 2.0
 laser_length = 1
+laser_material = ExtResource("7_cl1xv")
 show_target = true
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]
