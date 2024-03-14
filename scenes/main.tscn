@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=10 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="2_w3t85"]
 [ext_resource type="PackedScene" uid="uid://bdmtj8pyblxl5" path="res://scenes/pickable_cube.tscn" id="3_5rs3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0xy5"]
@@ -41,7 +40,6 @@ light_color = Color(1, 0.858824, 0.654902, 1)
 shadow_enabled = true
 
 [node name="PlayerInstance" parent="." instance=ExtResource("1_e77tj")]
-script = ExtResource("2_w3t85")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
