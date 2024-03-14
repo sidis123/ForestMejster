@@ -31,14 +31,17 @@ step_turn_angle = 45.0
 
 [node name="FunctionPickupRight" parent="RightHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2
+ranged_enable = false
+ranged_distance = 2.0
 
-[node name="FunctionPointer" parent="RightHandController" instance=ExtResource("5_5oj1i")]
+[node name="FunctionPointerRight" parent="RightHandController" instance=ExtResource("5_5oj1i")]
 enabled = false
 distance = 2.0
 show_laser = 0
 laser_length = 1
 laser_material = ExtResource("7_cl1xv")
 show_target = true
+collision_mask = 5242884
 
 [node name="LeftHandController" type="XRController3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
@@ -51,12 +54,15 @@ strafe = true
 
 [node name="FunctionPickupLeft" parent="LeftHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2
+ranged_enable = false
+ranged_distance = 2.0
 
-[node name="FunctionPointer" parent="LeftHandController" instance=ExtResource("5_5oj1i")]
+[node name="FunctionPointerLeft" parent="LeftHandController" instance=ExtResource("5_5oj1i")]
 enabled = false
 distance = 2.0
 laser_length = 1
 laser_material = ExtResource("7_cl1xv")
 show_target = true
+collision_mask = 5242884
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]
