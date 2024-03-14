@@ -16,7 +16,7 @@ var function_pointer_left: XRToolsFunctionPointer
 var function_pointer_collision_left: CollisionShape3D
 
 # Signals
-signal pause_toggled
+signal controller_toggled_pause
 
 func _ready():
 	init_xr_interface()
@@ -65,9 +65,7 @@ func init_controllers() -> void:
 			push_error("The left function pointer was not found")
 		else:
 			disable_left_pointer()
-
-func toggle_pause() -> void:
-	pause_toggled.emit()
+	
 	
 func enable_right_pointer():
 	function_pointer_right.set_enabled(true)
@@ -79,6 +77,7 @@ func disable_right_pointer():
 	function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 	function_pickup_right.ranged_enable = false
 	
+	
 func enable_left_pointer():
 	function_pointer_left.set_enabled(true)
 	function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.SHOW)
@@ -88,6 +87,7 @@ func disable_left_pointer():
 	function_pointer_left.set_enabled(false)
 	function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 	function_pickup_left.ranged_enable = false
+	
 
 func _on_right_controller_button_pressed(p_button: String) -> void:
 	print(p_button + " was pressed on the right controller")	
@@ -105,13 +105,15 @@ func _on_right_controller_button_released(p_button: String) -> void:
 		_: 
 			print("Button release unhandled")
 			
+			
 func _on_left_controller_button_pressed(p_button: String) -> void:
 	print(p_button + " was pressed on the left controller")
 	match p_button:
 		"ax_button":
 			enable_left_pointer()
 		"menu_button":
-			toggle_pause()
+			# Instead of disabling movement, make sure movement and player body are pausable
+			controller_toggled_pause.emit()
 		_: 
 			print("Button press unhandled")
 			
@@ -122,7 +124,5 @@ func _on_left_controller_button_released(p_button: String) -> void:
 			disable_left_pointer()
 		_: 
 			print("Button release unhandled")
-	
-
 
 # TODO: turn the Turn Mode on MovementTurn into a setting

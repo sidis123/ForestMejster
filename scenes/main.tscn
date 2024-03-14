@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=12 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
 [ext_resource type="PackedScene" uid="uid://bdmtj8pyblxl5" path="res://scenes/pickable_cube.tscn" id="3_5rs3s"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_x6jvw"]
+[ext_resource type="PackedScene" uid="uid://b5gug5ecibfou" path="res://scenes/pause_menu.tscn" id="4_s7kne"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0xy5"]
 sky_top_color = Color(0.494118, 0.733333, 1, 1)
@@ -31,6 +33,15 @@ size = Vector3(5, 0.1, 1)
 
 [node name="Main" type="Node3D"]
 
+[node name="PlayerInstance" parent="." instance=ExtResource("1_e77tj")]
+
+[node name="PauseMenuViewport" parent="." instance=ExtResource("3_x6jvw")]
+process_mode = 3
+screen_size = Vector2(1, 0.8)
+collision_layer = 5242880
+scene = ExtResource("4_s7kne")
+viewport_size = Vector2(800, 600)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c80sr")
 
@@ -38,8 +49,6 @@ environment = SubResource("Environment_c80sr")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_color = Color(1, 0.858824, 0.654902, 1)
 shadow_enabled = true
-
-[node name="PlayerInstance" parent="." instance=ExtResource("1_e77tj")]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 

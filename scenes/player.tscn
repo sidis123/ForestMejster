@@ -12,14 +12,18 @@
 [ext_resource type="Material" path="res://addons/godot-xr-tools/materials/pointer.tres" id="7_cl1xv"]
 
 [node name="PlayerOrigin" type="XROrigin3D"]
+process_mode = 3
 script = ExtResource("1_524a5")
 
 [node name="PlayerCamera" type="XRCamera3D" parent="."]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 
 [node name="XRToolsShaderCache" parent="PlayerCamera" instance=ExtResource("1_i0vxa")]
+process_mode = 3
 
 [node name="RightHandController" type="XRController3D" parent="."]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, -0.5)
 tracker = &"right_hand"
 
@@ -44,12 +48,14 @@ show_target = true
 collision_mask = 5242884
 
 [node name="LeftHandController" type="XRController3D" parent="."]
+process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, -0.5)
 tracker = &"left_hand"
 
 [node name="LeftHand" parent="LeftHandController" instance=ExtResource("1_xn7kd")]
 
 [node name="MovementDirect" parent="LeftHandController" instance=ExtResource("3_xk607")]
+process_mode = 1
 strafe = true
 
 [node name="FunctionPickupLeft" parent="LeftHandController" instance=ExtResource("6_gddok")]
@@ -66,3 +72,4 @@ show_target = true
 collision_mask = 5242884
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]
+process_mode = 1
