@@ -1,5 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://qat0jalvcswc"]
+[gd_scene load_steps=3 format=3 uid="uid://qat0jalvcswc"]
 
 [ext_resource type="PackedScene" uid="uid://brcs68vgehx1" path="res://models/tent/tent.glb" id="1_l3cta"]
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r5cc3"]
+points = PackedVector3Array(-0.874149, -0.0582595, -1.48262, -0.926044, 2.3074, -0.100472, 0.741804, 0.103326, -2.53291, -0.793321, -0.139183, 2.5571, 0.942829, 2.29124, 0.11424, 0.741804, -0.139183, 2.5571, -0.793321, -0.139183, -2.6139, 1.06532, 0.588084, -1.80555, -1.03581, 0.588084, 1.82974, 0.741804, -0.139183, -2.53291, -0.793321, 0.103326, 2.5571, -1.03581, 0.588084, -1.80555, 1.06532, 0.588084, 1.82974, 0.95713, 2.30939, -0.100592, -0.793321, 0.103326, -2.6139, 0.741804, 0.103326, 2.5571, -0.911852, 2.28939, 0.114016, 0.903461, -0.0582595, 0.375521, 0.903461, -0.0582595, -0.674269, -0.874149, -0.0582595, -0.10888, -0.631664, 0.103326, -2.6139, -0.631664, -0.139183, -2.6139)
+
 [node name="Tent" instance=ExtResource("1_l3cta")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Tent" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tent/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_r5cc3")
