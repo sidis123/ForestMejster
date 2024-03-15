@@ -3,16 +3,17 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvo1t1csolqw5"
-path.s3tc="res://.godot/imported/Smoke30Frames_0.png-e4212571d2adb62687f36f4de96604d8.s3tc.ctex"
+path.s3tc="res://.godot/imported/Smoke30Frames_0.png-6f1d8c99346218985dda45a5fe26cdb7.s3tc.ctex"
+path.etc2="res://.godot/imported/Smoke30Frames_0.png-6f1d8c99346218985dda45a5fe26cdb7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
-source_file="res://objects/Smoke30Frames_0.png"
-dest_files=["res://.godot/imported/Smoke30Frames_0.png-e4212571d2adb62687f36f4de96604d8.s3tc.ctex"]
+source_file="res://models/nature/trees/Smoke30Frames_0.png"
+dest_files=["res://.godot/imported/Smoke30Frames_0.png-6f1d8c99346218985dda45a5fe26cdb7.s3tc.ctex", "res://.godot/imported/Smoke30Frames_0.png-6f1d8c99346218985dda45a5fe26cdb7.etc2.ctex"]
 
 [params]
 
