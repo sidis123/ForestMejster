@@ -24,6 +24,13 @@ XrSimulator="*res://addons/xr-simulator/XRSimulator.tscn"
 
 enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://resources/bushes/": "green",
+"res://resources/rocks/": "gray"
+}
+
 [layer_names]
 
 3d_physics/layer_1="Static World"
