@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 var swim_speed = 1.0
-var random_factor = 1.2
+var random_factor = 1
 var min_y_position = -4.5
 
 func _ready():
