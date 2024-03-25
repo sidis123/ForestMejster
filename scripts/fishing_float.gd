@@ -26,10 +26,6 @@ func _ready():
 	if not target:
 		push_error("Fishing float failed to find float target")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 # Called every physics frame
 func _physics_process(delta):
 	if connected:
@@ -56,8 +52,9 @@ func _on_action_pressed():
 	#if connected:
 		#reset = true
 
+# Detects collisions
 func _on_body_entered(body):
-	print(body)
+	#print(body)
 	var layer = body.get_collision_layer()
 	if layer and layer == 10: # check if colliding with fishable water
 		pass
