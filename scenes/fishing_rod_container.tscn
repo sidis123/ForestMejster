@@ -16,3 +16,5 @@ script = ExtResource("3_fp70s")
 
 [node name="FishingFloat" parent="." instance=ExtResource("2_8ystg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0369989, -0.973656)
+
+[connection signal="landed_in_water" from="FishingFloat" to="." method="_on_float_landed"]

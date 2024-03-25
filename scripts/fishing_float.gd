@@ -1,14 +1,16 @@
 extends RigidBody3D
 
-var target: Node3D
-var fishing_rod_container: Node3D
-#var reset: bool = false
-
-# Spring force constant
-const k := 5.0
-
 # Whether the float is connected to the fishing rod
 var connected: bool = true
+
+# The float target that the float is attached to when connected
+var target: Node3D
+
+# The fishing rod container
+var fishing_rod_container: Node3D
+
+# Signal for when the float lands in water (TODO: use this to start the fishing minigame)
+signal landed_in_water
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,21 +27,14 @@ func _ready():
 	target = get_node("../FishingRod/FloatTarget")
 	if not target:
 		push_error("Fishing float failed to find float target")
-
+	
+	
 # Called every physics frame
 func _physics_process(delta):
 	if connected:
+		# Set the position of the float to the target
 		global_position = target.global_position
-
-# Called during physics processing, allowing safe reading and modification of the object's simulation state 
-#func _integrate_forces(state):
-	#if connected:
-		#if reset:
-			#state.transform.origin = target.transform.origin
-			#reset = false
-		#var force_direction: Vector3 = target.global_position - global_position
-		#var force: Vector3 = force_direction * k
-		#state.apply_force(force, Vector3.ZERO) 
+	
 	
 # Handles the interaction signal from the fishing rod
 func _on_action_pressed():
@@ -49,16 +44,15 @@ func _on_action_pressed():
 	else:
 		freeze = false
 		linear_velocity = target.estimated_velocity
-	#if connected:
-		#reset = true
-
+	
+	
 # Detects collisions
 func _on_body_entered(body):
-	#print(body)
 	var layer = body.get_collision_layer()
-	if layer and layer == 10: # check if colliding with fishable water
-		pass
+	if layer and layer == pow(2,9): 
+		# If colliding with fishable water, a signal is emitted  
+		landed_in_water.emit()
 	else:
-		# Reset if colliding with anything else
+		# Ff colliding with anything else, the float is reset
 		connected = true
 		freeze = true
