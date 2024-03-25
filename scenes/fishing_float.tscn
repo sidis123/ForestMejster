@@ -6,15 +6,12 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ognoa"]
 points = PackedVector3Array(-0.501801, -0.216537, -0.787932, 0.389081, 0.450883, 1.08865, 0.514326, 0.403352, 1.02214, 0.0558813, 2.1982, -0.0616213, 1.18818, 0.2894, -0.0566091, -0.977492, 0.405751, 0.748325, 0.0558813, -1.731, 0.0607333, 0.396772, 0.289018, -1.12009, -0.976781, 0.405639, -0.748711, -0.849942, -0.449024, -0.0571349, -0.28274, -0.394678, 0.856622, -0.0669782, 2.13627, 0.122031, 0.743063, -0.392335, -0.512574, 0.743419, -0.392692, 0.511995, -0.0669782, -1.731, -0.0616213, 0.288975, 0.290422, 1.1478, 1.13528, 0.402641, 0.169116, 0.230986, 0.404321, -1.14293, -0.282535, -0.394357, -0.856832, 0.514194, 0.403295, -1.02245, 0.117083, 2.13627, 0.0607333, -0.0669782, 2.1982, -0.0616213, -0.128408, -1.66946, 0.0607333, 1.13483, 0.402566, -0.169909, 0.231041, 0.404403, 1.14284, 0.0558813, -1.66946, -0.122919, -0.90597, -0.221105, 0.226673, 0.117083, -1.66946, -0.0616213, 0.0558813, -1.66946, 0.122031, -0.972399, 0.347833, -0.745714, 0.453375, 0.2336, 1.06495, -0.972843, 0.34788, 0.745146)
 
-[node name="Fishing_float" type="Node3D"]
-transform = Transform3D(1.69432, 0, 0, 0, 1.69432, 0, 0, 0, 1.69432, 34.2026, 0, 32.0041)
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="FishingFloat" type="RigidBody3D"]
 script = ExtResource("1_5cgpm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="FloatMesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_e3h5b")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="FloatCollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_ognoa")

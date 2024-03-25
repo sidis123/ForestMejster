@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://2n7g68gnmq2e"]
+
+[ext_resource type="PackedScene" uid="uid://bcoan783pbvdq" path="res://scenes/fishing_rod.tscn" id="1_7ce2q"]
+
+[node name="FishingRodContainer" type="Node3D"]
+
+[node name="FishingRod" parent="." instance=ExtResource("1_7ce2q")]
