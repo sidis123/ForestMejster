@@ -1,30 +1,58 @@
 extends RigidBody3D
 
-@export var float_force := 1
-@onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-const water_height := -2.5
-var time_since_last_push := 0.0  # Timer to track time since last push
-var push_interval := 20.0  # Interval in seconds for the strong push
-var strong_push_force := 10.0  # Adjust the strength of the strong push here
+# Whether the float is connected to the fishing rod
+var connected: bool = true
+
+# The float target that the float is attached to when connected
+var target: Node3D
+
+# The fishing rod container
+var fishing_rod_container: Node3D
+
+# Signal for when the float lands in water (TODO: use this to start the fishing minigame)
+signal landed_in_water
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	time_since_last_push = 0.0
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+	# Disable the rigid body
+	freeze = true
+	
+	# Find the fishing rod container
+	fishing_rod_container = get_node("../")
+	if not fishing_rod_container:
+		push_error("Fishing float failed to find the fishing rod container")
+	fishing_rod_container.action_pressed.connect(_on_action_pressed)
+	
+	# Find the float target
+	target = get_node("../FishingRod/FloatTarget")
+	if not target:
+		push_error("Fishing float failed to find float target")
+	
+	
 # Called every physics frame
 func _physics_process(delta):
-	# Update the timer
-	time_since_last_push += delta
-
-	# Check if 20 seconds have passed
-	if time_since_last_push >= push_interval:
-		apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push upwards
-		time_since_last_push = 0  # Reset the timer
-
-	# Your existing floating logic
-	if global_position.y < water_height:
-		apply_force(Vector3.UP * float_force * gravity * 1.5)
+	if connected:
+		# Set the position of the float to the target
+		global_position = target.global_position
+	
+	
+# Handles the interaction signal from the fishing rod
+func _on_action_pressed():
+	connected = !connected
+	if connected:
+		freeze = true
+	else:
+		freeze = false
+		linear_velocity = target.estimated_velocity
+	
+	
+# Detects collisions
+func _on_body_entered(body):
+	var layer = body.get_collision_layer()
+	if layer and layer == pow(2,9): 
+		# If colliding with fishable water, a signal is emitted  
+		landed_in_water.emit()
+	else:
+		# Ff colliding with anything else, the float is reset
+		connected = true
+		freeze = true

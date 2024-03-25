@@ -90,4 +90,5 @@ jump_button_action = "by_button"
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]
 process_mode = 1
+collision_mask = 31
 physics = SubResource("Resource_l5fo3")

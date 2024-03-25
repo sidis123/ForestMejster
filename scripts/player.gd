@@ -88,41 +88,39 @@ func disable_left_pointer():
 	function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
 	function_pickup_left.ranged_enable = false
 	
+	
+## Controller input handling
+## All methods handling input signals should be here
+## Internal functionality should be realised in other methods
+## External functionality should use emitted signals
+## Avoid writing logic directlly into the handling
 
 func _on_right_controller_button_pressed(p_button: String) -> void:
-	print(p_button + " was pressed on the right controller")	
+	#print(p_button + " was pressed on the right controller")	
 	match p_button:
 		"ax_button":
 			enable_right_pointer()
-		_: 
-			print("Button input unhandled")
 			
 func _on_right_controller_button_released(p_button: String) -> void:
-	print(p_button + " was released on the right controller")
+	#print(p_button + " was released on the right controller")
 	match p_button:
 		"ax_button":
 			disable_right_pointer()
-		_: 
-			print("Button release unhandled")
 			
 			
 func _on_left_controller_button_pressed(p_button: String) -> void:
-	print(p_button + " was pressed on the left controller")
+	#print(p_button + " was pressed on the left controller")
 	match p_button:
 		"ax_button":
 			enable_left_pointer()
 		"menu_button":
 			# Instead of disabling movement, make sure movement and player body are pausable
 			controller_toggled_pause.emit()
-		_: 
-			print("Button press unhandled")
 			
 func _on_left_controller_button_released(p_button: String) -> void:
-	print(p_button + " was released on the left controller")
+	#print(p_button + " was released on the left controller")
 	match p_button:
 		"ax_button":
 			disable_left_pointer()
-		_: 
-			print("Button release unhandled")
 
 # TODO: turn the Turn Mode on MovementTurn into a setting
