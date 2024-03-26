@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://2n7g68gnmq2e"]
+
+[ext_resource type="Script" path="res://scripts/fishing_rod.gd" id="1_1tyxx"]
+[ext_resource type="PackedScene" uid="uid://bcoan783pbvdq" path="res://scenes/fishing_rod.tscn" id="1_7ce2q"]
+[ext_resource type="PackedScene" uid="uid://dil16xqh8spna" path="res://scenes/fishing_float.tscn" id="2_8ystg"]
+[ext_resource type="Script" path="res://scripts/fishing_float_target.gd" id="3_fp70s"]
+
+[node name="FishingRodContainer" type="Node3D"]
+script = ExtResource("1_1tyxx")
+
+[node name="FishingRod" parent="." instance=ExtResource("1_7ce2q")]
+
+[node name="FloatTarget" type="Node3D" parent="FishingRod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0353016, -0.973656)
+script = ExtResource("3_fp70s")
+
+[node name="FishingFloat" parent="." instance=ExtResource("2_8ystg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0369989, -0.973656)
+max_contacts_reported = 1
+
+[connection signal="landed_in_water" from="FishingFloat" to="." method="_on_float_landed"]
