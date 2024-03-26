@@ -1,101 +1,105 @@
 shader_type spatial;
 
-// Amount of height for each triangle
-uniform float triangle_height: hint_range(0.2, 5.0, 0.1) = 0.8;
-// The speed of the trangles height change
-uniform float triangle_speed: hint_range(0.1, 5.0, 0.1) = 1;
-uniform vec3 albedo : source_color;
-uniform vec3 albedo2 : source_color;
-uniform float metallic : hint_range(0.0, 1.0) =0;
-uniform float roughness : hint_range(0.0, 1.0) =0.02;
-uniform sampler2D wave;
-uniform sampler2D texture_normal;
-uniform sampler2D texture_normal2;
-uniform vec2 wave_direction = vec2(2.0, 0.0);
-uniform vec2 wave_direction2 = vec2(0.0, 1.0);
-uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.025;
-uniform float noise_scale = 10.0;
-uniform float height_scale = 0.15;
+// Uniforms related to triangle animation
+uniform float triangleHeight: hint_range(0.2, 5.0, 0.1) = 0.8;
+uniform float triangleSpeed: hint_range(0.1, 5.0, 0.1) = 1;
 
-uniform vec4 color_deep : source_color;
-uniform vec4 color_shallow : source_color;
-uniform float beers_law = 2.0;
-uniform float depth_offset= -0.75;
-uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+// Surface properties
+uniform vec3 primaryColor : source_color;
+uniform vec3 secondaryColor : source_color;
+uniform float metallic : hint_range(0.0, 1.0) = 0;
+uniform float roughness : hint_range(0.0, 1.0) = 0.02;
 
-uniform float edge_scale =0.1;
-uniform float near =1.0;
-uniform float far= 100.0;
-uniform vec3 edge_color : source_color;
+// Normal textures for surface distortion
+uniform sampler2D normalTexture1;
+uniform sampler2D normalTexture2;
 
-varying float height;
-varying vec3 world_pos;
+// Wave direction for surface distortion
+uniform vec2 waveDirection1 = vec2(2.0, 0.0);
+uniform vec2 waveDirection2 = vec2(0.0, 1.0);
+uniform float timeScale : hint_range(0.0, 0.2, 0.005) = 0.025;
 
-float generateOffset(float x, float z, float val1, float val2, float time) {
-	float radiansX = ((mod(x + z * x * val1, triangle_height) / triangle_height) + (time * triangle_speed) * mod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
-	float radiansZ = ((mod(val2 * (z * x + x * z), triangle_height) / triangle_height) + (time * triangle_speed) * 2.0 * mod(x, 2.0)) * 2.0 * 3.14;
-	
-	return triangle_height * 0.5 * (sin(radiansZ) * cos(radiansX));
+// Water color and depth parameters
+uniform vec4 deepWaterColor : source_color;
+uniform vec4 shallowWaterColor : source_color;
+uniform float attenuationCoefficient = 2.0;
+uniform float depthOffset = -0.75;
+
+// Depth and screen textures for depth effects
+uniform sampler2D depthTexture : hint_depth_texture, filter_linear_mipmap;
+uniform sampler2D screenTexture : hint_screen_texture, filter_linear_mipmap;
+
+// Edge detection for depth difference
+uniform float edgeScale = 0.1;
+uniform float nearPlane = 1.0;
+uniform float farPlane = 100.0;
+uniform vec3 edgeColor : source_color;
+
+// Function to generate vertex offset for distortion effect
+float generateVertexOffset(float x, float z, float modX, float modZ, float time) {
+    float waveX = ((mod(x + z * x * modX, triangleHeight) / triangleHeight) + 
+                   (time * triangleSpeed) * mod(x * 0.8 + z, 1.5)) * 2.0 * 3.14;
+    float waveZ = ((mod(modZ * (z * x + x * z), triangleHeight) / triangleHeight) + 
+                   (time * triangleSpeed) * 2.0 * mod(x, 2.0)) * 2.0 * 3.14;
+    
+    return triangleHeight * 0.5 * (sin(waveZ) * cos(waveX));
 }
 
-vec3 applyDistortion(vec3 vertex, float time) {
-	float xd = generateOffset(vertex.x, vertex.z, 0.2, 0.1, time);
-	float yd = generateOffset(vertex.x, vertex.z, 0.1, 0.3, time);
-	float zd = generateOffset(vertex.x, vertex.z, 0.15, 0.2, time);
-	
-	return vertex + vec3(xd, yd, zd);
+// Applying distortion to the vertex position
+vec3 applyDistortion(vec3 vertexPosition, float time) {
+    float xDistortion = generateVertexOffset(vertexPosition.x, vertexPosition.z, 0.2, 0.1, time);
+    float yDistortion = generateVertexOffset(vertexPosition.x, vertexPosition.z, 0.1, 0.3, time);
+    float zDistortion = generateVertexOffset(vertexPosition.x, vertexPosition.z, 0.15, 0.2, time);
+    
+    return vertexPosition + vec3(xDistortion, yDistortion, zDistortion);
 }
 
-float fresnel(float amount, vec3 normal, vec3 view)
-{
-	return pow((1.0 - clamp(dot(normalize(normal),normalize(view)),0.0,1.0)),amount);
+// Fresnel effect for reflection intensity
+float calculateFresnelEffect(float intensity, vec3 normal, vec3 viewDirection) {
+    return pow((1.0 - clamp(dot(normalize(normal), normalize(viewDirection)), 0.0, 1.0)), intensity);
 }
 
-float edge(float depth)
-{
-	depth=2.0 * depth-1.0;
-	return near * far /(far + depth * (near- far));
+// Calculating edge depth for depth blending
+float calculateEdgeDepth(float depthValue) {
+    depthValue = 2.0 * depthValue - 1.0;
+    return nearPlane * farPlane / (farPlane + depthValue * (nearPlane - farPlane));
 }
 
+// Vertex shader
 void vertex() {
-	VERTEX = applyDistortion(VERTEX, TIME * 0.1);
+    VERTEX = applyDistortion(VERTEX, TIME * 0.1);
 }
 
+// Fragment shader
 void fragment() {
-	
-	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).r *2.0 -1.0;
-	float depth = PROJECTION_MATRIX[3][2] / (depth_texture + PROJECTION_MATRIX[2][2]);
-	float depth_blend = exp((depth+VERTEX.z + depth_offset)* -beers_law);
-	depth_blend =clamp(1.0 - depth_blend, 0.0, 1.0);
-	float depth_blend_power = clamp(pow(depth_blend, 2.5), 0.0, 1.0);
-	
-	vec3 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV,depth_blend_power * 2.5).rgb;
-	vec3 depth_color = mix(color_shallow.rgb, color_deep.rgb, depth_blend_power);
-	vec3 color = mix(screen_color * depth_color, depth_color * 0.25,depth_blend_power *0.5);
-	
-	float z_depth = edge(texture(DEPTH_TEXTURE, SCREEN_UV).x);
-	float z_pos = edge(FRAGCOORD.z);
-	float z_dif = z_depth - z_pos;
-	
-	
-	vec2 time = (TIME * wave_direction) * time_scale;
-	vec2 time2 = (TIME * wave_direction2) * time_scale;
-	
-	vec3 normal_blend = mix(texture(texture_normal,world_pos.xz + time).rgb,texture(texture_normal2,world_pos.xz +time2).rgb, 0.5);
-	float fresnel =fresnel(5.0, NORMAL, VIEW);
-	vec3 surface_color= mix(albedo,albedo2,fresnel);
-	
-	vec3 depth_color_adj= mix(edge_color, color, step(edge_scale, z_dif));
-	
-	NORMAL = normalize(cross(dFdx(VERTEX), dFdy(VERTEX)));
-	ALBEDO=clamp(surface_color + depth_color_adj, vec3(0.0),vec3(1.0));
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	//NORMAL_MAP =normal_blend;
-}
+    float rawDepth = texture(depthTexture, SCREEN_UV).r * 2.0 - 1.0;
+    float depth = PROJECTION_MATRIX[3][2] / (rawDepth + PROJECTION_MATRIX[2][2]);
+    float depthBlend = exp((depth + VERTEX.z + depthOffset) * -attenuationCoefficient);
+    depthBlend = clamp(1.0 - depthBlend, 0.0, 1.0);
+    float depthPower = clamp(pow(depthBlend, 2.5), 0.0, 1.0);
+    
+    vec3 screenColor = textureLod(screenTexture, SCREEN_UV, depthPower * 2.5).rgb;
+	vec3 waterColor = mix(shallowWaterColor.rgb, deepWaterColor.rgb, depthPower);
+    vec3 finalColor = mix(screenColor * waterColor, waterColor * 0.25, depthPower * 0.5);
 
-//void light() {
-	// Called for every pixel for every light affecting the material.
-	// Uncomment to replace the default light processing function with this one.
-//}
+    float depthFromTexture = calculateEdgeDepth(texture(depthTexture, SCREEN_UV).x);
+    float fragmentDepth = calculateEdgeDepth(FRAGCOORD.z);
+    float depthDifference = depthFromTexture - fragmentDepth;
+
+    vec2 timeAdjusted1 = (TIME * waveDirection1) * timeScale;
+    vec2 timeAdjusted2 = (TIME * waveDirection2) * timeScale;
+
+    vec3 normal1 = texture(normalTexture1, VERTEX.xy + timeAdjusted1).rgb;
+    vec3 normal2 = texture(normalTexture2, VERTEX.xy + timeAdjusted2).rgb;
+    vec3 blendedNormals = mix(normal1, normal2, 0.5);
+
+    float fresnelEffect = calculateFresnelEffect(5.0, NORMAL, VIEW);
+    vec3 surfaceColor = mix(primaryColor, secondaryColor, fresnelEffect);
+
+    vec3 adjustedDepthColor = mix(edgeColor, finalColor, step(edgeScale, depthDifference));
+
+    NORMAL = normalize(cross(dFdx(VERTEX), dFdy(VERTEX)));
+    ALBEDO = clamp(surfaceColor + adjustedDepthColor, vec3(0.0), vec3(1.0));
+    METALLIC = metallic;
+    ROUGHNESS = roughness;
+}
