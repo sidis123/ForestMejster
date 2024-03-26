@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bx6fjooog4y38"
-path="res://.godot/imported/campfire.blend-3d0b1fe6177d47dc1cc163a48cf8428e.scn"
+path="res://.godot/imported/campfire.blend-852b5860c40b1075d76243d139ac0d1d.scn"
 
 [deps]
 
-source_file="res://objects/campfire.blend"
-dest_files=["res://.godot/imported/campfire.blend-3d0b1fe6177d47dc1cc163a48cf8428e.scn"]
+source_file="res://models/nature/trees/campfire.blend"
+dest_files=["res://.godot/imported/campfire.blend-852b5860c40b1075d76243d139ac0d1d.scn"]
 
 [params]
 
