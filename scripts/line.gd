@@ -1,31 +1,38 @@
+@tool
 class_name Line
 extends Node3D
 
+## Line Script.
+##
+## This script realises a 3D line between two nodes.
+
 @export_category("Line settings")
+
+## The radius of the line.
 @export var line_radius: float = 0.1
+
+## The resolution of the line (idk how it actually works).
 @export var line_resolution = 180
 
-## Override of the line material
+## Override of the line material.
 @export var polygon_material_override: Material : set = set_polygon_material_override
 
 @export_category("End points")
-@export var start_point: Node3D
-@export var end_point: Node3D
-var start_point_position: Vector3 = Vector3.ZERO
-var end_point_position: Vector3 = Vector3.ZERO
 
-## The Path3D node that represents the path of the line
+## The starting point of the line.
+@export var start_point: Node3D
+
+## The end point of the line.
+@export var end_point: Node3D
+
+## The Path3D node that represents the path of the line.
 var path: Path3D
 
-## The curve of the path
+## The curve of the path.
 var curve: Curve3D
 
-## The CSGPolygon3D node that represents the volume of the line
+## The CSGPolygon3D node that represents the volume of the line.
 var polygon: CSGPolygon3D
-
-## Variables used for debugging
-var spam_delay = 2.0
-var time_since_spam = 0.0
 
 func _ready():
 	# Retrieve the polygon and update its material
@@ -46,22 +53,18 @@ func _ready():
 		push_error("The one or both end points of the line are not set")
 	else:
 		set_line_position()
-		
-	spam(0.0)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Update the positions of the points
 	if start_point and end_point:
 		update_line_position()
 	
-	spam(delta)
-	
 	# Fill the path with volume
 	update_polygon()
 
 
+## Sets the initial positions of the points of the Path3D.
 func set_line_position() -> void:
 	# Set the line's origin to the start point position
 	global_position = start_point.global_position
@@ -72,6 +75,7 @@ func set_line_position() -> void:
 	curve.add_point(end_point.global_position - global_position)
 
 
+## Updates the positions of the points of the Path3D.
 func update_line_position() -> void:
 	# Set the line's origin to the start point position
 	global_position = start_point.global_position
@@ -81,13 +85,14 @@ func update_line_position() -> void:
 	curve.set_point_position(1, end_point.global_position - global_position)
 
 
+## Updates and renders the CSGPolygon3D according to the line path.
 func update_polygon() -> void:
 	# The next section resets the global rotation of the polygon to 0
 	# I have no I idea why this is necessary and why inheriting the same rotation
 	# as the path it adds volume to is bad for it, but the inherited rotation
 	# is added top of the rotation of the path.
 	# E.g. if one of the parents ir rotated by 90 degrees, the polygon will be
-	# 90 degrees off the actual curve - I love Godot
+	# 90 degrees off the actual curve - I love Godot.
 	
 	# Get the current global position of the polygon
 	var current_global_position = polygon.global_transform.origin
@@ -105,23 +110,8 @@ func update_polygon() -> void:
 		circle.append(coords)
 		polygon.polygon = circle
 
-
+## Changes the CSGPolygon3D's material.
 func set_polygon_material_override(material : Material) -> void:
 	polygon_material_override = material
 	if is_inside_tree() and polygon:
 		polygon.set_material(material)
-
-## Function used for debugging
-func spam(delta: float):
-	time_since_spam += delta
-	if time_since_spam >= spam_delay:
-		time_since_spam = 0.0
-		# Gal reikia transform origin pakeisti?
-		print("----------------------------------")
-		print("Linijos globali pozicija: " + str(global_position) + "; relatyvi tėvui: " + str(position))
-		print("Linijos globali rotacija: " + str(global_transform.basis.get_euler()) + "; relatyvi tėvui: " + str(transform.basis.get_euler()))
-		print("Path globali pozicija: " + str(path.global_position) + "; relatyvi tėvui: " + str(path.position))
-		print("Path globali rotacija: " + str(path.global_transform.basis.get_euler()) + "; relatyvi tėvui: " + str(path.transform.basis.get_euler()))
-		print("Polygon globali pozicija: " + str(polygon.global_position) + "; relatyvi tėvui: " + str(polygon.position))
-		print("Polygon globali rotacija: " + str(polygon.global_transform.basis.get_euler()) + "; relatyvi tėvui: " + str(polygon.transform.basis.get_euler()))
-		print("----------------------------------\n")
