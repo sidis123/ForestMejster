@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://biupbpk5xsnya"]
+
+[ext_resource type="Script" path="res://scripts/line_test.gd" id="1_nm2a0"]
+[ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_sy1v8"]
+[ext_resource type="PackedScene" uid="uid://d2cfn2tc7jp6r" path="res://scenes/line.tscn" id="3_unk3n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qdajy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_66eky"]
+sky_material = SubResource("ProceduralSkyMaterial_qdajy")
+
+[sub_resource type="Environment" id="Environment_csfdl"]
+background_mode = 2
+sky = SubResource("Sky_66eky")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_de372"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c4iw2"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ql1p6"]
+size = Vector3(1, 5, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylm4f"]
+albedo_color = Color(1, 0.152941, 0.0862745, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y800h"]
+material = SubResource("StandardMaterial3D_ylm4f")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ttk2f"]
+radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7vp02"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3fll"]
+albedo_color = Color(0.996078, 0.588235, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_nm2a0")
+impulse_delay = 0.5
+move_speed = 5.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_csfdl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.96032, 8.36871)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0)
+
+[node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" instance=ExtResource("1_sy1v8")]
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.57998, 0)
+shape = SubResource("BoxShape3D_de372")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.57998, 0)
+mesh = SubResource("BoxMesh_c4iw2")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 0)
+shape = SubResource("BoxShape3D_ql1p6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, 0)
+shape = SubResource("BoxShape3D_ql1p6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5.5)
+shape = SubResource("BoxShape3D_ql1p6")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5.5)
+shape = SubResource("BoxShape3D_ql1p6")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_de372")
+
+[node name="Container" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Start" type="Node3D" parent="Container"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Container/Start"]
+mesh = SubResource("SphereMesh_y800h")
+skeleton = NodePath("../../..")
+
+[node name="End" type="RigidBody3D" parent="Container"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/End"]
+shape = SubResource("SphereShape3D_ttk2f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Container/End"]
+mesh = SubResource("SphereMesh_7vp02")
+
+[node name="Line" parent="Container" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("3_unk3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+line_radius = 0.02
+polygon_material_override = SubResource("StandardMaterial3D_c3fll")
+start_point = NodePath("../Start")
+end_point = NodePath("../End")
