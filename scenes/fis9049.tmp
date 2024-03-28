@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dil16xqh8spna"]
+
+[ext_resource type="Script" path="res://scripts/fishing_float.gd" id="1_5cgpm"]
+[ext_resource type="ArrayMesh" uid="uid://b17jcaxfad25m" path="res://models/fishing/fishing_float_mesh.tres" id="2_e3h5b"]
+[ext_resource type="PackedScene" uid="uid://cyj6ve2el24kr" path="res://scenes/fish.tscn" id="3_wn80x"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gobmt"]
+margin = 0.02
+radius = 0.0198209
+
+[node name="FishingFloat" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 519
+mass = 0.05
+max_contacts_reported = 3
+contact_monitor = true
+script = ExtResource("1_5cgpm")
+
+[node name="FloatMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+mesh = ExtResource("2_e3h5b")
+skeleton = NodePath("../..")
+
+[node name="FloatCollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_gobmt")
+
+[node name="Fish" parent="." instance=ExtResource("3_wn80x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6207, 0.184388, 8.69972)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
