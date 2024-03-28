@@ -23,8 +23,8 @@ func _on_pile_area_exited(area):
 		# Spawn a new wood object
 		var new_wood_instance = preload("res://scenes/pickable_wood.tscn").instantiate()
 		if new_wood_instance:
-			new_wood_instance.global_transform.origin = Vector3(-3.741, 0.619, 11.407)
 			get_parent().add_child(new_wood_instance)
 			wood_instances.append(new_wood_instance)
+			new_wood_instance.global_transform.origin = Vector3(-3.741, 0.619, 11.407)
 			wood_counter += 1
 			print("New log was spawned. ID: " + str(wood_counter))
