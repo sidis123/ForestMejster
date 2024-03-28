@@ -17,7 +17,6 @@ func _ready():
 	fishing_float = get_node("FishingFloat")
 	if not fishing_float:
 		push_error("Fishing rod container failed to find the fishing float")
-	fishing_float.landed_in_water.connect(_on_float_landed)
 	
 	
 func _on_float_landed():
