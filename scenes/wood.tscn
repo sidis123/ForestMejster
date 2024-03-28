@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://h2oii34vo11w"]
+
+[ext_resource type="Script" path="res://scripts/basedWood.gd" id="1_264pu"]
+[ext_resource type="PackedScene" uid="uid://cyxvc0461fbjf" path="res://scenes/pickable_wood.tscn" id="2_edunp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x5t87"]
+radius = 2.0
+
+[node name="pile" type="Node3D"]
+script = ExtResource("1_264pu")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_x5t87")
+
+[node name="wood" parent="." instance=ExtResource("2_edunp")]
+
+[connection signal="area_exited" from="Area3D" to="." method="_on_pile_area_exited"]

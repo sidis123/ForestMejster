@@ -107,7 +107,6 @@ func _on_right_controller_button_released(p_button: String) -> void:
 		"ax_button":
 			disable_right_pointer()
 			
-			
 func _on_left_controller_button_pressed(p_button: String) -> void:
 	#print(p_button + " was pressed on the left controller")
 	match p_button:
@@ -122,5 +121,5 @@ func _on_left_controller_button_released(p_button: String) -> void:
 	match p_button:
 		"ax_button":
 			disable_left_pointer()
-
+	
 # TODO: turn the Turn Mode on MovementTurn into a setting
