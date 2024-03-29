@@ -21,6 +21,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0537452, -0.932214)
 
 [node name="FishingFloat" parent="." instance=ExtResource("2_8ystg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0885887, -0.941443)
+mass = 0.69
 max_contacts_reported = 1
 
 [node name="Line" parent="." node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("5_0hfu1")]

@@ -12,6 +12,17 @@ var fishing_rod_container: Node3D
 # Signal for when the float lands in water (TODO: use this to start the fishing minigame)
 signal landed_in_water
 
+@export var float_force := 1.0
+@onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var water = get_node('/root/Main/Water')
+@export var fish_interval:= 3
+var time_since_last_push := 0.0  # Timer to track time since last push
+var push_interval  # Default interval in seconds for the strong push
+var strong_push_force := 4.0  # Adjust the strength of the strong push here
+var push_interval_randomness  # Random factor for the push interval
+var push_active: bool = false
+var can_spawn_fish: bool = false  # Variable to determine if fish can be spawned
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Disable the rigid body
@@ -27,6 +38,7 @@ func _ready():
 	target = get_node("../FishingRod/FloatTarget")
 	if not target:
 		push_error("Fishing float failed to find float target")
+	set_fish_interval(fish_interval)
 	
 	
 # Called every physics frame
@@ -34,17 +46,41 @@ func _physics_process(delta):
 	if connected:
 		# Set the position of the float to the target
 		global_position = target.global_position
+		scale = Vector3(1, 1, 1)
 	
-	
+	if landed_in_water:
+		# Update the timer for floating logic
+		time_since_last_push += delta
+		# Check if push interval (+-10%) has passed
+		var randomized_interval = push_interval + randf_range(-push_interval_randomness, push_interval_randomness)
+		if time_since_last_push >= randomized_interval:
+			apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push upwards
+			time_since_last_push = 0  # Reset the timer
+			push_active=true
+			can_spawn_fish = true
+		if global_position.y < water.get_height():
+			apply_force(Vector3.UP * float_force * gravity * 1.3)
+		# Player missed the fish
+		if global_position.y >= water.get_height()+0.2 and push_active==true:
+			linear_velocity = Vector3.ZERO
+			push_active=false
+			can_spawn_fish = false
+
+func set_fish_interval(value):
+	fish_interval = clamp(value, 1, 10)
+	push_interval = fish_interval * 10.0
+	push_interval_randomness = push_interval / 10
+
 # Handles the interaction signal from the fishing rod
 func _on_action_pressed():
 	#issisaugot rigid body positiona i variabla ir tada naudot jy kur zuvy spawnint
 	var positionFortheFish=global_position
+	print("Back to rod")
 	var targetino = Vector3(22.46, 0, 24.058)
 	connected = !connected
 	
 	
-	if connected:
+	if connected and can_spawn_fish:
 		#cia iskviest medoda kuris spawnina zuvyte
 		spawn_and_shoot_fish(positionFortheFish,targetino)
 		freeze = true
@@ -58,8 +94,14 @@ func _on_action_pressed():
 func _on_body_entered(body):
 	var layer = body.get_collision_layer()
 	if layer and layer == pow(2,9): 
-		# If colliding with fishable water, a signal is emitted  
+		# If colliding with fishable water, a signal is emitted 
+		scale *= 17  # Increase the scale of the float 
 		landed_in_water.emit()
+		angular_velocity = Vector3()  # Reset angular velocity
+		linear_velocity = Vector3()   # Reset linear velocity
+		rotation = Vector3(0, rotation.y, 0)  # Maintain upright orientation
+		time_since_last_push = 0
+		
 	else:
 		# Ff colliding with anything else, the float is reset
 		connected = true
@@ -98,21 +140,3 @@ func spawn_and_shoot_fish(fish_spawn_position, target_position):
 			print("Failed to instance fish.")
 	else:
 		print("Fish scene not found or could not be loaded.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
