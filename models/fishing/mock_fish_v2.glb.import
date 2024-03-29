@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cx6cbgd8tkssl"
-path="res://.godot/imported/fish_mock.glb-1b37f263c3340b715f5ba8fc50f7964c.scn"
+uid="uid://cmx0e3uap0u50"
+path="res://.godot/imported/mock_fish_v2.glb-639c88b417ba193b7a109191c22fd222.scn"
 
 [deps]
 
-source_file="res://models/fishing/fish_mock.glb"
-dest_files=["res://.godot/imported/fish_mock.glb-1b37f263c3340b715f5ba8fc50f7964c.scn"]
+source_file="res://models/fishing/mock_fish_v2.glb"
+dest_files=["res://.godot/imported/mock_fish_v2.glb-639c88b417ba193b7a109191c22fd222.scn"]
 
 [params]
 
@@ -29,13 +29,6 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={
-"nodes": {
-"PATH:Icosphere": {
-"generate/physics": true,
-"physics/shape_type": 2
-}
-}
-}
+_subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1
