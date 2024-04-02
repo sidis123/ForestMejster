@@ -44,27 +44,40 @@ func _ready():
 # Called every physics frame
 func _physics_process(delta):
 	if connected:
-		# Set the position of the float to the target
-		global_position = target.global_position
-		scale = Vector3(1, 1, 1)
+		set_position_at_target()
 	
 	if landed_in_water:
-		# Update the timer for floating logic
-		time_since_last_push += delta
-		# Check if push interval (+-10%) has passed
-		var randomized_interval = push_interval + randf_range(-push_interval_randomness, push_interval_randomness)
-		if time_since_last_push >= randomized_interval:
-			apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push upwards
-			time_since_last_push = 0  # Reset the timer
-			push_active=true
-			can_spawn_fish = true
-		if global_position.y < water.get_height():
-			apply_force(Vector3.UP * float_force * gravity * 1.3)
-		# Player missed the fish
-		if global_position.y >= water.get_height()+0.2 and push_active==true:
-			linear_velocity = Vector3.ZERO
-			push_active=false
-			can_spawn_fish = false
+		bob_in_water(delta)
+
+
+# Sets the position of the float at the position of the float target
+func set_position_at_target():
+	# Set the position of the float to the target
+	global_position = target.global_position
+	scale = Vector3(1, 1, 1)
+
+
+# Handles the bobbing logic and the time frame for spawning the fish
+func bob_in_water(delta):
+	# Update the timer for floating logic
+	time_since_last_push += delta
+	
+	# Check if push interval (+-10%) has passed
+	var randomized_interval = push_interval + randf_range(-push_interval_randomness, push_interval_randomness)
+	
+	if time_since_last_push >= randomized_interval:
+		apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push upwards
+		time_since_last_push = 0  # Reset the timer
+		push_active=true
+		can_spawn_fish = true
+	if global_position.y < water.get_height():
+		apply_force(Vector3.UP * float_force * gravity * 1.3)
+	# Player missed the fish
+	if global_position.y >= water.get_height()+0.2 and push_active==true:
+		linear_velocity = Vector3.ZERO
+		push_active=false
+		can_spawn_fish = false
+
 
 func set_fish_interval(value):
 	fish_interval = clamp(value, 1, 10)
@@ -73,7 +86,7 @@ func set_fish_interval(value):
 
 # Handles the interaction signal from the fishing rod
 func _on_action_pressed():
-	#issisaugot rigid body positiona i variabla ir tada naudot jy kur zuvy spawnint
+	# Saves the position of the float at time of recall
 	var positionFortheFish=global_position
 	print("Back to rod")
 	var targetino = Vector3(22.46, 0, 24.058)
@@ -103,12 +116,12 @@ func _on_body_entered(body):
 		time_since_last_push = 0
 		
 	else:
-		# Ff colliding with anything else, the float is reset
+		# If colliding with anything else, the float is reset
 		connected = true
 		freeze = true
 
-# Spawns a fish and shoots it towards the player
 
+# Spawns a fish and shoots it towards the player
 func spawn_and_shoot_fish(fish_spawn_position, target_position):
 	# Retrieve the fish instance from the main scene
 	var fish_scene = preload("res://scenes/fish.tscn")
@@ -128,14 +141,13 @@ func spawn_and_shoot_fish(fish_spawn_position, target_position):
 			new_fish.global_transform.origin = fish_spawn_position
 
 			# Calculate initial velocity to hit the target with an arched trajectory
-			# Calculate initial velocity to hit the target with an arched trajectory
-			# Calculate initial velocity to hit the target with an arched trajectory
-			var gravity = -9.8 # Gravity value (adjust as needed)
+			var gravity = -9.8 # Gravity value (adjust as needed) (TODO: figure out if this can break bobbing (it overrides the gravity variable I guess))
 			var displacement = target_position - fish_spawn_position
 			var time_to_reach_target = -displacement.y / gravity
 			var horizontal_velocity = Vector3(displacement.x / (time_to_reach_target * 10), 0, displacement.z / (time_to_reach_target * 10)) # Slower horizontal velocity
 			var vertical_velocity = Vector3(0, -gravity * (time_to_reach_target * 6), 0) # Higher vertical velocity
 			new_fish.linear_velocity = horizontal_velocity + vertical_velocity
+			# TODO: implement a cap on the fish impulse so it wouldn't fly out of the map
 		else:
 			print("Failed to instance fish.")
 	else:

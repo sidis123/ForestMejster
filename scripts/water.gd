@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 var fishing_float: RigidBody3D
 var fishing_rod_container: Node3D
-@onready var collision_shape=get_node("/root/Main/Water/Area3D/Fishable_water_col")
+@onready var collision_shape = get_node("/root/Main/Water/FishingWater/FishingWaterCollisionShape")
 
 #var sceneA = preload("res://path_to_scene_A.tscn")
 
