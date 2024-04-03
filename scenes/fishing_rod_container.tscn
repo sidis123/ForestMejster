@@ -13,14 +13,14 @@ script = ExtResource("1_1tyxx")
 [node name="FishingRod" parent="." instance=ExtResource("1_7ce2q")]
 
 [node name="FloatTarget" type="Node3D" parent="FishingRod"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0885887, -0.941443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.941)
 script = ExtResource("3_fp70s")
 
 [node name="StringStart" type="Node3D" parent="FishingRod"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0537452, -0.932214)
 
 [node name="FishingFloat" parent="." instance=ExtResource("2_8ystg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0885887, -0.941443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.941)
 mass = 0.69
 max_contacts_reported = 1
 

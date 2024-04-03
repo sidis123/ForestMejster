@@ -12,7 +12,7 @@ monitorable = false
 script = ExtResource("1_cx5po")
 
 [node name="FishingWaterCollisionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0)
 shape = SubResource("BoxShape3D_vewt5")
 
 [connection signal="body_entered" from="." to="." method="_on_water_entered"]

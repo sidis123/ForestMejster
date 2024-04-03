@@ -1,13 +1,13 @@
 extends RigidBody3D
 class_name FishingFloat
 
-# Whether the float is connected to the fishing rod
+## Whether the float is connected to the fishing rod
 var connected: bool = true
 
-# The float target that the float is attached to when connected
+## The float target that the float is attached to when connected
 var target: Node3D
 
-# The fishing rod container
+## The fishing rod container
 var fishing_rod_container: Node3D
 
 
@@ -24,12 +24,26 @@ var push_interval_randomness  # Random factor for the push interval
 var push_active: bool = false
 var can_spawn_fish: bool = false  # Variable to determine if fish can be spawned
 
+@export_category("Distance from fishing rod")
+
 ## The maximum distance the float can go from the fishing rod before it is reset.
 @export var max_distance: float = 10.0
 var distance: float = 0.0 # TODO: increase *MESH* scale based on distance from target
 
+## The minimum scale of the float. The float mesh will be at this scale while on the rod.
+@export var min_scale: float = 0.02
+
+## The maximum scale of the float. The float mesh will reach this scale at the maximum distance or upon reaching water. 
+@export var max_scale: float = 0.8
+
+## The mesh of the float, used for changing scale.
+var mesh: MeshInstance3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Find the mesh
+	mesh = get_node("FloatMesh")
+	
 	# Find the fishing rod container
 	fishing_rod_container = get_node("../")
 	if not fishing_rod_container:
@@ -45,6 +59,11 @@ func _ready():
 	# Reset the float
 	reset()
 
+
+# Called every frame
+func _process(delta):
+	if not connected and not in_water:
+		mesh.scale = Vector3.ONE * (distance / max_distance * (max_scale - min_scale) + min_scale)
 
 # Called every physics frame
 func _physics_process(delta):
@@ -71,7 +90,7 @@ func reset():
 ## Sets the position of the float at the position of the float target
 func set_position_at_target():
 	global_position = target.global_position
-	scale = Vector3(1, 1, 1) 
+	mesh.scale = Vector3.ONE * min_scale
 	# BUG: if you reset the scale once (like in reset()) it doesn't always reset 
 	# because its not in _inherited_forces() as it should've been
 
@@ -93,6 +112,7 @@ func bob_in_water(delta):
 	# Bobs the float (applies upwards force once it gets bellow the water level)
 	if global_position.y < water.global_position.y:
 		apply_force(Vector3.UP * float_force * gravity * 1.3)
+	# BUG: equlizes (stops bobbing) eventually
 		
 	# Player misses the fish once the float gets above the water level after the push
 	if global_position.y >= water.global_position.y + 0.2 and push_active==true:
@@ -135,7 +155,7 @@ func _on_body_entered(body):
 func on_water_entered():
 	print("The float entered the water")
 	in_water = true
-	scale *= 17  # Increase the scale of the float 
+	mesh.scale = Vector3.ONE * max_scale # increase the scale of the float mesh to max
 	angular_velocity = Vector3()  # Reset angular velocity
 	linear_velocity = Vector3()   # Reset linear velocity
 	rotation = Vector3(0, rotation.y, 0)  # Maintain upright orientation
