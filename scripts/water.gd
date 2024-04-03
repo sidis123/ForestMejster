@@ -10,8 +10,8 @@ var fishing_rod_container: Node3D
 func _ready():
 	fishing_float = get_node("/root/Main/FishingRod/FishingFloat")
 	fishing_rod_container = get_node("/root/Main/FishingRod")
-	fishing_float.landed_in_water.connect(_on_landed_in_water)
-	fishing_rod_container.action_pressed.connect(_on_action_pressed)
+	#fishing_float.landed_in_water.connect(_on_landed_in_water)
+	#fishing_rod_container.action_pressed.connect(_on_action_pressed)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

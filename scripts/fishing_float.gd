@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name FishingFloat
 
 # Whether the float is connected to the fishing rod
 var connected: bool = true
@@ -9,12 +10,12 @@ var target: Node3D
 # The fishing rod container
 var fishing_rod_container: Node3D
 
-# Signal for when the float lands in water (TODO: use this to start the fishing minigame)
-signal landed_in_water
+
+var in_water: bool = false
 
 @export var float_force := 1.0
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-@onready var water = get_node('/root/Main/Water')
+@onready var water = get_node('/root/Main/Water/FishingWaterNew')
 @export var fish_interval:= 3
 var time_since_last_push := 0.0  # Timer to track time since last push
 var push_interval  # Default interval in seconds for the strong push
@@ -23,11 +24,12 @@ var push_interval_randomness  # Random factor for the push interval
 var push_active: bool = false
 var can_spawn_fish: bool = false  # Variable to determine if fish can be spawned
 
+## The maximum distance the float can go from the fishing rod before it is reset.
+@export var max_distance: float = 10.0
+var distance: float = 0.0 # TODO: increase *MESH* scale based on distance from target
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Disable the rigid body
-	freeze = true
-	
 	# Find the fishing rod container
 	fishing_rod_container = get_node("../")
 	if not fishing_rod_container:
@@ -40,45 +42,66 @@ func _ready():
 		push_error("Fishing float failed to find float target")
 	set_fish_interval(fish_interval)
 	
-	
+	# Reset the float
+	reset()
+
+
 # Called every physics frame
 func _physics_process(delta):
 	if connected:
 		set_position_at_target()
-	
-	if landed_in_water:
+		return
+		
+	if in_water:
 		bob_in_water(delta)
+		return
+		
+	distance = global_position.distance_to(target.global_position)
+	if distance > max_distance:
+		reset()
 
 
-# Sets the position of the float at the position of the float target
+## Resets the float back to the fishing rod.
+func reset():
+	connected = true
+	freeze = true
+	set_position_at_target()
+
+
+## Sets the position of the float at the position of the float target
 func set_position_at_target():
-	# Set the position of the float to the target
 	global_position = target.global_position
-	scale = Vector3(1, 1, 1)
+	scale = Vector3(1, 1, 1) 
+	# BUG: if you reset the scale once (like in reset()) it doesn't always reset 
+	# because its not in _inherited_forces() as it should've been
 
 
-# Handles the bobbing logic and the time frame for spawning the fish
+## Handles the bobbing logic and the time frame for spawning the fish.
 func bob_in_water(delta):
 	# Update the timer for floating logic
 	time_since_last_push += delta
 	
+	# BUG: doesn't this recalculate the interval every physics frame?
 	# Check if push interval (+-10%) has passed
 	var randomized_interval = push_interval + randf_range(-push_interval_randomness, push_interval_randomness)
-	
 	if time_since_last_push >= randomized_interval:
-		apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push upwards
+		apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push downwards
 		time_since_last_push = 0  # Reset the timer
 		push_active=true
 		can_spawn_fish = true
-	if global_position.y < water.get_height():
+	
+	# Bobs the float (applies upwards force once it gets bellow the water level)
+	if global_position.y < water.global_position.y:
 		apply_force(Vector3.UP * float_force * gravity * 1.3)
-	# Player missed the fish
-	if global_position.y >= water.get_height()+0.2 and push_active==true:
+		
+	# Player misses the fish once the float gets above the water level after the push
+	if global_position.y >= water.global_position.y + 0.2 and push_active==true:
 		linear_velocity = Vector3.ZERO
 		push_active=false
 		can_spawn_fish = false
 
 
+## What is this used for?
 func set_fish_interval(value):
 	fish_interval = clamp(value, 1, 10)
 	push_interval = fish_interval * 10.0
@@ -86,43 +109,52 @@ func set_fish_interval(value):
 
 # Handles the interaction signal from the fishing rod
 func _on_action_pressed():
-	# Saves the position of the float at time of recall
-	var positionFortheFish=global_position
-	print("Back to rod")
+	# Gdscript is snake case bro
+	var positionFortheFish = global_position
+	# Tf does this name mean?
 	var targetino = Vector3(22.46, 0, 24.058)
-	connected = !connected
 	
-	
-	if connected and can_spawn_fish:
-		#cia iskviest medoda kuris spawnina zuvyte
-		spawn_and_shoot_fish(positionFortheFish,targetino)
-		freeze = true
-		
+	if not connected:
+		if can_spawn_fish:
+			spawn_and_shoot_fish(positionFortheFish,targetino)
+		reset()
 	else:
+		connected = false
 		freeze = false
 		linear_velocity = target.estimated_velocity
-	
-	
-# Detects collisions
+
+
+## Detects collisions with other bodies and resets the float
 func _on_body_entered(body):
 	var layer = body.get_collision_layer()
-	if layer and layer == pow(2,9): 
-		# If colliding with fishable water, a signal is emitted 
-		scale *= 17  # Increase the scale of the float 
-		landed_in_water.emit()
-		angular_velocity = Vector3()  # Reset angular velocity
-		linear_velocity = Vector3()   # Reset linear velocity
-		rotation = Vector3(0, rotation.y, 0)  # Maintain upright orientation
-		time_since_last_push = 0
-		
-	else:
-		# If colliding with anything else, the float is reset
-		connected = true
-		freeze = true
+	if layer and layer != pow(2,9): 
+		reset()
+
+
+## Func that handles the entry into water. Called by the water.
+func on_water_entered():
+	print("The float entered the water")
+	in_water = true
+	scale *= 17  # Increase the scale of the float 
+	angular_velocity = Vector3()  # Reset angular velocity
+	linear_velocity = Vector3()   # Reset linear velocity
+	rotation = Vector3(0, rotation.y, 0)  # Maintain upright orientation
+	time_since_last_push = 0
+	# TODO: doing this not in integrate forces can cause glitching
+
+
+# NOTE: if the float leaves the water area at any point it will be disabled - even if it happens during the push :)
+func on_water_exited():
+	in_water = false
+	can_spawn_fish = false
+	push_active = false
+	print("The float exited the water")
 
 
 # Spawns a fish and shoots it towards the player
+# TODO: this should be in a separate fish script tbh
 func spawn_and_shoot_fish(fish_spawn_position, target_position):
+	print("Nu iškvietė")
 	# Retrieve the fish instance from the main scene
 	var fish_scene = preload("res://scenes/fish.tscn")
 
@@ -138,7 +170,7 @@ func spawn_and_shoot_fish(fish_spawn_position, target_position):
 			get_parent().add_child(new_fish)
 
 			# Set the position of the new fish
-			new_fish.global_transform.origin = fish_spawn_position
+			new_fish.global_position = fish_spawn_position
 
 			# Calculate initial velocity to hit the target with an arched trajectory
 			var gravity = -9.8 # Gravity value (adjust as needed) (TODO: figure out if this can break bobbing (it overrides the gravity variable I guess))

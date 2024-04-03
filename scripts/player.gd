@@ -123,3 +123,8 @@ func _on_left_controller_button_released(p_button: String) -> void:
 			disable_left_pointer()
 	
 # TODO: turn the Turn Mode on MovementTurn into a setting
+
+## Function for handling floating when the player enters fishable water
+func on_water_entered():
+	print("The player entered the water")
+	# TODO: implement and fix the fact that it can only collide with player body, so it needs to call this somehow

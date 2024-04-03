@@ -17,12 +17,8 @@ func _ready():
 	fishing_float = get_node("FishingFloat")
 	if not fishing_float:
 		push_error("Fishing rod container failed to find the fishing float")
-	
-	
-func _on_float_landed():
-	print("The float landed in water")
-	
-	
+
+
 # Catch the pickable objects action pressed signal and reemit it
 # This is done only so the float (and other things in the future) doesn't have to directly connect to the pickable object
 func _on_action_pressed(pickable: Variant):

@@ -30,5 +30,3 @@ line_radius = 0.001
 polygon_material_override = ExtResource("6_o1gpu")
 start_point = NodePath("../FishingRod/StringStart")
 end_point = NodePath("../FishingFloat")
-
-[connection signal="landed_in_water" from="FishingFloat" to="." method="_on_float_landed"]
