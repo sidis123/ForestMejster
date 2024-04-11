@@ -55,7 +55,7 @@ func _ready():
 		set_line_position()
 
 
-func _process(delta):
+func _process(_delta):
 	# Update the positions of the points
 	if start_point and end_point:
 		update_line_position()

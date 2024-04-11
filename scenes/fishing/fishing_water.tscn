@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca0ohfqspp2pg"]
+
+[ext_resource type="Script" path="res://scripts/fishing/fishing.gd" id="1_cx5po"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vewt5"]
+size = Vector3(40, 6, 40)
+
+[node name="FishingWater" type="Area3D"]
+collision_layer = 512
+collision_mask = 524290
+monitorable = false
+script = ExtResource("1_cx5po")
+trial_wait_time_randomness = 0.0
+
+[node name="FishingWaterCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0)
+shape = SubResource("BoxShape3D_vewt5")
+
+[node name="TrialTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CatchTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_water_entered"]
+[connection signal="body_exited" from="." to="." method="_on_water_exited"]
+[connection signal="timeout" from="TrialTimer" to="." method="_on_trial_timer_timeout"]
+[connection signal="timeout" from="CatchTimer" to="." method="_on_catch_timer_timeout"]

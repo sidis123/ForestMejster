@@ -35,6 +35,8 @@ func _ready():
 func _process(delta):
 	if paused:
 		position_menu()
+		
+	#print(Engine.get_frames_per_second())
 
 
 func pause():
