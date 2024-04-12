@@ -96,7 +96,7 @@ screen_size = Vector2(0.3, 0.1)
 collision_layer = 0
 scene = ExtResource("12_xpbn2")
 viewport_size = Vector2(1152, 648)
-throttle_fps = 1.0
+throttle_fps = 3.0
 input_keyboard = false
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]

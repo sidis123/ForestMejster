@@ -14,13 +14,13 @@ var in_water: bool = false
 
 @export_category("Floating characteristics")
 
-@export var float_force := 0.1
+@export var float_force: float = 1
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var water: FishingWater = get_node('/root/Main/Water/FishingWater')
 @export var fish_interval:= 3
 var time_since_last_push := 0.0  # Timer to track time since last push
 var push_interval  # Default interval in seconds for the strong push
-var strong_push_force := 0.0  # Adjust the strength of the strong push here
+var plunge_force: float = 0.4  # Adjust the strength of the strong push here
 var push_interval_randomness  # Random factor for the push interval
 var push_active: bool = false
 var can_spawn_fish: bool = false  # Variable to determine if fish can be spawned
@@ -40,20 +40,21 @@ var distance: float = 0.0 # TODO: increase *MESH* scale based on distance from t
 ## The mesh of the float, used for changing the visual scale.
 @onready var mesh: MeshInstance3D = get_node("FloatMesh")
 
+var bobbing_amplitude: float = 0.1  # Amplitude of the bobbing (max height/depth from the water level)
+var bobbing_period: float = 1.0  # Time it takes to complete one full cycle of bobbing
+var rotation_period: float = 3.0
+var rotation_amplitude = 0.2  # Amplitude of the rotation (in radians)
+var bobbing_time: float = 0.0  # Keep track of the elapsed time
+var rotation_time: float = 0.0
+
+var plunging: bool = false
+var bobbing: bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Check if fishing rod is found and connect to its signal
-	if not fishing_rod:
-		push_error("Fishing float failed to find the fishing rod")
-	else:
+	if fishing_rod:
 		fishing_rod.action_pressed.connect(_on_action_pressed)
-	
-	# Find the float target
-	if not target:
-		push_error("Fishing float failed to find float target")
-	
-	# Set the interval for catching fish I guess
-	set_fish_interval(fish_interval)
 	
 	# Make sure the float is reset
 	_reset()
@@ -66,17 +67,60 @@ func _process(_delta):
 
 
 # Called every physics frame
-func _physics_process(_delta):
+func _physics_process(delta):
 	if connected:
 		set_position_at_target()
-		return
-		
-	if in_water:
-		bob_in_water()
-		return
 	
-	# Calculate the distance from the float to the rod
-	_update_distance_to_rod()
+	if not connected and not in_water:
+		_update_distance_to_rod()
+
+
+func _integrate_forces(state):
+	if in_water:
+		if plunging:
+			_control_plunging(state)
+			return
+		
+		#if emerging:
+			#_control_emerging(state)
+			#return
+		
+		if bobbing:
+			_bob_in_water(state)
+
+
+func _bob_in_water(state):
+	# Increment time variables by the physics frame duration
+	bobbing_time += state.step  
+	rotation_time += state.step
+	
+	var target_y = water.global_position.y + bobbing_amplitude * sin(TAU / bobbing_period * bobbing_time)  # Calculate the target y using a sine wave
+	
+	# Calculate the angles for rotation based on sine and cosine waves
+	var angle_x = rotation_amplitude * cos(TAU / rotation_period * rotation_time)
+	var angle_z = rotation_amplitude * sin(TAU / rotation_period * rotation_time)
+	
+	# Create quaternions for rotations around X and Z axes
+	var quat_x = Quaternion(Vector3(1, 0, 0), angle_x)
+	var quat_z = Quaternion(Vector3(0, 0, 1), angle_z)
+	
+	# Combine the two quaternions
+	var combined_quat = quat_x * quat_z
+	
+	# Apply the new position and combined quaternion to the rigid body's transform
+	var current_transform = state.transform
+	current_transform.origin.y = target_y
+	current_transform.basis = Basis(combined_quat)
+	state.set_transform(current_transform)
+
+
+func _control_plunging(state):
+	if state.linear_velocity.y < 0 or global_position.y < water.global_position.y:
+		apply_force(Vector3.UP * (mass * gravity + float_force))
+	else:
+		plunging = false
+		bobbing_time = 0.0
+		bobbing = true
 
 
 func _update_distance_to_rod():
@@ -94,7 +138,9 @@ func _adjust_mesh_scale():
 func _reset():
 	freeze = true
 	connected = true
-	set_position_at_target()
+	# Reset the mesh scale
+	mesh.scale = Vector3.ONE * min_scale
+	global_rotation = Vector3.ZERO
 
 
 ## Releases the float from the fishing rod.
@@ -106,51 +152,16 @@ func _release():
 
 ## Sets the position of the float at the position of the float target
 func set_position_at_target():
-	
 	global_position = target.global_position
-	# Reset the mesh scale
-	mesh.scale = Vector3.ONE * min_scale
-
-var pushing_up: bool = false
-var jump_force: float = 4.0
-
-## Handles the bobbing logic and the time frame for spawning the fish.
-func bob_in_water():
-	# Update the timer for floating logic
-	#time_since_last_push += delta
-	
-	# BUG: doesn't this recalculate the interval every physics frame?
-	# Check if push interval (+-10%) has passed
-	#var randomized_interval = push_interval + randf_range(-push_interval_randomness, push_interval_randomness)
-	#if time_since_last_push >= randomized_interval:
-		#apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push downwards
-		#time_since_last_push = 0  # Reset the timer
-		#push_active=true
-		#can_spawn_fish = true
-
-	
-	## Bobs the float (applies upwards force once it gets bellow the water level)
-	if global_position.y < water.global_position.y:
-		apply_force(Vector3.UP * (float_force + mass * gravity))
-	# BUG: equlizes (stops bobbing) eventually
-		
-	# Player misses the fish once the float gets above the water level after the push
-	#if global_position.y >= water.global_position.y + 0.2 and push_active==true:
-		#linear_velocity = Vector3.ZERO
-		#push_active=false
-		#can_spawn_fish = false
-
-func plunge_on_bite():
-	apply_central_impulse(Vector3.DOWN * strong_push_force)  # Apply a strong push downwards
-
-## What is this used for?
-func set_fish_interval(value):
-	fish_interval = clamp(value, 1, 10)
-	push_interval = fish_interval * 10.0
-	push_interval_randomness = push_interval / 10
 
 
-## Handles the interaction signal from the fishing rod
+func plunge():
+	bobbing = false
+	apply_central_impulse(Vector3.DOWN * plunge_force)
+	plunging = true
+
+
+## Handles the interaction signal from the fishing rod.
 func _on_action_pressed(pickable: Variant):	
 	if not connected:
 		_reset()
@@ -165,21 +176,21 @@ func _on_body_entered(body):
 		_reset()
 
 
-## Func that handles the entry into water. Called by the water.
+## Func that handles the entry into water - sets bools and maxes out the mesh scale.
+## Called by the water.
 func on_water_entered():
 	print("The float entered the water")
 	in_water = true
+	plunging = true
 	mesh.scale = Vector3.ONE * max_scale # increase the scale of the float mesh to max
-	angular_velocity = Vector3()  # Reset angular velocity
-	linear_velocity = Vector3()   # Reset linear velocity
-	rotation = Vector3(0, rotation.y, 0)  # Maintain upright orientation
-	time_since_last_push = 0
-	# TODO: doing this not in integrate forces can cause glitching
 
 
-# NOTE: if the float leaves the water area at any point it will be disabled - even if it happens during the push :)
+## Handles the exit from water - resets all bools and variables related to water.
+## Called by the water.
 func on_water_exited():
 	in_water = false
-	can_spawn_fish = false
-	push_active = false
+	plunging = false
+	bobbing = false
+	bobbing_time = 0.0
+	rotation_time = 0.0
 	print("The float exited the water")

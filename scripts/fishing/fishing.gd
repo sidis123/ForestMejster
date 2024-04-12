@@ -77,15 +77,12 @@ func _catch_fish():
 		var fish_instance = FishScene.instantiate()
 		
 		if fish_instance:
-			# Setup the fish and add it to scene
-			#var fish_mesh = fish_instance.get_node("Raude")
-			#fish_mesh.scale = Vector3.ONE * 10
+			# Add the fish and set it up
 			add_child(fish_instance)
+			fish_instance.set_mesh_scale(Vector3(10, 10, 10))
 			fish_instance.global_position = fish_spawn_position
-			print(fish_instance.global_position)
 
 			# Calculate initial velocity to hit the target with an arched trajectory
-			#var gravity = -9.8 # Gravity value (adjust as needed) (TODO: figure out if this can break bobbing (it overrides the gravity variable I guess))
 			var displacement = player.global_position - fish_spawn_position
 			var time_to_reach_target = displacement.y / gravity
 			var horizontal_velocity = Vector3(displacement.x / (time_to_reach_target * 10), 0, displacement.z / (time_to_reach_target * 10)) # Slower horizontal velocity
@@ -162,7 +159,7 @@ func _on_fishing_rod_tugged():
 ## Connected to the timeout of the trial timer.
 func _on_trial_timer_timeout():
 	print("It do be biting")
-	fishing_float.plunge_on_bite()
+	fishing_float.plunge()
 	can_catch = true
 	catch_timer.start()
 
