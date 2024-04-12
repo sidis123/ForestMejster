@@ -24,15 +24,21 @@ var can_catch: bool = false
 ## The size of the time window in which the player should react.
 @export var trial_moment_time: float = 1.0
 
-## The fishing rod container
+## The fishing rod container.
 @onready var fishing_rod: FishingRod = get_node("/root/Main/FishingRod/FishingRod")
 
-## The fishing float
+## The fishing float.
 @onready var fishing_float: FishingFloat = get_node("/root/Main/FishingRod/FishingFloat")
+
+## The player (needed to target the fish).
+@onready var player: XROrigin3D = get_node("/root/Main/PlayerInstance")
 
 var trial_number: int = 0
 
 var fishing_in_progress: bool = false
+
+## The fish scene that will be spawned upon catching.
+const FishScene = preload("res://scenes/fishing/fish.tscn")
 
 # TODO: implement distraction logic
 
@@ -64,7 +70,30 @@ func _fail_trial():
 
 func _catch_fish():
 	print("You caught it baby")
-	# TODO: spawn fish
+	var fish_spawn_position = fishing_float.global_position
+	
+	if FishScene:
+		# Create a new instance of the fish
+		var fish_instance = FishScene.instantiate()
+		
+		if fish_instance:
+			# Setup the fish and add it to scene
+			#var fish_mesh = fish_instance.get_node("Raude")
+			#fish_mesh.scale = Vector3.ONE * 10
+			add_child(fish_instance)
+			fish_instance.global_position = fish_spawn_position
+			print(fish_instance.global_position)
+
+			# Calculate initial velocity to hit the target with an arched trajectory
+			#var gravity = -9.8 # Gravity value (adjust as needed) (TODO: figure out if this can break bobbing (it overrides the gravity variable I guess))
+			var displacement = player.global_position - fish_spawn_position
+			var time_to_reach_target = displacement.y / gravity
+			var horizontal_velocity = Vector3(displacement.x / (time_to_reach_target * 10), 0, displacement.z / (time_to_reach_target * 10)) # Slower horizontal velocity
+			var vertical_velocity = Vector3(0, gravity * (time_to_reach_target * 6), 0) # Higher vertical velocity
+			# TODO: the linear velocity should be set in _integrate_forces(), not in a wholy different script
+			fish_instance.linear_velocity = horizontal_velocity + vertical_velocity
+			# TODO: implement a cap on the fish impulse so it wouldn't fly out of the map
+
 
 func _finish_fishing():
 	print("We done fishing")
