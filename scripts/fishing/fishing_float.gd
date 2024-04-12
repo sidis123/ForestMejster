@@ -10,8 +10,6 @@ var connected: bool = true
 ## The fishing rod.
 @onready var fishing_rod: FishingRod = get_node("../FishingRod")
 
-var disable_reset: bool = false
-
 var in_water: bool = false
 
 @export_category("Floating characteristics")
@@ -155,9 +153,7 @@ func set_fish_interval(value):
 ## Handles the interaction signal from the fishing rod
 func _on_action_pressed(pickable: Variant):	
 	if not connected:
-		# TODO: THIS IS TEMPORARY
-		if not disable_reset:
-			_reset()
+		_reset()
 	else:
 		_release()
 

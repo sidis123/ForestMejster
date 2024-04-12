@@ -1,5 +1,5 @@
-extends Area3D
 class_name FishingWater
+extends Area3D
 
 ## Number of times the player needs to correctly click to catch the fish.
 @export var number_of_trials: int = 3
@@ -34,17 +34,18 @@ var trial_number: int = 0
 
 var fishing_in_progress: bool = false
 
+# TODO: implement distraction logic
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not fishing_rod:
 		push_error("Fishing water failed to find the fishing rod")
 	fishing_rod.action_pressed.connect(_on_fishing_rod_action)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	# TODO: implement distraction logic
-	pass
+	fishing_rod.tugged.connect(_on_fishing_rod_tugged)
+	
+	# Connect the signals - in script is more efficient than in inspector
+	body_entered.connect(_on_water_entered)
+	body_exited.connect(_on_water_exited)
 
 
 func _start_fishing():
@@ -52,7 +53,6 @@ func _start_fishing():
 	trial_number = 1
 	_reset_timers()
 	fishing_in_progress = true
-	fishing_float.disable_reset = true
 
 func _complete_trial():
 	print("Good job")
@@ -64,6 +64,7 @@ func _fail_trial():
 
 func _catch_fish():
 	print("You caught it baby")
+	# TODO: spawn fish
 
 func _finish_fishing():
 	print("We done fishing")
@@ -71,7 +72,6 @@ func _finish_fishing():
 	trial_number = 0
 	trial_timer.stop()
 	catch_timer.stop()
-	fishing_float.disable_reset = false
 
 
 func _reset_timers():
@@ -116,6 +116,9 @@ func _on_water_exited(body: Node3D):
 ## Connected to the action_pressed signal of the fishing rod container.
 func _on_fishing_rod_action(pickable: Variant):
 	print("Fishing water detected a fishing rod action")
+
+
+func _on_fishing_rod_tugged():
 	if can_catch:
 		catch_timer.stop()
 		can_catch = false
