@@ -40,6 +40,9 @@ var distance: float = 0.0 # TODO: increase *MESH* scale based on distance from t
 ## The mesh of the float, used for changing the visual scale.
 @onready var mesh: MeshInstance3D = get_node("FloatMesh")
 
+## The particle system of the float, used for emitting success particles.
+@onready var particles: CPUParticles3D = get_node("SuccessParticles")
+
 var bobbing_amplitude: float = 0.1  # Amplitude of the bobbing (max height/depth from the water level)
 var bobbing_period: float = 1.0  # Time it takes to complete one full cycle of bobbing
 var rotation_period: float = 3.0
@@ -159,6 +162,10 @@ func plunge():
 	bobbing = false
 	apply_central_impulse(Vector3.DOWN * plunge_force)
 	plunging = true
+
+
+func emit_particles():
+	particles.set_emitting(true)
 
 
 ## Handles the interaction signal from the fishing rod.

@@ -22,7 +22,7 @@ var can_catch: bool = false
 @export var trial_wait_time_randomness: float = 0.2
 
 ## The size of the time window in which the player should react.
-@export var trial_moment_time: float = 1.0
+#@export var trial_moment_time: float = 1.0
 
 ## The fishing rod container.
 @onready var fishing_rod: FishingRod = get_node("/root/Main/FishingRod/FishingRod")
@@ -62,6 +62,7 @@ func _start_fishing():
 
 func _complete_trial():
 	print("Good job")
+	fishing_float.emit_particles()
 	trial_number += 1
 	_reset_timers()
 	
@@ -144,6 +145,7 @@ func _on_fishing_rod_action(pickable: Variant):
 	print("Fishing water detected a fishing rod action")
 
 
+## Handles the fishing rod tug.
 func _on_fishing_rod_tugged():
 	if can_catch:
 		catch_timer.stop()

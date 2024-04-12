@@ -12,7 +12,7 @@ var instant_velocity: Vector3 = Vector3.ZERO
 @export_category("Tugging logic")
 
 ## Velocity threshold for detecting a tug.
-@export var tug_velocity_threshold: float = 6.0
+@export var tug_velocity_threshold: float = 5.0
 
 ## Tug detection cooldown in seconds used to prevent unintentional spamming.
 @export var tug_cooldown: float = 0.8

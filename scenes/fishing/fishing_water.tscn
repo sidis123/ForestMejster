@@ -14,8 +14,7 @@ linear_damp = 5.0
 angular_damp_space_override = 1
 angular_damp = 5.0
 script = ExtResource("1_cx5po")
-number_of_trials = 1
-trial_wait_time_randomness = 0.0
+trial_wait_time_randomness = 0.1
 
 [node name="FishingWaterCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
