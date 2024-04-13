@@ -133,3 +133,4 @@ end_point = NodePath("../../FishingFloat")
 [node name="FishingFloat" parent="." instance=ExtResource("11_apdnu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.941)
 max_contacts_reported = 1
+max_distance = 20.0

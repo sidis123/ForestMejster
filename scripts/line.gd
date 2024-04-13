@@ -12,7 +12,7 @@ extends Node3D
 @export var line_radius: float = 0.1
 
 ## The resolution of the line (idk how it actually works).
-@export var line_resolution = 180
+@export var line_resolution = 90
 
 ## Override of the line material.
 @export var polygon_material_override: Material : set = set_polygon_material_override

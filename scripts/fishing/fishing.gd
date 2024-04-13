@@ -1,28 +1,33 @@
 class_name FishingWater
 extends Area3D
 
+
+## The fish scene that will be spawned upon catching.
+const FishScene = preload("res://scenes/fishing/fish.tscn")
+
 ## Number of times the player needs to correctly click to catch the fish.
 @export var number_of_trials: int = 3
 
 ## The time you need to wait between trials.
 @export var trial_time: float = 3.0
 
-@onready var trial_timer: Timer = get_node("TrialTimer")
-
-## The time in seconds that the player has to react to a trial.
-@export var catch_windown: float = 1.0
-
-@onready var catch_timer: Timer = get_node("CatchTimer")
-
-var can_catch: bool = false
-
 ## Multiplyer that determines the randomness of time between trials.
 ## 0 means no randomness, 
 ## 1 means the time between trials can last anywhere between 0 s and twice the normal time.
 @export var trial_wait_time_randomness: float = 0.2
 
-## The size of the time window in which the player should react.
-#@export var trial_moment_time: float = 1.0
+## The time in seconds that the player has to react to a trial.
+@export var catch_windown: float = 1.0
+
+var can_catch: bool = false
+
+var trial_number: int = 0
+
+var fishing_in_progress: bool = false
+
+@onready var trial_timer: Timer = get_node("TrialTimer")
+
+@onready var catch_timer: Timer = get_node("CatchTimer")
 
 ## The fishing rod container.
 @onready var fishing_rod: FishingRod = get_node("/root/Main/FishingRod/FishingRod")
@@ -33,19 +38,10 @@ var can_catch: bool = false
 ## The player (needed to target the fish).
 @onready var player: XROrigin3D = get_node("/root/Main/PlayerInstance")
 
-var trial_number: int = 0
-
-var fishing_in_progress: bool = false
-
-## The fish scene that will be spawned upon catching.
-const FishScene = preload("res://scenes/fishing/fish.tscn")
-
 # TODO: implement distraction logic
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not fishing_rod:
-		push_error("Fishing water failed to find the fishing rod")
 	fishing_rod.action_pressed.connect(_on_fishing_rod_action)
 	fishing_rod.tugged.connect(_on_fishing_rod_tugged)
 	
@@ -55,13 +51,11 @@ func _ready():
 
 
 func _start_fishing():
-	print("We fishing")
 	trial_number = 1
 	_reset_timers()
 	fishing_in_progress = true
 
 func _complete_trial():
-	print("Good job")
 	fishing_float.emit_particles()
 	trial_number += 1
 	_reset_timers()
@@ -70,7 +64,6 @@ func _fail_trial():
 	_reset_timers()
 
 func _catch_fish():
-	print("You caught it baby")
 	var fish_spawn_position = fishing_float.global_position
 	
 	if FishScene:
@@ -94,7 +87,6 @@ func _catch_fish():
 
 
 func _finish_fishing():
-	print("We done fishing")
 	fishing_in_progress = false
 	trial_number = 0
 	trial_timer.stop()
@@ -123,6 +115,7 @@ func _on_water_entered(body: Node3D):
 		if body == fishing_float:
 			_start_fishing()
 	else:
+		pass
 		print("An unrecognised body has entered the water: " + str(body))
 
 
@@ -136,13 +129,14 @@ func _on_water_exited(body: Node3D):
 		if body == fishing_float:
 			_finish_fishing()
 	else:
+		pass
 		print("An unrecognised body has exited the water: " + str(body))
 
 
 ## Handles the logic upon fishing rod action. 
 ## Connected to the action_pressed signal of the fishing rod container.
 func _on_fishing_rod_action(pickable: Variant):
-	print("Fishing water detected a fishing rod action")
+	pass
 
 
 ## Handles the fishing rod tug.
@@ -158,15 +152,14 @@ func _on_fishing_rod_tugged():
 			fishing_float._reset()
 
 
-## Connected to the timeout of the trial timer.
+## Connected to the timeout of the trial timer - when the moment to catch comes.
 func _on_trial_timer_timeout():
-	print("It do be biting")
 	fishing_float.plunge()
 	can_catch = true
 	catch_timer.start()
 
 
+## Connected to the timeout of the catch timer - when the moment to catch passes.
 func _on_catch_timer_timeout():
-	print("Missed it, bud")
 	can_catch = false
 	_fail_trial()
