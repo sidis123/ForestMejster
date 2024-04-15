@@ -29,6 +29,7 @@ bounce_threshold = 1.0
 
 [node name="PlayerOrigin" type="XROrigin3D"]
 process_mode = 3
+current = true
 script = ExtResource("1_524a5")
 
 [node name="PlayerCamera" type="XRCamera3D" parent="."]
@@ -103,3 +104,5 @@ input_keyboard = false
 process_mode = 1
 collision_mask = 31
 physics = SubResource("Resource_l5fo3")
+water_emergence_acceleration = 5.0
+water_max_emergence_velocity = 2.0

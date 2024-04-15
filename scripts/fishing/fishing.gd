@@ -111,7 +111,7 @@ func _on_water_entered(body: Node3D):
 	# Check if the body that landed in the water has a func for processing this event
 	if body.has_method("on_water_entered"):
 		# Call it if it does
-		body.on_water_entered()
+		body.on_water_entered(global_position.y) # TODO: this breaks floats
 		if body == fishing_float:
 			_start_fishing()
 	else:

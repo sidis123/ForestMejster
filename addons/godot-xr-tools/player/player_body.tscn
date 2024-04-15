@@ -9,3 +9,5 @@ top_level = true
 collision_layer = 524288
 collision_mask = 1023
 script = ExtResource("1")
+water_emergence_acceleration = null
+water_max_emergence_velocity = null
