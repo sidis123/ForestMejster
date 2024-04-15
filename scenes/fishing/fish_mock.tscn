@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://coi25buc88g6d"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhwr6qbpcc67e" path="res://models/fishing/mock_fish_v2.tres" id="2_vhr4r"]
-[ext_resource type="Script" path="res://scripts/fish_mock.gd" id="2_wy85y"]
+[ext_resource type="Script" path="res://scripts/fishing/fish_mock.gd" id="2_wy85y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gsnr"]
 albedo_color = Color(0.2, 0.490196, 0.635294, 1)

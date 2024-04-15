@@ -35,5 +35,4 @@ func let_go(by: Node3D, p_linear_velocity: Vector3, p_angular_velocity: Vector3)
 
 
 func handle_tug():
-	print("Bro tugging!")
 	tugged.emit()
