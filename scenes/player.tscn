@@ -47,6 +47,7 @@ tracker = &"right_hand"
 [node name="RightHand" parent="RightHandController" instance=ExtResource("2_uiry7")]
 
 [node name="MovementTurn" parent="RightHandController" instance=ExtResource("5_y5i8i")]
+process_mode = 1
 turn_mode = 2
 step_turn_angle = 45.0
 
@@ -104,5 +105,3 @@ input_keyboard = false
 process_mode = 1
 collision_mask = 31
 physics = SubResource("Resource_l5fo3")
-water_emergence_acceleration = 5.0
-water_max_emergence_velocity = 2.0
