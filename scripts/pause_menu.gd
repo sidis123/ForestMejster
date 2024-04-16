@@ -1,6 +1,8 @@
 extends Control
 
-var pause_menu_viewport: Node3D
+# The viewoport 2d in 3d that contains the pause menu.
+# It should be the grandparent (2din3dviewport/viewport/menu)
+@onready var pause_menu_viewport : Node3D = get_node("../../")
 
 var player_camera: XRCamera3D
 
@@ -12,31 +14,24 @@ var paused: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Retrieve the viewport - it should be the grandparent (2din3dviewport/viewport/menu)
-	pause_menu_viewport = get_node("../../")
+	# Hide the viewport
 	pause_menu_viewport.visible = false
 	pause_menu_viewport.set_enabled(false)
 	
-	if not pause_menu_viewport:
-		push_error("The pause menu viewport was not found")
-	
 	var player: XROrigin3D = get_node("../../../PlayerInstance")
 	
-	if not player:
-		push_error("The player node was not found")
-	else:
+	if  player:
 		player.controller_toggled_pause.connect(_on_pause_toggled)
 		player_camera = player.get_node("PlayerCamera")
-		if not player_camera:
-			push_error("The player camera node was not found")
+		
+	# Make sure the scene is unpaused (pause gets inherited when reloading)
+	get_tree().paused = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if paused:
 		position_menu()
-		
-	#print(Engine.get_frames_per_second())
 
 
 func pause():
@@ -80,8 +75,9 @@ func _on_settings_button_pressed():
 	pass # Replace with function body.
 
 
-func _on_exit_to_menu_button_pressed():
-	pass # Replace with function body.
+func _on_restart_game_button_pressed():
+	# Reload the scene
+	get_tree().reload_current_scene()
 
 
 func _on_exit_game_button_pressed():

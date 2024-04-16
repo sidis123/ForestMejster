@@ -58,12 +58,12 @@ theme_override_font_sizes/font_size = 40
 text = "Settings
 "
 
-[node name="ExitToMenuButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="RestartGameButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
-text = "Exit To Main Menu"
+text = "Restart game"
 
 [node name="ExitGameButton" type="Button" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 100)
@@ -74,5 +74,5 @@ text = "Exit Game"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/ExitToMenuButton" to="." method="_on_exit_to_menu_button_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/RestartGameButton" to="." method="_on_restart_game_button_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/ExitGameButton" to="." method="_on_exit_game_button_pressed"]
