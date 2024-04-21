@@ -25,7 +25,7 @@ closed_pose = ExtResource("5_q0q5l")
 script = ExtResource("6_d7xwk")
 closed_pose = ExtResource("8_autvk")
 
-[node name="Fish" instance=ExtResource("1_vdqen")]
+[node name="Fish" groups=["Coocable"] instance=ExtResource("1_vdqen")]
 script = ExtResource("2_o4gd6")
 
 [node name="CollisionShape3D" parent="." index="0"]

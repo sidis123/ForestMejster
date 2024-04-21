@@ -13,7 +13,8 @@ extends XRToolsPickable
 func set_mesh_scale(scale: Vector3):
 	mesh.set_scale(scale)
 
-
 func pick_up(by: Node3D) -> void:
 	super.pick_up(by)
+	if mesh.get_parent().has_method("set_gravity_scale"): #reikalingas fisho cookinimui NEISTRINTI
+		mesh.get_parent().set_gravity_scale(1)
 	mesh.set_scale(Vector3(2, 2, 2)) # Reset the mesh scale
