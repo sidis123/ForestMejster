@@ -27,10 +27,11 @@ closed_pose = ExtResource("8_u8i4e")
 [node name="Steak" instance=ExtResource("1_60uqg")]
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1.115, 0, 0, 0, 1.115, 0, 0, 0, 1.115, 0, -0.0748877, 0.0824596)
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, -0.0130079, -0.0140648, 0.00370623)
 shape = SubResource("BoxShape3D_muqgd")
 
 [node name="steak_low" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 mesh = ExtResource("2_gax02")
 skeleton = NodePath("")
 
@@ -38,14 +39,14 @@ skeleton = NodePath("")
 script = ExtResource("3_cm0gi")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="XRToolsHighlightVisible" index="0"]
-transform = Transform3D(0.22, 0, 0, 0, 0.239, 0, 0, 0, 0.22, 0.22307, 0.0114105, -0.720441)
+transform = Transform3D(-0.015, 0, 0, 0, -0.187, 0, 0, 0, -0.015, 0.0365016, -0.0320516, -0.0960811)
 mesh = ExtResource("2_gax02")
 surface_material_override/0 = SubResource("StandardMaterial3D_ld3ce")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("4_rmc3f")]
-transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0.074, -0.066, -0.154)
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0.074, -0.0316976, -0.0422267)
 hand_pose = SubResource("Resource_ifu0f")
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("7_8a6hg")]
-transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -0.0744674, -0.0659336, -0.154315)
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -0.0744674, -0.0249733, -0.0353663)
 hand_pose = SubResource("Resource_2g27g")
