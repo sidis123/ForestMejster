@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b1mke6up8vpty"
-path="res://.godot/imported/steak.glb-d6dbc3a64d867e2550530aee4d0ddd0b.scn"
+uid="uid://cwbv8doi3j5db"
+path="res://.godot/imported/cartoon_steak.glb-954efa3aece14166d54a88bcee7abe00.scn"
 
 [deps]
 
-source_file="res://models/campfire/steak/steak.glb"
-dest_files=["res://.godot/imported/steak.glb-d6dbc3a64d867e2550530aee4d0ddd0b.scn"]
+source_file="res://models/campfire/cartoon_steak.glb"
+dest_files=["res://.godot/imported/cartoon_steak.glb-954efa3aece14166d54a88bcee7abe00.scn"]
 
 [params]
 
