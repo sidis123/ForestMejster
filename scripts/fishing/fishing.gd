@@ -16,6 +16,12 @@ const FishScene = preload("res://scenes/fishing/fish.tscn")
 ## 1 means the time between trials can last anywhere between 0 s and twice the normal time.
 @export var trial_wait_time_randomness: float = 0.2
 
+## The time between distractions.
+@export var distraction_time: float = 2.0
+
+## Multiplyer that determines the randomness of time between distractions.
+@export var distraction_time_randomness: float = 0.0
+
 ## The time in seconds that the player has to react to a trial.
 @export var catch_windown: float = 1.0
 
@@ -29,6 +35,8 @@ var fishing_in_progress: bool = false
 
 @onready var catch_timer: Timer = get_node("CatchTimer")
 
+@onready var distraction_timer: Timer = get_node("DistractionTimer");
+
 ## The fishing rod container.
 @onready var fishing_rod: FishingRod = get_node("/root/Main/FishingRod/FishingRod")
 
@@ -37,6 +45,14 @@ var fishing_in_progress: bool = false
 
 ## The player (needed to target the fish).
 @onready var player: XROrigin3D = get_node("/root/Main/PlayerInstance")
+
+@onready var water_mesh: MeshInstance3D = get_node("../")
+
+@onready var water_shader: ShaderMaterial
+
+var wind_distraction: bool = false
+var wind_transition_speed: float = 0.2
+var wind_transition_time: float = 0.0
 
 # TODO: implement distraction logic
 
@@ -48,7 +64,24 @@ func _ready():
 	# Connect the signals - in script is more efficient than in inspector
 	body_entered.connect(_on_water_entered)
 	body_exited.connect(_on_water_exited)
+	
+	if water_mesh:
+		water_shader = water_mesh.get_surface_override_material(0)
 
+func _process(delta):
+	if wind_distraction:
+		#water_shader.set_shader_parameter("triangleSpeed", 5);
+		#wind_distraction = false
+		#var triangle_height = water_shader.get_shader_parameter("triangleHeight")
+		var triangle_speed = water_shader.get_shader_parameter("triangleSpeed")
+		#if triangle_height < 0.6 or triangle_speed < 0.8:
+		if triangle_speed < 5:
+			#water_shader.set_shader_parameter("triangleSpeed", 2);
+			#water_shader.set_shader_parameter("triangleHeight", min(0.6, triangle_height + delta * wind_transition_speed));
+			water_shader.set_shader_parameter("triangleSpeed", min(5, triangle_speed + delta * wind_transition_speed));
+		
+		
+		
 
 func _start_fishing():
 	trial_number = 1
@@ -91,12 +124,15 @@ func _finish_fishing():
 	trial_number = 0
 	trial_timer.stop()
 	catch_timer.stop()
+	distraction_timer.stop()
 
 
 func _reset_timers():
 	trial_timer.wait_time = _get_time_until_next_trial()
 	catch_timer.wait_time = catch_windown
+	distraction_timer.wait_time = _get_time_until_distraction()
 	trial_timer.start()
+	distraction_timer.start()
 
 ## Calculates the randomised time until next trial.
 func _get_time_until_next_trial() -> float:
@@ -104,6 +140,10 @@ func _get_time_until_next_trial() -> float:
 	var time_until_next_trial = randf_range(trial_time - randomness, trial_time + randomness)
 	return time_until_next_trial
 
+func _get_time_until_distraction() -> float:
+	var randomness = distraction_time * distraction_time_randomness
+	var time = randf_range(distraction_time - randomness, distraction_time + randomness)
+	return time
 
 ## Handles the entry of the fishable water. 
 ## Connected to the body entered signal of this node.
@@ -163,3 +203,8 @@ func _on_trial_timer_timeout():
 func _on_catch_timer_timeout():
 	can_catch = false
 	_fail_trial()
+
+
+func _on_distraction_timer_timeout():
+	if fishing_in_progress:
+		wind_distraction = true

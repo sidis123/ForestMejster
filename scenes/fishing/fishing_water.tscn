@@ -26,5 +26,9 @@ one_shot = true
 [node name="CatchTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="DistractionTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="TrialTimer" to="." method="_on_trial_timer_timeout"]
 [connection signal="timeout" from="CatchTimer" to="." method="_on_catch_timer_timeout"]
+[connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]
