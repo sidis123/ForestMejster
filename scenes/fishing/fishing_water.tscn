@@ -15,6 +15,8 @@ angular_damp_space_override = 1
 angular_damp = 5.0
 script = ExtResource("1_cx5po")
 trial_wait_time_randomness = 0.1
+distraction_time = 3.0
+distraction_time_randomness = 0.2
 
 [node name="FishingWaterCollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
@@ -29,6 +31,8 @@ one_shot = true
 [node name="DistractionTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="body_entered" from="." to="." method="_on_water_entered"]
+[connection signal="body_exited" from="." to="." method="_on_water_exited"]
 [connection signal="timeout" from="TrialTimer" to="." method="_on_trial_timer_timeout"]
 [connection signal="timeout" from="CatchTimer" to="." method="_on_catch_timer_timeout"]
 [connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]

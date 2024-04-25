@@ -10,8 +10,8 @@ extends XRToolsPickable
 @onready var mesh = get_node("Mesh")
 
 ## Sets the scale of the fish's mesh to given value.
-func set_mesh_scale(scale: Vector3):
-	mesh.set_scale(scale)
+func set_mesh_scale(mesh_scale: Vector3):
+	mesh.set_scale(mesh_scale)
 
 func pick_up(by: Node3D) -> void:
 	super.pick_up(by)
