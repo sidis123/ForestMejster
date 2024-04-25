@@ -62,7 +62,9 @@ var _distance: float = 0.0
 @onready var mesh: MeshInstance3D = get_node("FloatMesh")
 
 ## The particle system of the float, used for emitting success particles.
-@onready var particles: CPUParticles3D = get_node("SuccessParticles")
+@onready var particles: GPUParticles3D = get_node("SuccessParticles")
+
+@onready var splash_particles: GPUParticles3D = get_node("SplashParticles")
 
 ## The float target that the float is attached to when connected.
 @onready var target: Node3D = get_node("../FishingRod/FloatTarget")
@@ -93,7 +95,7 @@ func _process(_delta):
 
 
 # Called every physics frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _connected:
 		set_position_at_target()
 	
@@ -189,6 +191,7 @@ func plunge():
 	_bobbing = false
 	apply_central_impulse(Vector3.DOWN * plunge_force)
 	_plunging = true
+	splash_particles.set_emitting(true)
 
 
 ## Called by water upon successful fishing trial.
@@ -197,7 +200,7 @@ func emit_particles():
 
 
 ## Handles the interaction signal from the fishing rod.
-func _on_action_pressed(pickable: Variant):	
+func _on_action_pressed(_pickable: Variant):	
 	if not _connected:
 		_reset()
 	else:
@@ -217,6 +220,7 @@ func on_water_entered(_water_height: float):
 	_in_water = true
 	_plunging = true
 	mesh.scale = Vector3.ONE * max_mesh_scale # increase the scale of the float mesh to max
+	splash_particles.set_emitting(true)
 
 
 ## Handles the exit from water - resets all bools and variables related to water.
