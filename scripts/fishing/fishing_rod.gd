@@ -19,23 +19,37 @@ signal tugged
 ## The float target.
 @onready var float_target: FishingFloatTarget = get_node("FloatTarget")
 
+@onready var player_body: XRToolsPlayerBody = get_node("/root/Main/PlayerInstance/PlayerBody")
 
-#func _ready():
-	#super._ready() # Run the parent _ready() function to get the grab points
+var _moved: bool = false
+
+func _process(delta):
+	if (
+			_moved and not is_picked_up() and player_body 
+			and global_position.distance_to(player_body.global_position) > 10.0
+	):
+		reset()
 
 
 func pick_up(by: Node3D) -> void:
 	super.pick_up(by) # Run the parent pick up function
-	float_target.set_picked_up(true) # Tell the target to start calculating
+	_moved = true
+	float_target.set_picked_up(true) # Tell the target to start calculating velocity
 
 
 func let_go(by: Node3D, p_linear_velocity: Vector3, p_angular_velocity: Vector3) -> void:
 	super.let_go(by, p_linear_velocity, p_angular_velocity) # Run the parent function
-	float_target.set_picked_up(false) # Tell the target to stop calculating
+	float_target.set_picked_up(false) # Tell the target to stop calculating velocity
 
 
 func handle_tug():
 	tugged.emit()
+
+
+func reset():
+	#print("Resetting")
+	emit_signal("action_pressed", self) # resets the float
+	_moved = false
 
 
 func trigger_haptic(duration: float, delay: float):

@@ -216,8 +216,9 @@ func _on_catch_timer_timeout():
 func _on_distraction_timer_timeout():
 	if fishing_in_progress:
 		_reset_distraction_timer()
-		var available_distraction: Distraction = distractions.filter(func(d: Distraction): return not d.active).pick_random()
-		if available_distraction:
+		var available_distractions = distractions.filter(func(d: Distraction): return not d.active)
+		if available_distractions.size() > 0:
+			var available_distraction: Distraction = available_distractions.pick_random()
 			available_distraction.activate(_random_position_for_distraction(), fishing_rod)
 		else:
 			print("No available distractions were found") # TODO: get rid of this, only for debug

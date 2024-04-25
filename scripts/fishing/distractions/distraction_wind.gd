@@ -13,7 +13,7 @@ extends Distraction
 @export var fade_out_duration: float = 3.0
 
 ## The maximum volume the wind audio will reach.
-@export_range(0.0, 80) var max_volume_db: float = 0
+@export var max_volume_db: float = -8
 
 ## The minimum volume - cant hear it or anything lower.
 var min_volume_db: float = -30
