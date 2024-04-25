@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca0ohfqspp2pg"]
+[gd_scene load_steps=5 format=3 uid="uid://ca0ohfqspp2pg"]
 
 [ext_resource type="Script" path="res://scripts/fishing/fishing.gd" id="1_cx5po"]
+[ext_resource type="PackedScene" uid="uid://wus354uwp5a2" path="res://scenes/fishing/distractions/distraction_fish.tscn" id="2_1dg7f"]
+[ext_resource type="PackedScene" uid="uid://b4grfvgpri7y5" path="res://scenes/fishing/distractions/distraction_wind.tscn" id="3_6f0le"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vewt5"]
 size = Vector3(40, 8, 40)
@@ -30,6 +32,10 @@ one_shot = true
 
 [node name="DistractionTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="DistractionFish" parent="." instance=ExtResource("2_1dg7f")]
+
+[node name="DistractionWind" parent="." instance=ExtResource("3_6f0le")]
 
 [connection signal="body_entered" from="." to="." method="_on_water_entered"]
 [connection signal="body_exited" from="." to="." method="_on_water_exited"]

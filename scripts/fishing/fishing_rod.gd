@@ -36,3 +36,9 @@ func let_go(by: Node3D, p_linear_velocity: Vector3, p_angular_velocity: Vector3)
 
 func handle_tug():
 	tugged.emit()
+
+
+func trigger_haptic(duration: float, delay: float):
+	var controller: XRController3D = get_picked_up_by_controller()
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.5, 0.2, duration, delay) # vibrate on wind

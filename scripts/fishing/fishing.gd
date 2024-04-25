@@ -5,7 +5,10 @@ extends Area3D
 ## The fish scene that will be spawned upon catching.
 const FishScene = preload("res://scenes/fishing/fish.tscn")
 
-const DistractionFishScene = preload("res://scenes/fishing/distraction_fish.tscn")
+# NOTE: if we ever want to save some extra memory for other activities, distractions could
+# all be preloaded and only instantiated when fishing starts instead of being children to this node
+#const DistractionFishScene = preload("res://scenes/fishing/distractions/distraction_fish.tscn")
+#const DistractionWindScene = preload("res://scenes/fishing/distractions/distraction_wind.tscn")
 
 @export_category("Fishing")
 
@@ -62,27 +65,33 @@ var fishing_in_progress: bool = false
 
 @onready var water_shader: ShaderMaterial
 
+@onready var distraction_fish: DistractionFish = get_node("DistractionFish")
+
+@onready var distraction_wind: DistractionWind = get_node("DistractionWind")
+
 var wind_distraction: bool = false
 var wind_transition_speed: float = 0.2
 var wind_transition_time: float = 0.0
 
-var distraction_scene_array: Array[PackedScene] = []
+var distractions: Array[Distraction] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fishing_rod.action_pressed.connect(_on_fishing_rod_action)
+	#fishing_rod.action_pressed.connect(_on_fishing_rod_action)
 	fishing_rod.tugged.connect(_on_fishing_rod_tugged)
 	
 	if water_mesh:
 		water_shader = water_mesh.get_surface_override_material(0)
 	
-	if DistractionFishScene:
-		distraction_scene_array.append(DistractionFishScene)
-
+	if distraction_fish:
+		distractions.append(distraction_fish)
+	if distraction_wind:
+		distractions.append(distraction_wind)
 
 func _start_fishing():
 	trial_number = 1
 	_reset_timers()
+	_reset_distraction_timer()
 	fishing_in_progress = true
 
 func _complete_trial():
@@ -123,13 +132,15 @@ func _finish_fishing():
 	catch_timer.stop()
 	distraction_timer.stop()
 
+func _reset_distraction_timer():
+	distraction_timer.wait_time = _get_time_until_distraction()
+	distraction_timer.start()
 
 func _reset_timers():
 	trial_timer.wait_time = _get_time_until_next_trial()
 	catch_timer.wait_time = catch_windown
-	distraction_timer.wait_time = _get_time_until_distraction()
 	trial_timer.start()
-	distraction_timer.start()
+
 
 ## Calculates the randomised time until next trial.
 func _get_time_until_next_trial() -> float:
@@ -172,8 +183,8 @@ func _on_water_exited(body: Node3D):
 
 ## Handles the logic upon fishing rod action. 
 ## Connected to the action_pressed signal of the fishing rod container.
-func _on_fishing_rod_action(_pickable: Variant):
-	pass
+#func _on_fishing_rod_action(_pickable: Variant):
+	#pass
 
 
 ## Handles the fishing rod tug.
@@ -203,15 +214,13 @@ func _on_catch_timer_timeout():
 
 
 func _on_distraction_timer_timeout():
-	print("Timer timed out")
-	if fishing_in_progress and not distraction_scene_array.is_empty():
-		var distraction_scene: PackedScene = distraction_scene_array.pick_random()
-		var distraction: Distraction = distraction_scene.instantiate()
-		if distraction:
-			add_child(distraction)
-			distraction.spawn(_random_position_for_distraction())
+	if fishing_in_progress:
+		_reset_distraction_timer()
+		var available_distraction: Distraction = distractions.filter(func(d: Distraction): return not d.active).pick_random()
+		if available_distraction:
+			available_distraction.activate(_random_position_for_distraction(), fishing_rod)
 		else:
-			print("Distraction failed to instantiate") # TODO: get rid of this, only for debug
+			print("No available distractions were found") # TODO: get rid of this, only for debug
 
 func _random_position_for_distraction() -> Vector3:
 	var float_position = fishing_float.global_position
