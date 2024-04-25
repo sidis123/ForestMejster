@@ -31,6 +31,10 @@ extends RigidBody3D
 ## The maximum distance the float can go from the fishing rod before it is reset.
 @export var max_distance: float = 10.0
 
+## The maximum distance the float can go from the fishing rod before it is reset during fishing.
+## This should be higher so that it doesn't reset upon plunging.
+@export var max_fishing_distance: float = 12.0
+
 ## The minimum scale of the float mesh. It will be at this scale while on the rod.
 @export var min_mesh_scale: float = 0.02
 
@@ -99,7 +103,7 @@ func _physics_process(_delta):
 	if _connected:
 		set_position_at_target()
 	
-	if not _connected and not _in_water:
+	if not _connected:
 		_update_distance_to_rod()
 
 
@@ -156,7 +160,9 @@ func _control_plunging(state):
 ## Updates the current distance from the float to the fishing rod.
 func _update_distance_to_rod():
 	_distance = global_position.distance_to(target.global_position)
-	if _distance > max_distance:
+	if not _in_water and _distance > max_distance:
+		_reset()
+	if _in_water and _distance > max_fishing_distance:
 		_reset()
 
 
