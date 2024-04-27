@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch54hnpbw88c8"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_2muy8"]
+[ext_resource type="ArrayMesh" uid="uid://dk34hw7u8cupp" path="res://models/combat/Arrow.obj" id="2_cbrjt"]
+[ext_resource type="PackedScene" uid="uid://dh8grd7s3n8kg" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_snap.tscn" id="3_c8ewr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kynoy"]
+margin = 0.001
+radius = 0.01
+height = 0.68
+
+[node name="Arrow" groups=["Arrow"] instance=ExtResource("1_2muy8")]
+collision_layer = 6
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_kynoy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(-1.04907e-08, 0, -0.24, 0, 0.24, 0, 0.24, 0, -1.04907e-08, 0.337, 0, 0)
+mesh = ExtResource("2_cbrjt")
+
+[node name="GrabPointSnap" parent="." index="2" instance=ExtResource("3_c8ewr")]
