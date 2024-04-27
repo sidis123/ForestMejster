@@ -45,7 +45,7 @@ func _on_Bow_dropped(_pickable):
 	pull_pick.enabled=false
 	
 	arrow_snap_zone.enabled = false
-	pull_pick.collision_layer=0
+	
 
 func _on_pull_pick_picked_up(_pickable):
 	print("paimta virve")
