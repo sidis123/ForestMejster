@@ -8,7 +8,7 @@ extends XRToolsPickable
 @onready var pull_pivot_org_position = $PullPivot.transform.origin
 @onready var arrow_snap_zone : XRToolsSnapZone = $PullPivot/ArrowSnapZone
 # Called when the node enters the scene tree for the first time.
-const fire_factor = 100
+const fire_factor = 85
 
 func _ready():
 	super()
@@ -54,6 +54,7 @@ func _on_pull_pick_picked_up(_pickable):
 
 
 func _on_pull_pick_dropped(_pickable):
+	pull_pick.freeze=false
 	set_process(false)
 	print("paleista virve")
 	#move back to start position, and re-enable our collision layer

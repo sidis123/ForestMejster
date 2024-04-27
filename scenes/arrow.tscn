@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch54hnpbw88c8"]
+[gd_scene load_steps=10 format=3 uid="uid://ch54hnpbw88c8"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_2muy8"]
 [ext_resource type="ArrayMesh" uid="uid://dk34hw7u8cupp" path="res://models/combat/Arrow.obj" id="2_cbrjt"]
+[ext_resource type="Script" path="res://scripts/arrow.gd" id="2_wvahv"]
 [ext_resource type="PackedScene" uid="uid://dh8grd7s3n8kg" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_snap.tscn" id="3_c8ewr"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_1vg0j"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_mkmj4"]
@@ -19,12 +20,16 @@ disable_receive_shadows = true
 
 [node name="Arrow" groups=["Arrow"] instance=ExtResource("1_2muy8")]
 collision_layer = 6
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("2_wvahv")
+release_mode = 0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_kynoy")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="ArrowMesh" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(-1.04907e-08, 0, -0.24, 0, 0.24, 0, 0.24, 0, -1.04907e-08, 0.337, 0, 0)
 mesh = ExtResource("2_cbrjt")
 
@@ -43,3 +48,5 @@ script = ExtResource("6_g620s")
 transform = Transform3D(-1.04907e-08, 0, -0.24, 0, 0.24, 0, 0.24, 0, -1.04907e-08, 0.337, 0, 0)
 mesh = ExtResource("2_cbrjt")
 surface_material_override/0 = SubResource("StandardMaterial3D_76nxs")
+
+[connection signal="body_entered" from="." to="." method="_on_Arrow_body_entered"]
