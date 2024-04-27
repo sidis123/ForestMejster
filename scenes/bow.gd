@@ -8,7 +8,7 @@ extends XRToolsPickable
 @onready var pull_pivot_org_position = $PullPivot.transform.origin
 @onready var arrow_snap_zone : XRToolsSnapZone = $PullPivot/ArrowSnapZone
 # Called when the node enters the scene tree for the first time.
-const fire_factor = 50.0
+const fire_factor = 100.0
 
 func _ready():
 	super()
@@ -41,11 +41,8 @@ func _on_Bow_dropped(_pickable):
 	pull_pick.freeze=true
 	if pull_pick.is_picked_up():
 		pull_pick.let_go(pull_pick,Vector3(),Vector3())
-	
 	pull_pick.enabled=false
-	
 	arrow_snap_zone.enabled = false
-	
 
 func _on_pull_pick_picked_up(_pickable):
 	print("paimta virve")
