@@ -28,13 +28,13 @@ shape = SubResource("CapsuleShape3D_kynoy")
 transform = Transform3D(-1.04907e-08, 0, -0.24, 0, 0.24, 0, 0.24, 0, -1.04907e-08, 0.337, 0, 0)
 mesh = ExtResource("2_cbrjt")
 
-[node name="GrabPointSnap" parent="." index="2" instance=ExtResource("3_c8ewr")]
-
-[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("4_1vg0j")]
+[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("4_1vg0j")]
 transform = Transform3D(0.00342085, -0.999989, 0.00331607, -0.999994, -0.00342087, 0, 1.13438e-05, -0.00331605, -0.999995, 0.10625, -0.0104861, 0.0917991)
 
-[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("5_mkmj4")]
+[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("5_mkmj4")]
 transform = Transform3D(-0.00232128, -0.999997, 0, 0.999997, -0.00232128, 0, 0, 0, 1, 0.120406, -0.0131871, -0.0978769)
+
+[node name="GrabPointSnap" parent="." index="4" instance=ExtResource("3_c8ewr")]
 
 [node name="XRToolsHighlightVisible" type="Node3D" parent="." index="5"]
 script = ExtResource("6_g620s")

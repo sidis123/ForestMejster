@@ -8,7 +8,7 @@ extends XRToolsPickable
 @onready var pull_pivot_org_position = $PullPivot.transform.origin
 @onready var arrow_snap_zone : XRToolsSnapZone = $PullPivot/ArrowSnapZone
 # Called when the node enters the scene tree for the first time.
-const fire_factor = 100.0
+const fire_factor = 100
 
 func _ready():
 	super()
@@ -59,7 +59,7 @@ func _on_pull_pick_dropped(_pickable):
 	#move back to start position, and re-enable our collision layer
 	pull_pick_colision.transform = Transform3D()
 	pull_pick.freeze=true
-	bow_skeleton.set_bone_pose_position(1,Vector3(0,0,0))
+	bow_skeleton.set_bone_pose_position(1,Vector3(-1,0,0))
 	pull_pick.freeze=false
 	#fire our arrow
 	
@@ -76,7 +76,7 @@ func _on_pull_pick_dropped(_pickable):
 		
 	#move our pivot back
 	pull_pivot.transform.origin = pull_pivot_org_position
-
+	bow_skeleton.set_bone_pose_position(1,Vector3(0,-1,0))
 
 func _on_arrow_snap_zone_has_picked_up(what):
 	arrow_snap_zone.enabled = false
