@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://baqn44ngm0jv1"]
+[gd_scene load_steps=21 format=3 uid="uid://baqn44ngm0jv1"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_vl8v5"]
 [ext_resource type="PackedScene" uid="uid://dayrj5f78ulqv" path="res://models/combat/bow.glb" id="2_4f3jw"]
-[ext_resource type="Script" path="res://scenes/bow.gd" id="2_cyh7o"]
+[ext_resource type="Script" path="res://scripts/bow.gd" id="2_cgjgp"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_ohdt4"]
 [ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="4_bdr5j"]
+[ext_resource type="Texture2D" uid="uid://raydtcfqir2e" path="res://models/combat/Bow.png" id="4_u0ty5"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_pfwtn"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_v4ojs"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="7_m761g"]
@@ -15,6 +16,9 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cxhhj"]
 margin = 0.005
 points = PackedVector3Array(1.71839, 0.0758977, 7.06256, 1.47202, 0.158037, 6.56896, 1.71839, 0.0758977, -7.06256, -0.170374, 0.240175, -3.20221, -0.170374, -0.252561, 2.62703, 1.22565, -0.170423, -6.32284, -0.170374, 0.240175, 3.20221, 1.71839, -0.0882836, 7.06256, 0.978895, -0.170423, 6.40442, 1.47202, 0.158037, -6.56896, -0.252561, -0.252561, -2.29934, 0.240175, -0.170423, -5.09091, 1.71839, -0.0882836, -7.06256, 0.40455, 0.158037, 5.41998, 0.814714, 0.158037, -6.15831, 0.240175, 0.240175, 3.28379, 0.240175, -0.170423, 5.09091, 0.240175, -0.252561, 2.62703, 1.14327, -0.170423, 6.40442, 0.978895, -0.170423, -6.40442, 0.240175, -0.252561, -2.62703, 0.240175, 0.240175, -3.28379, -0.252561, -0.252561, 2.29934, 1.06127, 0.158037, 6.48738, 0.40455, 0.158037, -5.41998, 1.55401, 0.0758977, -7.06256, 1.55401, -0.0882836, 7.06256, 1.22565, 0.158037, -6.65192, 0.486544, -0.170423, -5.58313, -0.170374, -0.252561, -2.62703, 0.814714, 0.158037, 6.15831, 0.486544, -0.170423, 5.58313)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwlmf"]
+albedo_texture = ExtResource("4_u0ty5")
 
 [sub_resource type="Resource" id="Resource_s3v65"]
 script = ExtResource("5_pfwtn")
@@ -60,7 +64,7 @@ script = ExtResource("5_pfwtn")
 closed_pose = ExtResource("4_bdr5j")
 
 [node name="Bow" instance=ExtResource("1_vl8v5")]
-script = ExtResource("2_cyh7o")
+script = ExtResource("2_cgjgp")
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, -0.0546894, 0, 0)
@@ -71,10 +75,12 @@ shape = SubResource("ConvexPolygonShape3D_cxhhj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0546894, 0, 0)
 
 [node name="Skeleton3D" parent="bow/Armature" index="0"]
-bones/1/rotation = Quaternion(1.00048, 0.000474975, 0.000474975, 0.000474975)
+bones/0/rotation = Quaternion(1, -7.54979e-08, 4.38604e-08, -3.77489e-08)
+bones/1/rotation = Quaternion(1, -1.50996e-07, 7.54979e-08, 7.54979e-08)
 
 [node name="Cube" parent="bow/Armature/Skeleton3D" index="0"]
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_nwlmf")
 
 [node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("3_ohdt4")]
 transform = Transform3D(-0.00541045, -0.00684155, 0.999962, -0.999985, 3.70164e-05, -0.00541032, 0, -0.999977, -0.00684165, -0.13834, -0.00585752, 0.0119577)

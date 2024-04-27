@@ -21,6 +21,7 @@ const force_factor = 0.1
 			
 			
 #funkcija velesniam combatui i ka pataike tt.
+#reik idet viska i ka gali pataikyt strele
 func _on_Arrow_body_entered(body):
 	#just react to the floor for now, this can be improved upon loads
 	if body.name == "StaticBody3D":
