@@ -18,11 +18,11 @@ func _ready():
 	pause_menu_viewport.visible = false
 	pause_menu_viewport.set_enabled(false)
 	
-	var player: XROrigin3D = get_node("/root/Main/PlayerOrigin")
+	var player: XROrigin3D = get_node("/root/Staging/Scene/Main/XROrigin3D")
 	
 	if  player:
 		player.controller_toggled_pause.connect(_on_pause_toggled)
-		player_camera = player.get_node("PlayerCamera")
+		player_camera = player.get_node("XRCamera3D")
 		
 	# Make sure the scene is unpaused (pause gets inherited when reloading)
 	get_tree().paused = false
