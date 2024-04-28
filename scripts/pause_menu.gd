@@ -23,9 +23,6 @@ func _ready():
 	if  player:
 		player.controller_toggled_pause.connect(_on_pause_toggled)
 		player_camera = player.get_node("XRCamera3D")
-		
-	# Make sure the scene is unpaused (pause gets inherited when reloading)
-	get_tree().paused = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,8 +35,7 @@ func pause():
 	paused = true
 	pause_menu_viewport.visible = true
 	pause_menu_viewport.set_enabled(true)
-	print(get_tree())
-	get_tree().paused = true
+	#get_tree().paused = true
 	
 func unpause():
 	paused = false
@@ -76,8 +72,15 @@ func _on_settings_button_pressed():
 
 
 func _on_restart_game_button_pressed():
-	# Reload the scene
+	unpause()
+	
 	get_tree().reload_current_scene()
+	#var scene_base : XRToolsSceneBase = XRTools.find_xr_ancestor(self, "*", "XRToolsSceneBase")
+	#
+	#if not scene_base:
+		#return
+		#
+	#scene_base.load_scene("res://scenes/main.tscn")
 
 
 func _on_exit_game_button_pressed():

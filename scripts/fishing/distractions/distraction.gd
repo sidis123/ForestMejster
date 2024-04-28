@@ -3,7 +3,7 @@ extends Node3D
 
 var active: bool = false
 
-func activate(spawn_position: Vector3, fishing_rod: FishingRod) -> void:
+func activate(_spawn_position: Vector3, _fishing_rod: FishingRod) -> void:
 	push_error("activate() function not implemented by subclass")
 
 func deactivate():
