@@ -18,7 +18,7 @@ func _ready():
 	pause_menu_viewport.visible = false
 	pause_menu_viewport.set_enabled(false)
 	
-	var player: XROrigin3D = get_node("../../../PlayerInstance")
+	var player: XROrigin3D = get_node("/root/Main/PlayerOrigin")
 	
 	if  player:
 		player.controller_toggled_pause.connect(_on_pause_toggled)

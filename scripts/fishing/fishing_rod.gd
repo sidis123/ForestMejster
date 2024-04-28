@@ -19,7 +19,7 @@ signal tugged
 ## The float target.
 @onready var float_target: FishingFloatTarget = get_node("FloatTarget")
 
-@onready var player_body: XRToolsPlayerBody = get_node("/root/Main/PlayerInstance/PlayerBody")
+@onready var player_body: XRToolsPlayerBody = get_node("/root/Main/PlayerOrigin/PlayerBody")
 
 var _moved: bool = false
 

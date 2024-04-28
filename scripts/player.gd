@@ -1,3 +1,4 @@
+class_name Player
 extends XROrigin3D
 
 var xr_interface: XRInterface

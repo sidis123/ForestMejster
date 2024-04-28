@@ -1,3 +1,4 @@
+class_name Bow
 extends XRToolsPickable
 
 @onready var bow_skeleton : Skeleton3D = $bow/Armature/Skeleton3D

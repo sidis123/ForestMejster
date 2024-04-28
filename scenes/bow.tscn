@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://baqn44ngm0jv1"]
+[gd_scene load_steps=20 format=3 uid="uid://baqn44ngm0jv1"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_vl8v5"]
 [ext_resource type="PackedScene" uid="uid://dayrj5f78ulqv" path="res://models/combat/bow.glb" id="2_4f3jw"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="7_m761g"]
 [ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="9_phia5"]
 [ext_resource type="PackedScene" uid="uid://bddj5m7ull6g0" path="res://addons/godot-xr-tools/interactables/interactable_handle.tscn" id="9_q5fw6"]
-[ext_resource type="Script" path="res://scripts/PullPick.gd" id="9_xi712"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cxhhj"]
 margin = 0.005
@@ -106,9 +105,7 @@ transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0.0913049, 0, 0)
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0)
 
 [node name="PullPick" parent="PullPivot/HandleOrigin" index="0" instance=ExtResource("9_q5fw6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 freeze = true
-script = ExtResource("9_xi712")
 picked_up_layer = 65536
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PullPivot/HandleOrigin/PullPick" index="0"]
