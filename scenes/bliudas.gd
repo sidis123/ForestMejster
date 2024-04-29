@@ -14,8 +14,8 @@ func _ready():
 		area.connect("body_entered", Callable(self, "_on_area_body_entered"))
 
 func _on_area_body_entered(body):
-	# Check if the entering body is in the "Coocable" group
-	if body.is_in_group("Coocable"):
+	# Check if the entering body is in the "Cookable" group
+	if body.is_in_group("Cookable"):
 		# Set fish state to ON_BLIUDAS
 		fish_state = FishState.ON_BLIUDAS
 		
