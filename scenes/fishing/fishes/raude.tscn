@@ -241,8 +241,10 @@ closed_pose = ExtResource("6_oejoc")
 script = ExtResource("7_co3sj")
 closed_pose = ExtResource("9_ou1ng")
 
-[node name="Raude" groups=["Cookable"] instance=ExtResource("1_05afi")]
+[node name="Raude" groups=["Cookable", "Fish"] instance=ExtResource("1_05afi")]
+top_level = true
 script = ExtResource("2_8ijpg")
+type = 0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -263,10 +265,8 @@ skeleton = NodePath("")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("5_opqo2")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0.074, -0.066, 0)
-visible = true
 hand_pose = SubResource("Resource_7m3db")
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("8_sh7lw")]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -0.074, -0.066, 0)
-visible = true
 hand_pose = SubResource("Resource_avugu")

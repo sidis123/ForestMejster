@@ -6,6 +6,14 @@ extends XRToolsPickable
 ##
 ## Extends [XRToolsPickable]. Is spawned by fishing water. Can be put on the wok.
 
+enum FishType {
+	Raude,
+	Kuoja,
+	Lynas
+}
+
+@export var type : FishType
+
 func pick_up(by: Node3D) -> void:
 	super.pick_up(by)
 	if gravity_scale < 1:

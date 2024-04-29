@@ -1,29 +1,43 @@
-@tool
 class_name Bucket
-extends XRToolsPickable
+extends PickableDispenser
 
-# The fish scene that will be spawned upon interaction
-const FishScene = preload("res://scenes/fishing/fish.tscn")
+## The queue containing the types of fish in the order they've been added
+var _fish_queue : Array[Fish.FishType] = []
 
-var fish_instance : Fish = null
+var _fish : Fish = null
 
-## Overrides the pick up function of the pickable to spawn the fish
-func pick_up(by: Node3D) -> void:
-	if FishScene:
-		# Create a new instance of the fish
-		fish_instance = FishScene.instantiate()
-		
-		if fish_instance:
-			# Add the fish and set it up
-			add_child(fish_instance)
-			fish_instance.global_position = global_position
+func _process(_delta):
+	if _fish and not _fish.is_picked_up():
+		_fish_queue.append(_fish.type)
+		_fish.queue_free()
 
-			# Call the fish's pick up function
-			fish_instance.pick_up(by)
+## Test if this object can dispense a pickup
+func can_pick_up(by: Node3D) -> bool:
+	return _fish_queue.size() > 0
 
-func let_go(by: Node3D, p_linear_velocity: Vector3, p_angular_velocity: Vector3) -> void:
-	if is_instance_valid(fish_instance):
-		# Relay the let go function to the fish instance
-		fish_instance.let_go(by, p_linear_velocity, p_angular_velocity)
-		# Stop tracking the instance (it will now serve as an independant pickable)
-		fish_instance = null
+
+## Instantiate the scene with the last fish type
+func _get_dispensable_instance():
+	var fish_type = _fish_queue.pop_back()
+	# NOTE: very manual matching of type to index in the array of dispensed scenes
+	match fish_type:
+		Fish.FishType.Kuoja:
+			return dispensed_scenes[0].instantiate()
+		Fish.FishType.Lynas:
+			return dispensed_scenes[1].instantiate()
+		Fish.FishType.Raude:
+			return dispensed_scenes[2].instantiate()
+		_:
+			return null
+
+
+## Save a ref to a fish that enters the bucket
+func _on_body_entered(body):
+	if body is Fish:
+		_fish = body as Fish
+
+
+## Remove the ref
+func _on_body_exited(body):
+	if body == _fish:
+		_fish = null

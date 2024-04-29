@@ -1,18 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://482xli6khdjt"]
+[gd_scene load_steps=24 format=3 uid="uid://482xli6khdjt"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_lru0g"]
 [ext_resource type="Script" path="res://scripts/fishing/bucket.gd" id="2_28oen"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="2_tawm8"]
-[ext_resource type="Animation" uid="uid://bediglpx0rj7i" path="res://addons/godot-xr-tools/hands/animations/left/Grip 5.res" id="3_dwq7a"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="3_hsqe3"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="4_b2q5i"]
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_oxjma"]
-[ext_resource type="Animation" uid="uid://s1vqcxyqcvea" path="res://addons/godot-xr-tools/hands/animations/right/Grip 5.res" id="6_airob"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="7_jphvn"]
+[ext_resource type="PackedScene" uid="uid://ct2g57qsopix7" path="res://scenes/fishing/fishes/kuoja.tscn" id="8_26j02"]
+[ext_resource type="PackedScene" uid="uid://cx3om4goiitmd" path="res://scenes/fishing/fishes/lynas.tscn" id="9_ehjeh"]
+[ext_resource type="PackedScene" uid="uid://b562tmnadvtpm" path="res://scenes/fishing/fishes/raude.tscn" id="10_ykq3w"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_540lm"]
-margin = 0.02
-height = 0.82
-radius = 0.25
+[sub_resource type="BoxShape3D" id="BoxShape3D_v43pv"]
+margin = 0.01
+size = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fh0be"]
+height = 0.1
+radius = 0.22
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kr2fp"]
 resource_name = "M_Wood"
@@ -83,13 +88,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_p1u3w")
 
-[sub_resource type="Resource" id="Resource_thcvs"]
+[sub_resource type="Resource" id="Resource_egaf3"]
 script = ExtResource("4_b2q5i")
-closed_pose = ExtResource("3_dwq7a")
+closed_pose = ExtResource("3_hsqe3")
 
 [sub_resource type="Resource" id="Resource_p45jf"]
 script = ExtResource("4_b2q5i")
-closed_pose = ExtResource("6_airob")
 
 [sub_resource type="BoxMesh" id="BoxMesh_ql83l"]
 flip_faces = true
@@ -99,29 +103,69 @@ size = Vector3(0.05, 0.05, 0.2)
 shading_mode = 0
 albedo_color = Color(0.898039, 0.772549, 0, 1)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ueiya"]
+margin = 0.02
+height = 0.5
+radius = 0.28
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hyuiw"]
+top_radius = 0.22
+bottom_radius = 0.2
+height = 0.45
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8h8c"]
+shading_mode = 0
+albedo_color = Color(0.898039, 0.772549, 0, 1)
+
 [node name="Bucket" instance=ExtResource("1_lru0g")]
-script = ExtResource("2_28oen")
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.411863, 0)
-shape = SubResource("CylinderShape3D_540lm")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.808928, 0)
+shape = SubResource("BoxShape3D_v43pv")
 
-[node name="BucketMesh" type="MeshInstance3D" parent="." index="1"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0526888, 0)
+shape = SubResource("CylinderShape3D_fh0be")
+
+[node name="BucketMesh" type="MeshInstance3D" parent="." index="2"]
 mesh = SubResource("ArrayMesh_6hgfd")
 skeleton = NodePath("")
 
-[node name="GrabPointHandLeft" parent="." index="2" instance=ExtResource("2_tawm8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0476867, 0.0399558, -0.0607535)
-hand_pose = SubResource("Resource_thcvs")
+[node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("2_tawm8")]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0.08, 0.8, 0.05)
+visible = true
+hand_pose = SubResource("Resource_egaf3")
 
-[node name="GrabPointHandRight" parent="." index="3" instance=ExtResource("5_oxjma")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0488848, 0.0401451, -0.0620916)
+[node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("5_oxjma")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.08, 0.8, 0.05)
+visible = true
 hand_pose = SubResource("Resource_p45jf")
 
-[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="4"]
+[node name="XRToolsHighlightVisible" type="Node3D" parent="." index="5"]
 script = ExtResource("7_jphvn")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="XRToolsHighlightVisible" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.809739, 0)
 mesh = SubResource("BoxMesh_ql83l")
 surface_material_override/0 = SubResource("StandardMaterial3D_l67dg")
+
+[node name="FishDispenser" type="Area3D" parent="." index="6"]
+collision_layer = 4
+collision_mask = 196615
+script = ExtResource("2_28oen")
+dispensed_scenes = Array[PackedScene]([ExtResource("8_26j02"), ExtResource("9_ehjeh"), ExtResource("10_ykq3w")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FishDispenser" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.253227, 0)
+shape = SubResource("CylinderShape3D_ueiya")
+
+[node name="XRToolsHighlightVisible" type="Node3D" parent="FishDispenser" index="1"]
+script = ExtResource("7_jphvn")
+
+[node name="HighlightMesh" type="MeshInstance3D" parent="FishDispenser/XRToolsHighlightVisible" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247932, 0)
+mesh = SubResource("CylinderMesh_hyuiw")
+surface_material_override/0 = SubResource("StandardMaterial3D_q8h8c")
+
+[connection signal="body_entered" from="FishDispenser" to="FishDispenser" method="_on_body_entered"]
+[connection signal="body_exited" from="FishDispenser" to="FishDispenser" method="_on_body_exited"]

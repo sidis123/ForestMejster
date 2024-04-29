@@ -271,8 +271,10 @@ closed_pose = ExtResource("6_tff6c")
 script = ExtResource("7_fox1h")
 closed_pose = ExtResource("9_o3wsi")
 
-[node name="Lynas" groups=["Cookable"] instance=ExtResource("1_geksc")]
+[node name="Lynas" groups=["Cookable", "Fish"] instance=ExtResource("1_geksc")]
+top_level = true
 script = ExtResource("2_d35hb")
+type = 2
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -293,10 +295,8 @@ skeleton = NodePath("")
 
 [node name="GrabPointHandLeft" parent="." index="3" instance=ExtResource("5_pe1a5")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 0.074, -0.066, 0)
-visible = true
 hand_pose = SubResource("Resource_7m3db")
 
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("8_vjtq7")]
 transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, -0.074, -0.066, 0)
-visible = true
 hand_pose = SubResource("Resource_avugu")
