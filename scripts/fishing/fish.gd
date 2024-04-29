@@ -18,3 +18,7 @@ func pick_up(by: Node3D) -> void:
 	if mesh.get_parent().has_method("set_gravity_scale"): #reikalingas fisho cookinimui NEISTRINTI
 		mesh.get_parent().set_gravity_scale(1)
 	mesh.set_scale(Vector3(2, 2, 2)) # Reset the mesh scale
+
+func let_go(by: Node3D, p_linear_velocity: Vector3, p_angular_velocity: Vector3) -> void:
+	print("Let go of fish")
+	super.let_go(by, p_linear_velocity, p_angular_velocity)
