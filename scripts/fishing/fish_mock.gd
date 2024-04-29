@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-var speed = 1.0
+var speed = 1.5
 var maxDistance = 7.0
 var minDepth = -5
 var direction = Vector3(1, 0, 0)
