@@ -19,11 +19,19 @@ signal tugged
 ## The float target.
 @onready var float_target: FishingFloatTarget = get_node("FloatTarget")
 
-@onready var player_body: XRToolsPlayerBody = get_node("/root/Main/PlayerOrigin/PlayerBody")
+var player_body: XRToolsPlayerBody
 
 var _moved: bool = false
 
-func _process(delta):
+func _ready():
+	super._ready()
+	
+	if Engine.is_editor_hint():
+		return
+		
+	player_body = get_node("/root/Staging/Scene/Main/XROrigin3D/PlayerBody")
+
+func _process(_delta):
 	if (
 			_moved and not is_picked_up() and player_body 
 			and global_position.distance_to(player_body.global_position) > 10.0
