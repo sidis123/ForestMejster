@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckwbwp15j84od"]
+
+[ext_resource type="PackedScene" uid="uid://csdvq8wulxb4g" path="res://scenes/new_line.tscn" id="1_7idur"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_i668j"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_7kp1i"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1galb"]
+material = SubResource("ORMMaterial3D_7kp1i")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.275838
+
+[node name="LineTest" type="Node3D"]
+
+[node name="Start" type="Node3D" parent="."]
+
+[node name="End" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.275625, -0.0105742, -0.00242865)
+
+[node name="NewLine" parent="." node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("1_7idur")]
+transform = Transform3D(0.00881069, -0.99918, -0.0383316, 0, 0.0383329, -0.999224, 0.999917, 0.00880419, 0.000337756, 0.137812, -0.00528708, -0.00121433)
+material_override = SubResource("ORMMaterial3D_i668j")
+mesh = SubResource("CylinderMesh_1galb")
+material = SubResource("ORMMaterial3D_7kp1i")
+start_point = NodePath("../Start")
+end_point = NodePath("../End")

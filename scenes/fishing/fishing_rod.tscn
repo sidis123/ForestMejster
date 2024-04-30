@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcoan783pbvdq"]
+[gd_scene load_steps=24 format=3 uid="uid://bcoan783pbvdq"]
 
 [ext_resource type="ArrayMesh" uid="uid://bgkn2xux62jyt" path="res://models/fishing/fishing_rod_mesh.tres" id="2_6b1o8"]
 [ext_resource type="Script" path="res://scripts/fishing/fishing_rod.gd" id="2_h6u5q"]
@@ -11,7 +11,7 @@
 [ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="8_3q68x"]
 [ext_resource type="Script" path="res://scripts/fishing/fishing_float_target.gd" id="10_bvdsn"]
 [ext_resource type="PackedScene" uid="uid://dil16xqh8spna" path="res://scenes/fishing/fishing_float.tscn" id="11_apdnu"]
-[ext_resource type="PackedScene" uid="uid://d2cfn2tc7jp6r" path="res://scenes/line.tscn" id="12_rpasl"]
+[ext_resource type="PackedScene" uid="uid://csdvq8wulxb4g" path="res://scenes/new_line.tscn" id="12_1hf0y"]
 [ext_resource type="Material" uid="uid://b6dy24oasdds8" path="res://resources/M_String.tres" id="13_ahgwm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_21ums"]
@@ -75,6 +75,14 @@ closed_pose = ExtResource("5_lecea")
 script = ExtResource("6_0ucvv")
 closed_pose = ExtResource("8_3q68x")
 
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5jnqa"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cxmvb"]
+material = ExtResource("13_ahgwm")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.645688
+
 [node name="Container" type="Node3D"]
 
 [node name="FishingRod" type="RigidBody3D" parent="."]
@@ -126,14 +134,18 @@ script = ExtResource("10_bvdsn")
 editor_description = "This node displays the position that the fishing rod string starts at (it ends at the fishing float)."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0537452, -0.932214)
 
-[node name="FishingLine" parent="FishingRod" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("12_rpasl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0537452, -0.932214)
-line_radius = 0.001
-polygon_material_override = ExtResource("13_ahgwm")
+[node name="NewLine" parent="FishingRod" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("12_1hf0y")]
+transform = Transform3D(1, 0, 0, 0, 0.465509, -0.0855425, 0, 0.885004, 0.044995, 0, -0.204037, -1.21794)
+material_override = SubResource("ORMMaterial3D_5jnqa")
+mesh = SubResource("CylinderMesh_cxmvb")
+skeleton = NodePath("../..")
+radius = 0.05
+material = ExtResource("13_ahgwm")
 start_point = NodePath("../StringStart")
 end_point = NodePath("../../FishingFloat")
 
 [node name="FishingFloat" parent="." instance=ExtResource("11_apdnu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, -0.941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.354329, -1.50367)
+collision_mask = 518
 max_contacts_reported = 1
-max_distance = 20.0
+max_distance = 100.0
