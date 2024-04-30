@@ -1,28 +1,20 @@
 extends RigidBody3D
 
-var swim_speed = 1.0
-var random_factor = 1
-var min_y_position = -4.5
+var speed = 1.5
+var maxDistance = 7.0
+var minDepth = -5
+var direction = Vector3(1, 0, 0)
+var traveledDistance = 0.0
 
-func _ready():
-	linear_velocity = Vector3(0, 0, swim_speed)
-	linear_damp = 0.9
-	angular_damp = 0.9
+func _process(delta):
 
-func _physics_process(delta):
-	swim()
+	translate(direction * speed * delta)
 
-func swim():
-	var direction = Vector3(randf_range(-5.0, 5.0), randf_range(-5.0, 5.0), randf_range(-5.0, 5.0))
-	direction = direction.normalized()
-	apply_central_impulse(direction * swim_speed * random_factor)
+	traveledDistance += abs(speed) * delta
 
-func _integrate_forces(state):
-	# Ensure fish doesn't go below specific water level, so that they can't get stuck at the bottom pits
-	var current_position = get_position()
-	if current_position.y < min_y_position:
-		current_position.y = min_y_position
-		set_position(current_position)
+	if traveledDistance >= maxDistance:
+		traveledDistance = 0.0
+		rotation_degrees.y += 180.0
 
-func _on_Fish_body_entered(body):
-	swim()
+	if global_transform.origin.y <= minDepth:
+		global_transform.origin.y = minDepth
