@@ -2,8 +2,10 @@ class_name FishingWater
 extends Area3D
 
 
-## The fish scene that will be spawned upon catching.
-const FishScene = preload("res://scenes/fishing/fish.tscn")
+## The fish scenes that will be spawned upon catching.
+const RaudeScene = preload("res://scenes/fishing/fishes/raude.tscn")
+const KuojaScene = preload("res://scenes/fishing/fishes/kuoja.tscn")
+const LynasScene = preload("res://scenes/fishing/fishes/lynas.tscn")
 
 # NOTE: if we ever want to save some extra memory for other activities, distractions could
 # all be preloaded and only instantiated when fishing starts instead of being children to this node
@@ -75,6 +77,8 @@ var wind_transition_time: float = 0.0
 
 var distractions: Array[Distraction] = []
 
+var fish_scenes: Array[PackedScene] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#fishing_rod.action_pressed.connect(_on_fishing_rod_action)
@@ -87,6 +91,11 @@ func _ready():
 		distractions.append(distraction_fish)
 	if distraction_wind:
 		distractions.append(distraction_wind)
+		
+	fish_scenes.append(RaudeScene)
+	fish_scenes.append(KuojaScene)
+	fish_scenes.append(LynasScene)
+
 
 func _start_fishing():
 	trial_number = 1
@@ -104,15 +113,16 @@ func _fail_trial():
 
 func _catch_fish():
 	var fish_spawn_position = fishing_float.global_position
+	var fish_scene = fish_scenes.pick_random()
 	
-	if FishScene:
+	if fish_scene:
 		# Create a new instance of the fish
-		var fish_instance = FishScene.instantiate()
+		var fish_instance = fish_scene.instantiate()
 		
 		if fish_instance:
 			# Add the fish and set it up
 			add_child(fish_instance)
-			fish_instance.set_mesh_scale(Vector3(10, 10, 10))
+			#fish_instance.set_mesh_scale(Vector3(10, 10, 10))
 			fish_instance.global_position = fish_spawn_position
 
 			# Calculate initial velocity to hit the target with an arched trajectory
