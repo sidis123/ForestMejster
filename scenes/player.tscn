@@ -27,16 +27,16 @@ jump_velocity = 3.0
 bounciness = 0.0
 bounce_threshold = 1.0
 
-[node name="PlayerOrigin" type="XROrigin3D"]
+[node name="XROrigin3D" type="XROrigin3D"]
 process_mode = 3
 current = true
 script = ExtResource("1_524a5")
 
-[node name="PlayerCamera" type="XRCamera3D" parent="."]
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
 
-[node name="XRToolsShaderCache" parent="PlayerCamera" instance=ExtResource("1_i0vxa")]
+[node name="XRToolsShaderCache" parent="XRCamera3D" instance=ExtResource("1_i0vxa")]
 process_mode = 3
 
 [node name="RightHandController" type="XRController3D" parent="." groups=["hand"]]
@@ -53,8 +53,10 @@ step_turn_angle = 45.0
 
 [node name="FunctionPickupRight" parent="RightHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2
+grab_collision_mask = 328708
 ranged_enable = false
 ranged_distance = 2.0
+ranged_collision_mask = 1028
 
 [node name="FunctionPointerRight" parent="RightHandController" instance=ExtResource("5_5oj1i")]
 enabled = false
@@ -78,8 +80,10 @@ strafe = true
 
 [node name="FunctionPickupLeft" parent="LeftHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2
+grab_collision_mask = 328708
 ranged_enable = false
 ranged_distance = 2.0
+ranged_collision_mask = 1028
 
 [node name="FunctionPointerLeft" parent="LeftHandController" instance=ExtResource("5_5oj1i")]
 enabled = false
@@ -103,5 +107,4 @@ input_keyboard = false
 
 [node name="PlayerBody" parent="." instance=ExtResource("6_ls5gy")]
 process_mode = 1
-collision_mask = 31
 physics = SubResource("Resource_l5fo3")

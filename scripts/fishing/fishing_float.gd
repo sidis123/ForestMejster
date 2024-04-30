@@ -31,6 +31,10 @@ extends RigidBody3D
 ## The maximum distance the float can go from the fishing rod before it is reset.
 @export var max_distance: float = 10.0
 
+## The maximum distance the float can go from the fishing rod before it is reset during fishing.
+## This should be higher so that it doesn't reset upon plunging.
+@export var max_fishing_distance: float = 12.0
+
 ## The minimum scale of the float mesh. It will be at this scale while on the rod.
 @export var min_mesh_scale: float = 0.02
 
@@ -62,7 +66,9 @@ var _distance: float = 0.0
 @onready var mesh: MeshInstance3D = get_node("FloatMesh")
 
 ## The particle system of the float, used for emitting success particles.
-@onready var particles: CPUParticles3D = get_node("SuccessParticles")
+@onready var particles: GPUParticles3D = get_node("SuccessParticles")
+
+@onready var splash_particles: GPUParticles3D = get_node("SplashParticles")
 
 ## The float target that the float is attached to when connected.
 @onready var target: Node3D = get_node("../FishingRod/FloatTarget")
@@ -71,7 +77,7 @@ var _distance: float = 0.0
 @onready var fishing_rod: FishingRod = get_node("../FishingRod")
 
 ## The fishing water.
-@onready var water: FishingWater = get_node('/root/Main/Water/FishingWater')
+@onready var water: FishingWater = get_node('/root/Staging/Scene/Main/Water/FishingWater')
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -93,11 +99,11 @@ func _process(_delta):
 
 
 # Called every physics frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _connected:
 		set_position_at_target()
 	
-	if not _connected and not _in_water:
+	if not _connected:
 		_update_distance_to_rod()
 
 
@@ -154,7 +160,9 @@ func _control_plunging(state):
 ## Updates the current distance from the float to the fishing rod.
 func _update_distance_to_rod():
 	_distance = global_position.distance_to(target.global_position)
-	if _distance > max_distance:
+	if not _in_water and _distance > max_distance:
+		_reset()
+	if _in_water and _distance > max_fishing_distance:
 		_reset()
 
 
@@ -189,6 +197,7 @@ func plunge():
 	_bobbing = false
 	apply_central_impulse(Vector3.DOWN * plunge_force)
 	_plunging = true
+	splash_particles.set_emitting(true)
 
 
 ## Called by water upon successful fishing trial.
@@ -197,7 +206,7 @@ func emit_particles():
 
 
 ## Handles the interaction signal from the fishing rod.
-func _on_action_pressed(pickable: Variant):	
+func _on_action_pressed(_pickable: Variant):	
 	if not _connected:
 		_reset()
 	else:
@@ -217,6 +226,7 @@ func on_water_entered(_water_height: float):
 	_in_water = true
 	_plunging = true
 	mesh.scale = Vector3.ONE * max_mesh_scale # increase the scale of the float mesh to max
+	splash_particles.set_emitting(true)
 
 
 ## Handles the exit from water - resets all bools and variables related to water.

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_jub2c"]
 [ext_resource type="Animation" uid="uid://s1vqcxyqcvea" path="res://addons/godot-xr-tools/hands/animations/right/Grip 5.res" id="6_1h28k"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="7_2lk3l"]
+[ext_resource type="Material" uid="uid://nuogvh1u6wye" path="res://resources/highlight_material.tres" id="8_46om1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kfo7u"]
 margin = 0.02
@@ -30,10 +31,6 @@ closed_pose = ExtResource("6_1h28k")
 flip_faces = true
 size = Vector3(0.11, 0.11, 0.11)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l67dg"]
-shading_mode = 0
-albedo_color = Color(0.898039, 0.772549, 0, 1)
-
 [node name="PickableCube" instance=ExtResource("1_c7ihu")]
 
 [node name="CollisionShape3D" parent="." index="0"]
@@ -56,4 +53,4 @@ script = ExtResource("7_2lk3l")
 
 [node name="HighlightMesh" type="MeshInstance3D" parent="XRToolsHighlightVisible" index="0"]
 mesh = SubResource("BoxMesh_ql83l")
-surface_material_override/0 = SubResource("StandardMaterial3D_l67dg")
+surface_material_override/0 = ExtResource("8_46om1")

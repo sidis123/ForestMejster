@@ -1,3 +1,4 @@
+class_name Player
 extends XROrigin3D
 
 var xr_interface: XRInterface
@@ -124,7 +125,8 @@ func _on_left_controller_button_released(p_button: String) -> void:
 	
 # TODO: turn the Turn Mode on MovementTurn into a setting
 
-## Function for handling floating when the player enters fishable water
-func on_water_entered():
-	print("The player entered the water")
-	# TODO: implement and fix the fact that it can only collide with player body, so it needs to call this somehow
+func trigger_left_haptic(frequency: float, amplitude: float, duration_sec: float, delay_sec: float):
+	xr_controller_left.trigger_haptic_pulse("haptic", frequency, amplitude, duration_sec, delay_sec)
+	
+func trigger_right_haptic(frequency: float, amplitude: float, duration_sec: float, delay_sec: float):
+	xr_controller_right.trigger_haptic_pulse("haptic", frequency, amplitude, duration_sec, delay_sec)

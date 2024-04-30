@@ -27,6 +27,7 @@ closed_pose = ExtResource("8_autvk")
 
 [node name="Fish" groups=["Coocable"] instance=ExtResource("1_vdqen")]
 script = ExtResource("2_o4gd6")
+type = null
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0.000294799, 0.0140662, -0.0664914)
