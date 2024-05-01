@@ -1,6 +1,6 @@
 @tool
 class_name Line
-extends Node3D
+extends MeshInstance3D
 
 ## Line Script.
 ##
@@ -8,110 +8,84 @@ extends Node3D
 
 @export_category("Line settings")
 
-## The radius of the line.
-@export var line_radius: float = 0.1
+@export var radius: float = 1
 
-## The resolution of the line (idk how it actually works).
-@export var line_resolution = 90
-
-## Override of the line material.
-@export var polygon_material_override: Material : set = set_polygon_material_override
+@export var material : Material : set = _set_material
 
 @export_category("End points")
 
 ## The starting point of the line.
-@export var start_point: Node3D
+@export var start_point: Node3D : set = _set_start_point
 
 ## The end point of the line.
-@export var end_point: Node3D
+@export var end_point: Node3D : set = _set_end_point
 
-## The Path3D node that represents the path of the line.
-var path: Path3D
-
-## The curve of the path.
-var curve: Curve3D
-
-## The CSGPolygon3D node that represents the volume of the line.
-var polygon: CSGPolygon3D
 
 func _ready():
-	# Retrieve the polygon and update its material
-	polygon = $LinePolygon
-	
-	if not polygon:
-		push_error("The polygon of the line was not found")
-		
-	if polygon_material_override:
-		polygon.set_material(polygon_material_override)
-	
-	# Retrieve the path and its curve
-	path = $LinePath
-	curve = path.curve
-	
-	# Set the initial positions of the start and end points
-	if not start_point or not end_point:
-		push_error("The one or both end points of the line are not set")
-	else:
-		set_line_position()
-
-
-func _process(_delta):
-	# Update the positions of the points
 	if start_point and end_point:
-		update_line_position()
+		_initialize_line()
+
+
+func _set_start_point(p: Node3D):
+	if not start_point and end_point:
+		start_point = p
+		_initialize_line()
+	else:
+		start_point = p
+
+
+func _set_end_point(p: Node3D):
+	if not end_point and start_point:
+		end_point = p
+		_initialize_line()
+	else:
+		end_point = p
+
+
+func _initialize_line():
+	if not start_point or not end_point:
+		return
+
+	var cylinder_mesh = CylinderMesh.new()
+	cylinder_mesh.top_radius = radius
+	cylinder_mesh.bottom_radius = radius
+	cylinder_mesh.height = 1.0  # Initial height, adjusted dynamically
+	mesh = cylinder_mesh
 	
-	# Fill the path with volume
-	update_polygon()
+	if material:
+		mesh.surface_set_material(0, material)
 
+func _process(delta):
+	update_line()
 
-## Sets the initial positions of the points of the Path3D.
-func set_line_position() -> void:
-	# Set the line's origin to the start point position
-	global_position = start_point.global_position
+func update_line():
+	if not start_point or not end_point:
+		return
+
+	var start_pos = start_point.global_position
+	var end_pos = end_point.global_position
+	var dir = end_pos - start_pos
 	
-	# Reset the curve and add the points
-	curve.clear_points()
-	curve.add_point(Vector3.ZERO)
-	curve.add_point(end_point.global_position - global_position)
+	if dir.length() > 0.05:
+		if mesh.top_radius == 0:
+			mesh.top_radius = radius
+			mesh.bottom_radius = radius
+		
+		# Update the position to the middle of the line
+		global_position = start_pos + dir * 0.5
 
+		# Update the cylinder's height to match the length
+		mesh.height = dir.length()
 
-## Updates the positions of the points of the Path3D.
-func update_line_position() -> void:
-	# Set the line's origin to the start point position
-	global_position = start_point.global_position
-	
-	# Reset the points' positions
-	curve.set_point_position(0, Vector3.ZERO)
-	curve.set_point_position(1, end_point.global_position - global_position)
+		# Update the rotation to point from start to end
+		look_at(end_pos, Vector3.UP)
+		rotate_object_local(Vector3.RIGHT, PI/2)
+	else:
+		mesh.height = 0
+		mesh.top_radius = 0
+		mesh.bottom_radius = 0
 
-
-## Updates and renders the CSGPolygon3D according to the line path.
-func update_polygon() -> void:
-	# The next section resets the global rotation of the polygon to 0
-	# I have no I idea why this is necessary and why inheriting the same rotation
-	# as the path it adds volume to is bad for it, but the inherited rotation
-	# is added top of the rotation of the path.
-	# E.g. if one of the parents ir rotated by 90 degrees, the polygon will be
-	# 90 degrees off the actual curve - I love Godot.
-	
-	# Get the current global position of the polygon
-	var current_global_position = polygon.global_transform.origin
-	# Create a new Transform with zero rotation and the same position
-	var zero_rotation_transform = Transform3D(Basis(), current_global_position)
-	# Set the global transform with zero rotation
-	polygon.global_transform = zero_rotation_transform
-	
-	# Add a circular volume across the path
-	var circle = PackedVector2Array()
-	for degree in line_resolution:
-		var x = line_radius * sin(PI * 2 * degree / line_resolution)
-		var y = line_radius * cos(PI * 2 * degree / line_resolution)
-		var coords = Vector2(x, y)
-		circle.append(coords)
-		polygon.polygon = circle
-
-## Changes the CSGPolygon3D's material.
-func set_polygon_material_override(material : Material) -> void:
-	polygon_material_override = material
-	if is_inside_tree() and polygon:
-		polygon.set_material(material)
+func _set_material(new_material: Material):
+	material = new_material
+	if mesh:
+		mesh.surface_set_material(0, material)

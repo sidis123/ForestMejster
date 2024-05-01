@@ -160,7 +160,6 @@ func _control_plunging(state):
 ## Updates the current distance from the float to the fishing rod.
 func _update_distance_to_rod():
 	_distance = global_position.distance_to(target.global_position)
-	print(str(_distance) + " : " + str(Engine.get_frames_per_second()) )
 	if not _in_water and _distance > max_distance:
 		_reset()
 	if _in_water and _distance > max_fishing_distance:

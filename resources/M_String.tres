@@ -2,7 +2,6 @@
 
 [resource]
 resource_name = "M_String"
-cull_mode = 2
-shading_mode = 0
+shading_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.494253, 0.473934, 0.260514, 1)
