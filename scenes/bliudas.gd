@@ -1,5 +1,8 @@
 extends MeshInstance3D
 
+signal start_cooking
+signal stop_cooking
+
 enum FishState {
 	NORMAL,
 	ON_BLIUDAS
@@ -12,6 +15,7 @@ func _ready():
 	var area = $Area3D
 	if area:
 		area.connect("body_entered", Callable(self, "_on_area_body_entered"))
+		area.connect("body_exited", Callable(self, "_on_area_body_exited"))
 
 func _on_area_body_entered(body):
 	# Check if the entering body is in the "Cookable" group
@@ -26,15 +30,8 @@ func _on_area_body_entered(body):
 		# Calculate the midpoint of the "bliudas" object
 		var midpoint = global_transform.origin
 		
-		# Hardcoded values for X, Y, and Z positions
-		var x_offset = 0.05
-		var y_offset = 0.475
-		var z_offset = 0.25
-		
 		# Move the entering body to the adjusted position
-		body.global_transform.origin.x = midpoint.x + x_offset
-		body.global_transform.origin.y = midpoint.y + y_offset
-		body.global_transform.origin.z = midpoint.z + z_offset
+		body.global_transform.origin = midpoint + Vector3(0.05, 0.475, 0.25)
 		
 		# Rotate the entering body 90 degrees on the X axis
 		body.global_transform.basis = Basis(Vector3(0, 0, 1), deg_to_rad(90))
@@ -45,9 +42,16 @@ func _on_area_body_entered(body):
 		# Remove angular velocity
 		body.angular_velocity = Vector3.ZERO
 		
-		
+		body.get_node("Mesh")._start_cooking()
 		
 		print("Fish placed on the bliudas")
 		print("Starting Cooking script")
-		# Start the script (replace with actual script start logic)
-		#body.start_cookingshaderscript()  # Start the cookingshaderscript
+		emit_signal("start_cooking")
+		
+		
+func _on_area_body_exited(body):
+	if body.is_in_group("Cookable"):
+		body.get_node("Mesh")._stop_cooking()
+		fish_state = FishState.NORMAL
+		print("Cooking stopped")
+		emit_signal("stop_cooking")
