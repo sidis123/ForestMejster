@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=40 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b5gug5ecibfou" path="res://scenes/pause_menu.tscn" id="4_s7kne"]
 [ext_resource type="PackedScene" uid="uid://b340ibw6xj170" path="res://scenes/dock.tscn" id="5_2qenr"]
 [ext_resource type="Shader" path="res://shaders/Low_poly_water.gdshader" id="6_65b7g"]
-[ext_resource type="PackedScene" uid="uid://bfa6n0rtpcxgq" path="res://scenes/campfire.tscn" id="7_rvpt3"]
+[ext_resource type="PackedScene" uid="uid://b6r1wb2hstt7r" path="res://scenes/campfire.tscn" id="7_rvpt3"]
 [ext_resource type="PackedScene" uid="uid://ca0ohfqspp2pg" path="res://scenes/fishing/fishing_water.tscn" id="8_mty1l"]
 [ext_resource type="PackedScene" uid="uid://qat0jalvcswc" path="res://scenes/tent.tscn" id="8_tg55q"]
 [ext_resource type="PackedScene" uid="uid://0rctt4pnv5n2" path="res://scenes/tutorial.tscn" id="10_rt4mo"]
@@ -27,31 +27,35 @@
 [ext_resource type="PackedScene" uid="uid://cx3om4goiitmd" path="res://scenes/fishing/fishes/lynas.tscn" id="28_p4c3x"]
 [ext_resource type="PackedScene" uid="uid://ct2g57qsopix7" path="res://scenes/fishing/fishes/kuoja.tscn" id="29_b1q8n"]
 [ext_resource type="PackedScene" uid="uid://uocxoi20gkvi" path="res://scenes/bezdukas.tscn" id="30_3pdq3"]
-[ext_resource type="PackedScene" path="res://scenes/campfire_v2.tscn" id="30_8ne4e"]
+[ext_resource type="PackedScene" uid="uid://bp5tb8du3d72d" path="res://scenes/campfire_v2.tscn" id="30_8ne4e"]
 [ext_resource type="PackedScene" uid="uid://3wcwrpjp3rh8" path="res://scenes/bezdukas_dissapearing.tscn" id="31_qaiy5"]
+[ext_resource type="PackedScene" uid="uid://0oelawq5k0li" path="res://trees.tscn" id="32_eergn"]
 [ext_resource type="PackedScene" uid="uid://bqyxcxbd01b00" path="res://models/nature/terrain.glb" id="32_rox6c"]
+[ext_resource type="PackedScene" uid="uid://dmhfght7k8x0j" path="res://water_plants.tscn" id="33_pnqyu"]
+[ext_resource type="PackedScene" uid="uid://dl0cfseyaqjnb" path="res://models/nature/rocks/Rock_table.glb" id="39_waqj3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0xy5"]
 sky_top_color = Color(0, 0.207843, 0.4, 1)
 sky_horizon_color = Color(0.494118, 0.356863, 0.2, 1)
 sky_curve = 0.3
 ground_horizon_color = Color(0.447059, 0.294118, 0.137255, 1)
-sun_angle_max = 0.0
+sun_angle_max = 15.0
 
 [sub_resource type="Sky" id="Sky_6f02f"]
 sky_material = SubResource("ProceduralSkyMaterial_c0xy5")
 
 [sub_resource type="Environment" id="Environment_c80sr"]
 background_mode = 2
+background_energy_multiplier = 0.66
 sky = SubResource("Sky_6f02f")
-tonemap_mode = 2
+tonemap_mode = 1
 glow_enabled = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_kiri2"]
-size = Vector3(5, 0.1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qo0d2"]
-size = Vector3(5, 0.1, 1)
+fog_enabled = true
+fog_light_color = Color(0.678431, 0.513726, 0.32549, 1)
+fog_light_energy = 0.15
+fog_sun_scatter = 0.09
+fog_density = 0.005
+fog_sky_affect = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_tmkjx"]
 size = Vector2(66, 55)
@@ -62,30 +66,33 @@ orientation = 1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_frkp2"]
 render_priority = 0
 shader = ExtResource("6_65b7g")
-shader_parameter/triangleHeight = 0.4
+shader_parameter/triangleHeight = 0.5
 shader_parameter/triangleSpeed = 0.5
-shader_parameter/primaryColor = Color(0, 0.705882, 0.552941, 1)
+shader_parameter/primaryColor = Color(0, 0.607843, 0.47451, 1)
 shader_parameter/secondaryColor = Color(0.901961, 0.909804, 0.996078, 1)
 shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.5
+shader_parameter/roughness = 0.41
 shader_parameter/waveDirection1 = Vector2(2, 0)
 shader_parameter/waveDirection2 = Vector2(0, 1)
 shader_parameter/timeScale = 0.025
-shader_parameter/deepWaterColor = Color(0.254902, 0.694118, 0.466667, 1)
-shader_parameter/shallowWaterColor = Color(0.498039, 0.831373, 0.807843, 1)
+shader_parameter/deepWaterColor = Color(0.176471, 0.501961, 0.333333, 1)
+shader_parameter/shallowWaterColor = Color(0.345098, 0.670588, 0.65098, 1)
 shader_parameter/attenuationCoefficient = 2.0
 shader_parameter/depthOffset = -0.75
-shader_parameter/edgeScale = 0.8
+shader_parameter/edgeScale = 1.0
 shader_parameter/nearPlane = 1.0
 shader_parameter/farPlane = 100.0
-shader_parameter/edgeColor = Color(0.14902, 0.517647, 0.45098, 1)
+shader_parameter/edgeColor = Color(0.258824, 0.823529, 0.721569, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_g1sf2"]
+points = PackedVector3Array(33.5238, 0.52381, 28.5476, -33.5238, -0.52381, -28.0238, -33.5238, 0.52381, -28.0238, 33.5238, -0.52381, -28.0238, -33.5238, -0.52381, 28.5476, -33.5238, 0.52381, 28.5476, 33.5238, 0.52381, -28.0238, 33.5238, -0.52381, 28.5476)
 
 [node name="Main" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_0wkb3")
 
 [node name="XROrigin3D" parent="." instance=ExtResource("1_e77tj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.062, 0)
+transform = Transform3D(0.563786, 0, 0.825921, 0, 1, 0, -0.825921, 0, 0.563786, 0.420892, 0.832159, 1.23314)
 
 [node name="PauseMenuViewport" parent="." instance=ExtResource("3_x6jvw")]
 process_mode = 3
@@ -100,33 +107,26 @@ viewport_size = Vector2(800, 600)
 environment = SubResource("Environment_c80sr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, -0.279468, 0.833804, 0.476097, -0.414609, 0.342444, -0.843108, 0, 0, 0)
-light_color = Color(1, 0.87451, 0.803922, 1)
-light_energy = 0.35
+transform = Transform3D(0.777145, -0.21524, 0.591368, 0, 0.939693, 0.34202, -0.62932, -0.2658, 0.730278, 0, 0, 0)
+light_color = Color(0.921569, 0.396078, 0.301961, 1)
+light_energy = 0.996
+light_indirect_energy = 10.0
+light_angular_distance = 2.65
 shadow_enabled = true
 shadow_opacity = 0.42
 shadow_blur = 2.138
-sky_mode = 1
+directional_shadow_mode = 0
 
-[node name="Table" type="StaticBody3D" parent="."]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -2.2674, 1.28246, -5.39248)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
-shape = SubResource("BoxShape3D_kiri2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Table/CollisionShape3D"]
-mesh = SubResource("BoxMesh_qo0d2")
-
-[node name="PickableCube0" parent="Table" instance=ExtResource("3_5rs3s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137565, -0.0382729)
+[node name="PickableCube0" parent="." instance=ExtResource("3_5rs3s")]
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -2.11094, 1.47727, -5.2127)
 ranged_grab_method = 2
 
-[node name="PickableCube1" parent="Table" instance=ExtResource("3_5rs3s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.189554, 0.137565, -0.0382729)
+[node name="PickableCube1" parent="." instance=ExtResource("3_5rs3s")]
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -2.36055, 1.48106, -5.27949)
 ranged_grab_method = 2
 
-[node name="PickableCube2" parent="Table" groups=["fire_wood"] instance=ExtResource("3_5rs3s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.380379, 0.113736, -0.0382729)
+[node name="PickableCube2" parent="." groups=["fire_wood"] instance=ExtResource("3_5rs3s")]
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.91187, 1.46599, -5.51839)
 ranged_grab_method = 2
 
 [node name="Campfire" parent="." instance=ExtResource("7_rvpt3")]
@@ -134,15 +134,21 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.21549, 1.09656, 1.61
 visible = false
 
 [node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.822382, 0, -0.568935, 0, 1, 0, 0.568935, 0, 0.822382, 34.3754, -0.431393, 21.0098)
+transform = Transform3D(0.822382, 0, -0.568935, 0, 1, 0, 0.568935, 0, 0.822382, 34.3754, -0.889945, 21.0098)
+layers = 3
 mesh = SubResource("QuadMesh_tmkjx")
 surface_material_override/0 = SubResource("ShaderMaterial_frkp2")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Water"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_g1sf2")
+
 [node name="FishingWater" parent="Water" instance=ExtResource("8_mty1l")]
-transform = Transform3D(0.280918, 0, -0.959732, 0, 1, 0, 0.959732, 0, 0.280918, -8.87534, -1.12897, -3.86797)
+transform = Transform3D(0.280918, 0, -0.959732, 0, 1, 0, 0.959732, 0, 0.280918, -8.87534, 0.0410473, -3.86797)
 
 [node name="FishingRod" parent="." instance=ExtResource("18_ap21l")]
-transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.8764, 0.806023, 7.85859)
+transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.9292, 0.806023, 8.08755)
 
 [node name="Bucket" parent="." instance=ExtResource("10_ym32v")]
 transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 19.7135, 0.351842, 6.17818)
@@ -155,7 +161,7 @@ transform = Transform3D(-0.96202, 0, -1.17897, 0, 1.52166, 0, 1.17897, 0, -0.962
 transform = Transform3D(1.05683, 0, -0.164021, 0, 1.06948, 0, 0.164021, 0, 1.05683, -5.69546, 0.815245, -2.02315)
 
 [node name="TutorialViewport" parent="." instance=ExtResource("3_x6jvw")]
-transform = Transform3D(0.96142, 0, 0.275084, 0, 1, 0, -0.275084, 0, 0.96142, -2.9297, 2.14738, -6.51036)
+transform = Transform3D(0.939615, 0, 0.342234, 0, 1, 0, -0.342234, 0, 0.939615, -2.37178, 2.76162, -5.86571)
 screen_size = Vector2(4, 2)
 enabled = false
 scene = ExtResource("10_rt4mo")
@@ -166,8 +172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4086, -3.951, 15.2789)
 visible = false
 
 [node name="Fish" parent="." instance=ExtResource("16_0iknb")]
-transform = Transform3D(-0.383667, 0, -0.923472, 0, 1, 0, 0.923472, 0, -0.383667, 2.406, 0.750037, 1.271)
-type = 0
+transform = Transform3D(0.102128, 0.142949, -0.984447, 0.993327, -0.0679778, 0.0931779, -0.0536008, -0.987393, -0.148938, -3.94829, 1.52375, -4.81116)
 
 [node name="InfWood" parent="." instance=ExtResource("16_20otq")]
 transform = Transform3D(0.711928, 0, -0.702253, 0, 1, 0, 0.702253, 0, 0.711928, -4.26789, 1.47803, 1.28163)
@@ -176,37 +181,37 @@ transform = Transform3D(0.711928, 0, -0.702253, 0, 1, 0, 0.702253, 0, 0.711928, 
 transform = Transform3D(0.749261, 0, -0.739078, 0, 1.05244, 0, 0.739078, 0, 0.749261, -4.32941, 0.819598, 1.31704)
 
 [node name="wokas" parent="." instance=ExtResource("19_qtg8e")]
-transform = Transform3D(0.0430684, 0, 0, 0, 0.0374043, 0, 0, 0, 0.0430684, -0.848522, 1.10549, -1.13131)
+transform = Transform3D(0.058, 0, 0, 0, 0.05, 0, 0, 0, 0.058, -0.771, 0.871166, -1.166)
 
 [node name="Steak" parent="." instance=ExtResource("20_j76k0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.649047, 0)
 
 [node name="Kuoka" parent="." instance=ExtResource("21_oum4y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.69903, 1.8035, -6.03402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.01798, 1.804, 10.3804)
 
 [node name="Bow" parent="." instance=ExtResource("22_6ivd3")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -0.461329, 1.75937, -5.9428)
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.22441, 1.43331, -5.83129)
 
 [node name="Arrow01" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.67251, 1.36606, -5.17205)
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.21138, 1.46724, -5.31122)
 
 [node name="Arrow02" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.62932, 1.36606, -5.03718)
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.16819, 1.46724, -5.17635)
 
 [node name="Arrow03" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.58801, 1.36606, -4.90819)
+transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.12688, 1.46724, -5.04736)
 
 [node name="holding_stick" parent="." instance=ExtResource("25_70mbh")]
-transform = Transform3D(-0.507218, 0, 1.08753, 0, 1.2, 0, -1.08753, 0, -0.507218, 22.9083, -0.0735513, 26.409)
+transform = Transform3D(-0.507218, 0, 1.08753, 0, 1.2, 0, -1.08753, 0, -0.507218, 19.2952, 0.178752, 8.45364)
 
 [node name="Raude" parent="." instance=ExtResource("27_75el0")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.6907, 0.688354, 8.44339)
+transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.6907, 0.430009, 8.44339)
 
 [node name="Lynas" parent="." instance=ExtResource("28_p4c3x")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.4111, 0.692269, 8.62984)
+transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.4111, 0.450616, 8.62984)
 
 [node name="Kuoja" parent="." instance=ExtResource("29_b1q8n")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 16.9901, 0.701143, 8.69161)
+transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 16.9901, 0.394965, 8.69161)
 
 [node name="Fish_mock2" parent="." instance=ExtResource("14_h3ydf")]
 transform = Transform3D(0.676658, 0, 0.736298, 0, 1, 0, -0.736298, 0, 0.676658, 32.4772, -4.56082, 25.2337)
@@ -230,14 +235,22 @@ transform = Transform3D(0.870982, 0, 0.491314, 0, 1, 0, -0.491314, 0, 0.870982, 
 transform = Transform3D(0.576432, 0, 0.817145, 0, 1, 0, -0.817145, 0, 0.576432, 20.0848, -1.49086, 17.3126)
 
 [node name="Bezdukas" parent="." instance=ExtResource("30_3pdq3")]
-transform = Transform3D(0.889423, 0, -1.46049, 0, 1.71, 0, 1.46049, 0, 0.889423, -9.44117, 1.3218, 8.29854)
+transform = Transform3D(1.35276, 0, -1.04602, 0, 1.71, 0, 1.04602, 0, 1.35276, -3.8052, 1.92744, 12.3579)
 
 [node name="BezdukasDissapearing" parent="." instance=ExtResource("31_qaiy5")]
-transform = Transform3D(0.52013, 0, -0.854087, 0, 1, 0, 0.854087, 0, 0.52013, -8.10556, 1.01324, 10.346)
+transform = Transform3D(0.847705, 0, -0.530467, 0, 1, 0, 0.530467, 0, 0.847705, -2.82773, 1.13455, 10.346)
 
 [node name="terrain" parent="." instance=ExtResource("32_rox6c")]
 
 [node name="Campfire2" parent="." instance=ExtResource("30_8ne4e")]
-transform = Transform3D(0.0251129, 0, -0.202685, 0, 0.204235, 0, 0.202685, 0, 0.0251129, -0.916748, 0.534524, -1.17057)
+transform = Transform3D(0.0251129, 0, -0.202685, 0, 0.204235, 0, 0.202685, 0, 0.0251129, -0.916748, 0.539091, -1.17057)
+stopTime = 30
+
+[node name="Rock_table" parent="." instance=ExtResource("39_waqj3")]
+transform = Transform3D(-1.21918, 0, -0.443855, 0, 1, 0, 0.490106, 0, -1.10413, -2.435, 0.492, -5.525)
+
+[node name="Trees" parent="." instance=ExtResource("32_eergn")]
+
+[node name="Water_plants" parent="." instance=ExtResource("33_pnqyu")]
 
 [editable path="terrain"]

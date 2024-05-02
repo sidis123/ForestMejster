@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4lv5orw021bu"]
+[gd_scene load_steps=24 format=3 uid="uid://jcojq3255t31"]
 
 [ext_resource type="PackedScene" uid="uid://5e7ww8aha8oa" path="res://models/nature/bushes/shrub.glb" id="1_qm4q4"]
 [ext_resource type="PackedScene" uid="uid://dqvf6q0mr7t3r" path="res://models/nature/bushes/bush_big.glb" id="2_t50nv"]

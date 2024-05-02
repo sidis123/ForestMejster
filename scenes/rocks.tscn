@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bbbm1bmvl3unv"]
+[gd_scene load_steps=29 format=3 uid="uid://sropfa6hmg5v"]
 
 [ext_resource type="ArrayMesh" uid="uid://vftw1vy5bdw3" path="res://resources/rocks/rock_small_v2.res" id="1_nwnag"]
 [ext_resource type="PackedScene" uid="uid://cafexsdximroi" path="res://models/nature/rocks/small/Rock_small_v1.glb" id="2_e5gk3"]

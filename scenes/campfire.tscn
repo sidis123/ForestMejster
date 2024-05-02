@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfa6n0rtpcxgq"]
+[gd_scene load_steps=9 format=3 uid="uid://b6r1wb2hstt7r"]
 
 [ext_resource type="PackedScene" uid="uid://ch0j14i0nb4dx" path="res://models/campfire/campfire.glb" id="1_jjwqh"]
 [ext_resource type="Script" path="res://scripts/campfireColision.gd" id="2_8n4jg"]
