@@ -25,6 +25,6 @@ func _on_pile_area_exited(area):
 		if new_wood_instance:
 			get_parent().add_child(new_wood_instance)
 			wood_instances.append(new_wood_instance)
-			new_wood_instance.global_transform.origin = Vector3(-3.741, 0.619, 11.407)
+			new_wood_instance.global_transform.origin = Vector3(-4.268, 1.478, 1.282)
 			wood_counter += 1
 			print("New log was spawned. ID: " + str(wood_counter))
