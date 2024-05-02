@@ -6,15 +6,18 @@ albedo_color = Color(1, 0.521569, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_4l5j4"]
 material = SubResource("StandardMaterial3D_ckyuk")
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dx2g0"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_c00da"]
 
 [node name="BezdukasDissapearing" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_4l5j4")
 
-[node name="BezdukasDissapearingBody" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="BezdukasDissapearingBody" type="RigidBody3D" parent="MeshInstance3D"]
+collision_layer = 65537
+collision_mask = 65537
+max_contacts_reported = 1
+contact_monitor = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/BezdukasDissapearingBody"]
-shape = SubResource("ConcavePolygonShape3D_dx2g0")
+shape = SubResource("BoxShape3D_c00da")

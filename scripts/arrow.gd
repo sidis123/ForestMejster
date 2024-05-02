@@ -1,7 +1,6 @@
 extends XRToolsPickable
 
 const force_factor = 0.1
-signal enemy_hit
 
 #cia krc funkcija skirta kad graziai skristu strele, bet neisejo tai velesniem bandymam nes sjp visai graziai ir db skrenda
 #func _physics_process(delta):
@@ -34,7 +33,7 @@ func _on_Arrow_body_entered(body):
 		if body.get_parent():
 			body.get_parent().queue_free()  # This will remove the parent of the BezdukasDissapearing node from the scene
 		# Spawn a new Steak node at the same position as the arrow
-		var steak_instance = preload("res://scenes/steak.tscn").instantiate()
+		var steak_instance = load("res://scenes/steak.tscn").instantiate()
 		steak_instance.global_transform.origin = global_transform.origin 
 		get_tree().get_root().add_child(steak_instance)  # Add the new Steak node to the scene tree
 		#spawn a new arrow

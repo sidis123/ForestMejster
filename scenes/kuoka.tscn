@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cyankqflrjy48"]
+[gd_scene load_steps=14 format=3 uid="uid://cyankqflrjy48"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_x50e0"]
+[ext_resource type="Script" path="res://scripts/kuoka.gd" id="2_62784"]
 [ext_resource type="ArrayMesh" uid="uid://28b04fb3ywk" path="res://resources/kuoka.tres" id="2_amjwg"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="3_hw54s"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_ouyd5"]
@@ -25,9 +26,12 @@ script = ExtResource("6_a6tcj")
 closed_pose = ExtResource("8_fpgim")
 
 [node name="Kuoka" instance=ExtResource("1_x50e0")]
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("2_62784")
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565, 0.0406867)
+transform = Transform3D(0.69, 0, 0, 0, 0.69, 0, 0, 0, 0.69, 0, 0.431881, 0.0406867)
 shape = SubResource("BoxShape3D_ldl43")
 
 [node name="lazda" type="MeshInstance3D" parent="." index="1"]
@@ -51,3 +55,7 @@ hand_pose = SubResource("Resource_ectql")
 [node name="GrabPointHandRight" parent="." index="4" instance=ExtResource("7_juoh0")]
 transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00331604, 0, 0.00331604, 0.999995, 0.037, -0.237, -0.09)
 hand_pose = SubResource("Resource_dv3g4")
+
+[connection signal="body_entered" from="." to="." method="_on_Kuoka_body_entered"]
+[connection signal="dropped" from="." to="." method="_on_dropped"]
+[connection signal="picked_up" from="." to="." method="_on_picked_up"]
