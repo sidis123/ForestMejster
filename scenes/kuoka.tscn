@@ -57,5 +57,3 @@ transform = Transform3D(1, 0, 0, 0, 0.999995, -0.00331604, 0, 0.00331604, 0.9999
 hand_pose = SubResource("Resource_dv3g4")
 
 [connection signal="body_entered" from="." to="." method="_on_Kuoka_body_entered"]
-[connection signal="dropped" from="." to="." method="_on_dropped"]
-[connection signal="picked_up" from="." to="." method="_on_picked_up"]

@@ -37,7 +37,7 @@ func _on_Arrow_body_entered(body):
 		steak_instance.global_transform.origin = global_transform.origin 
 		get_tree().get_root().add_child(steak_instance)  # Add the new Steak node to the scene tree
 		#spawn a new arrow
-		#var arrow_instance = preload("res://scenes/arrow.tscn").instantiate()
+		#var arrow_instance = load("res://scenes/arrow.tscn").instantiate()
 		#var offset = Vector3(2.0, 0.0, 0.0)  # Adjust the X value as needed
 		#arrow_instance.global_transform.origin = global_transform.origin + offset
 		#get_tree().get_root().add_child(arrow_instance)  # Add the new Steak node to the scene tree
