@@ -227,7 +227,7 @@ transform = Transform3D(1.35276, 0, -1.04602, 0, 1.71, 0, 1.04602, 0, 1.35276, -
 visible = false
 
 [node name="BezdukasDissapearing" parent="." instance=ExtResource("31_qaiy5")]
-transform = Transform3D(0.937803, 0.251342, -0.239481, -0.240132, 0.967809, 0.0753884, 0.25072, -0.0131924, 0.967969, -12.7593, 2.24827, 8.33812)
+transform = Transform3D(0.962306, -0.105453, -0.250691, 0.105382, 0.994337, -0.013744, 0.25072, -0.0131924, 0.967969, -13.0433, 2.24827, 8.41476)
 
 [node name="terrain" parent="." instance=ExtResource("32_rox6c")]
 
