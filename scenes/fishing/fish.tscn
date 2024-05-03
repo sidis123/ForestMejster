@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cyj6ve2el24kr"]
+[gd_scene load_steps=15 format=3 uid="uid://cyj6ve2el24kr"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_vdqen"]
 [ext_resource type="Script" path="res://scripts/fishing/fish.gd" id="2_o4gd6"]
 [ext_resource type="ArrayMesh" uid="uid://ba86tkiwd8ejk" path="res://resources/fish_mesh.tres" id="2_w1ybt"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="3_bdusk"]
+[ext_resource type="Script" path="res://scripts/cooking.gd" id="4_34xv8"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_td6l8"]
 [ext_resource type="Animation" uid="uid://dd67rufxwj2u" path="res://addons/godot-xr-tools/hands/animations/left/Grip 3.res" id="5_q0q5l"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_d7xwk"]
@@ -25,7 +26,7 @@ closed_pose = ExtResource("5_q0q5l")
 script = ExtResource("6_d7xwk")
 closed_pose = ExtResource("8_autvk")
 
-[node name="Fish" groups=["Coocable"] instance=ExtResource("1_vdqen")]
+[node name="Fish" groups=["Cookable"] instance=ExtResource("1_vdqen")]
 script = ExtResource("2_o4gd6")
 type = 0
 
@@ -37,6 +38,7 @@ shape = SubResource("BoxShape3D_6v4gk")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = ExtResource("2_w1ybt")
 skeleton = NodePath("")
+script = ExtResource("4_34xv8")
 
 [node name="XRToolsHighlightVisible" type="Node3D" parent="." index="2"]
 script = ExtResource("3_bdusk")
