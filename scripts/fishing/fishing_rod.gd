@@ -29,7 +29,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 		
-	player_body = get_node("/root/Staging/Scene/Main/XROrigin3D/PlayerBody")
+	player_body = get_node("/root/Main/XROrigin3D/PlayerBody")
 
 func _process(_delta):
 	if (
