@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc04w1qogmn4t"]
+
+[ext_resource type="Script" path="res://scripts/dragonfly.gd" id="1_sgv86"]
+[ext_resource type="ArrayMesh" uid="uid://c122d03civn6h" path="res://models/fishing/dragonfly.mesh" id="2_t1rak"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xv4yb"]
+points = PackedVector3Array(5.0247, 0.76073, 1.09268, -0.315199, -0.0668712, -2.37681, -0.314084, 0.0905857, -2.36453, -0.166963, -0.244322, 4.77883, -5.35968, 0.928348, 0.758555, -0.334876, -0.747176, -1.75565, 5.19261, 0.76073, -1.92307, -5.19281, 0.425658, -1.92307, 0.166764, 0.25804, 4.61069, 5.19261, 0.425658, -1.08524, 5.19261, 0.928348, 0.925977, -5.19281, 0.76073, -1.92307, -4.52221, 0.425658, 1.2601, 0.334677, -0.747176, -1.75565, 4.52201, 0.425658, 1.2601, 4.85784, 0.928348, -0.246693, 0.166764, -0.244322, 4.77883, 4.68992, 0.425658, -2.09049, -4.85804, 0.928348, -0.246693, -5.19281, 0.928348, 0.925977, 0.334677, -0.747176, -1.41936, -0.334876, -0.747176, -1.41936, -5.19281, 0.425658, -1.08524, -5.19281, 0.593112, 0.925977, -4.69012, 0.593112, -2.09049, -0.155372, -0.221057, -2.33741, 5.19261, 0.425658, -1.92307, -0.166963, 0.25804, 4.61069, 5.19261, 0.593112, 0.925977, 4.68992, 0.593112, -2.09049, 5.35948, 0.928348, 0.0881492, 0.166764, 0.0905857, 4.77883)
+
+[node name="Dragonfly" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+script = ExtResource("1_sgv86")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(-1.13465e-05, 0, -0.0428444, 0, 0.0313918, 0, 0.0361169, 0, -1.346e-05, -0.000357434, 0, 0)
+mesh = ExtResource("2_t1rak")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(-1.13465e-05, 0, -0.0428444, 0, 0.0313918, 0, 0.0361169, 0, -1.346e-05, -0.000357434, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_xv4yb")
