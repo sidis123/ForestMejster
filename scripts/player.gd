@@ -11,27 +11,21 @@ var function_pointer_right: XRToolsFunctionPointer
 
 # Left controller variables
 var xr_controller_left: XRController3D
+var movement_jump_left: XRToolsMovementJump
 var movement_direct_left: XRToolsMovementDirect
-var function_teleport: XRToolsFunctionTeleport
+var function_teleport_left: XRToolsFunctionTeleport
 var function_pickup_left: XRToolsFunctionPickup
 var function_pointer_left: XRToolsFunctionPointer
 var function_pointer_collision_left: CollisionShape3D
 
-# Signals
-signal controller_toggled_pause
 
 func _ready():
 	init_xr_interface()
 	init_controllers()
+	
+	if PauseManager:
+		PauseManager.pause_state_changed.connect(_on_pause_state_changed)
 
-func _process(_delta):
-	# Not great not terrible
-	if XRToolsUserSettings.movement_direct:
-		movement_direct_left.enabled = true
-		function_teleport.enabled = false
-	else:
-		movement_direct_left.enabled = false
-		function_teleport.enabled = true
 
 func init_xr_interface() -> void:
 	xr_interface = XRServer.find_interface("OpenXR")
@@ -45,7 +39,8 @@ func init_xr_interface() -> void:
 		get_viewport().use_xr = true
 	else:
 		print("OpenXR failed to initialize, please check if your headset is connected")
-		
+
+
 func init_controllers() -> void:
 	# Initialise the right controller and its children
 	xr_controller_right = XRHelpers.get_right_controller(self)
@@ -69,15 +64,17 @@ func init_controllers() -> void:
 	else:
 		xr_controller_left.button_pressed.connect(_on_left_controller_button_pressed)
 		xr_controller_left.button_released.connect(_on_left_controller_button_released)
+		movement_jump_left = xr_controller_left.get_node("MovementJump")
 		movement_direct_left = xr_controller_left.get_node("MovementDirect")
-		function_teleport = xr_controller_left.get_node("FunctionTeleport")
+		function_teleport_left = xr_controller_left.get_node("FunctionTeleport")
 		
+		# Enable one based on user settings
 		if XRToolsUserSettings.movement_direct:
 			movement_direct_left.enabled = true
-			function_teleport.enabled = false
+			function_teleport_left.enabled = false
 		else:
 			movement_direct_left.enabled = false
-			function_teleport.enabled = true
+			function_teleport_left.enabled = true
 		
 		function_pickup_left = xr_controller_left.get_node("FunctionPickupLeft")
 		function_pointer_left = xr_controller_left.get_node("FunctionPointerLeft")
@@ -85,13 +82,14 @@ func init_controllers() -> void:
 			push_error("The left function pointer was not found")
 		else:
 			disable_left_pointer()
-	
-	
+
+
 func enable_right_pointer():
 	function_pointer_right.set_enabled(true)
 	function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.SHOW)
 	function_pickup_right.ranged_enable = true
-	
+
+
 func disable_right_pointer():
 	function_pointer_right.set_enabled(false)
 	function_pointer_right.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
@@ -102,7 +100,8 @@ func enable_left_pointer():
 	function_pointer_left.set_enabled(true)
 	function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.SHOW)
 	function_pickup_left.ranged_enable = true
-	
+
+
 func disable_left_pointer():
 	function_pointer_left.set_enabled(false)
 	function_pointer_left.set_show_laser(XRToolsFunctionPointer.LaserShow.HIDE)
@@ -120,32 +119,50 @@ func _on_right_controller_button_pressed(p_button: String) -> void:
 	match p_button:
 		"ax_button":
 			enable_right_pointer()
-			
+
+
 func _on_right_controller_button_released(p_button: String) -> void:
 	#print(p_button + " was released on the right controller")
 	match p_button:
 		"ax_button":
 			disable_right_pointer()
-			
+
+
 func _on_left_controller_button_pressed(p_button: String) -> void:
 	#print(p_button + " was pressed on the left controller")
 	match p_button:
 		"ax_button":
 			enable_left_pointer()
 		"menu_button":
-			# Instead of disabling movement, make sure movement and player body are pausable
-			controller_toggled_pause.emit()
-			
+			PauseManager.toggle_pause()
+
+
 func _on_left_controller_button_released(p_button: String) -> void:
 	#print(p_button + " was released on the left controller")
 	match p_button:
 		"ax_button":
 			disable_left_pointer()
-	
-# TODO: turn the Turn Mode on MovementTurn into a setting
+
+
+## Methods for using the controller haptic feedback
 
 func trigger_left_haptic(frequency: float, amplitude: float, duration_sec: float, delay_sec: float):
 	xr_controller_left.trigger_haptic_pulse("haptic", frequency, amplitude, duration_sec, delay_sec)
 	
 func trigger_right_haptic(frequency: float, amplitude: float, duration_sec: float, delay_sec: float):
 	xr_controller_right.trigger_haptic_pulse("haptic", frequency, amplitude, duration_sec, delay_sec)
+
+## Method that handles the pause state change singal from PauseManager
+func _on_pause_state_changed(paused : bool):
+	if paused:
+		# Disable all movement
+		movement_jump_left.enabled = false
+		movement_direct_left.enabled = false
+		function_teleport_left.enabled = false
+	else:
+		movement_jump_left.enabled = true
+		# Enable one based on user settings
+		if XRToolsUserSettings.movement_direct:
+			movement_direct_left.enabled = true
+		else:
+			function_teleport_left.enabled = true

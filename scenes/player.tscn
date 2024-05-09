@@ -36,6 +36,7 @@ script = ExtResource("1_524a5")
 [node name="XRCamera3D" type="XRCamera3D" parent="."]
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+current = true
 
 [node name="XRToolsShaderCache" parent="XRCamera3D" instance=ExtResource("1_i0vxa")]
 process_mode = 3
@@ -75,11 +76,9 @@ tracker = &"left_hand"
 [node name="LeftHand" parent="LeftHandController" instance=ExtResource("1_xn7kd")]
 
 [node name="MovementDirect" parent="LeftHandController" instance=ExtResource("3_xk607")]
-process_mode = 1
 strafe = true
 
 [node name="FunctionTeleport" parent="LeftHandController" instance=ExtResource("10_juane")]
-process_mode = 1
 
 [node name="FunctionPickupLeft" parent="LeftHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2
