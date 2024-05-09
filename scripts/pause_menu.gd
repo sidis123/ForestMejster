@@ -4,6 +4,10 @@ extends Control
 # It should be the grandparent (2din3dviewport/viewport/menu)
 @onready var pause_menu_viewport : Node3D = get_node("../../")
 
+@onready var settings_ui : TabContainer = get_node("Background/SettingsUI")
+
+@onready var pause_menu_ui : MarginContainer = get_node("Background/PauseMenuUI")
+
 var player_camera: XRCamera3D
 
 var paused: bool = false
@@ -17,6 +21,10 @@ func _ready():
 	# Hide the viewport
 	pause_menu_viewport.visible = false
 	pause_menu_viewport.set_enabled(false)
+	
+	# Hide all the UIs
+	pause_menu_ui.visible = false
+	settings_ui.visible = false
 	
 	var player: XROrigin3D = get_node("/root/Staging/Scene/Main/XROrigin3D")
 	
@@ -35,6 +43,8 @@ func pause():
 	paused = true
 	pause_menu_viewport.visible = true
 	pause_menu_viewport.set_enabled(true)
+	pause_menu_ui.visible = true
+	settings_ui.visible = false
 	#get_tree().paused = true
 	
 func unpause():
@@ -68,7 +78,8 @@ func _on_resume_button_pressed():
 
 
 func _on_settings_button_pressed():
-	pass # Replace with function body.
+	pause_menu_ui.visible = false
+	settings_ui.visible = true
 
 
 func _on_restart_game_button_pressed():

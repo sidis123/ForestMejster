@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bsotifvyxaf5u"]
+[gd_scene load_steps=17 format=3 uid="uid://bsotifvyxaf5u"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_524a5"]
 [ext_resource type="PackedScene" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="1_i0vxa"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="6_ls5gy"]
 [ext_resource type="Material" path="res://addons/godot-xr-tools/materials/pointer.tres" id="7_cl1xv"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="10_ewj4p"]
+[ext_resource type="PackedScene" uid="uid://fiul51tsyoop" path="res://addons/godot-xr-tools/functions/function_teleport.tscn" id="10_juane"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="11_27bo6"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="12_t2o8b"]
 [ext_resource type="PackedScene" uid="uid://dphcujw0jaqld" path="res://scenes/fps_counter.tscn" id="12_xpbn2"]
@@ -48,7 +49,6 @@ tracker = &"right_hand"
 
 [node name="MovementTurn" parent="RightHandController" instance=ExtResource("5_y5i8i")]
 process_mode = 1
-turn_mode = 2
 step_turn_angle = 45.0
 
 [node name="FunctionPickupRight" parent="RightHandController" instance=ExtResource("6_gddok")]
@@ -77,6 +77,9 @@ tracker = &"left_hand"
 [node name="MovementDirect" parent="LeftHandController" instance=ExtResource("3_xk607")]
 process_mode = 1
 strafe = true
+
+[node name="FunctionTeleport" parent="LeftHandController" instance=ExtResource("10_juane")]
+process_mode = 1
 
 [node name="FunctionPickupLeft" parent="LeftHandController" instance=ExtResource("6_gddok")]
 grab_distance = 0.2

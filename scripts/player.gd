@@ -12,6 +12,7 @@ var function_pointer_right: XRToolsFunctionPointer
 # Left controller variables
 var xr_controller_left: XRController3D
 var movement_direct_left: XRToolsMovementDirect
+var function_teleport: XRToolsFunctionTeleport
 var function_pickup_left: XRToolsFunctionPickup
 var function_pointer_left: XRToolsFunctionPointer
 var function_pointer_collision_left: CollisionShape3D
@@ -22,6 +23,15 @@ signal controller_toggled_pause
 func _ready():
 	init_xr_interface()
 	init_controllers()
+
+func _process(_delta):
+	# Not great not terrible
+	if XRToolsUserSettings.movement_direct:
+		movement_direct_left.enabled = true
+		function_teleport.enabled = false
+	else:
+		movement_direct_left.enabled = false
+		function_teleport.enabled = true
 
 func init_xr_interface() -> void:
 	xr_interface = XRServer.find_interface("OpenXR")
@@ -60,6 +70,15 @@ func init_controllers() -> void:
 		xr_controller_left.button_pressed.connect(_on_left_controller_button_pressed)
 		xr_controller_left.button_released.connect(_on_left_controller_button_released)
 		movement_direct_left = xr_controller_left.get_node("MovementDirect")
+		function_teleport = xr_controller_left.get_node("FunctionTeleport")
+		
+		if XRToolsUserSettings.movement_direct:
+			movement_direct_left.enabled = true
+			function_teleport.enabled = false
+		else:
+			movement_direct_left.enabled = false
+			function_teleport.enabled = true
+		
 		function_pickup_left = xr_controller_left.get_node("FunctionPickupLeft")
 		function_pointer_left = xr_controller_left.get_node("FunctionPointerLeft")
 		if not function_pointer_left:
