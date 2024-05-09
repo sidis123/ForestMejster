@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5gug5ecibfou"]
+[gd_scene load_steps=3 format=3 uid="uid://b5gug5ecibfou"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_xagxo"]
 [ext_resource type="Script" path="res://scenes/settings_ui.gd" id="2_tscx0"]
-[ext_resource type="Theme" path="res://resources/menu_theme.tres" id="2_vq13b"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -123,7 +122,6 @@ text = "Snap turning:"
 
 [node name="SnapTurningCB" type="CheckBox" parent="Background/SettingsUI/SettingsVBox/SnapTurning"]
 layout_mode = 2
-theme = ExtResource("2_vq13b")
 
 [node name="DirectMovement" type="HBoxContainer" parent="Background/SettingsUI/SettingsVBox"]
 custom_minimum_size = Vector2(0, 60)
@@ -136,7 +134,6 @@ text = "Direct movement:"
 
 [node name="DirectMovementCB" type="CheckBox" parent="Background/SettingsUI/SettingsVBox/DirectMovement"]
 layout_mode = 2
-theme = ExtResource("2_vq13b")
 
 [node name="HSeparator4" type="HSeparator" parent="Background/SettingsUI/SettingsVBox"]
 layout_mode = 2
