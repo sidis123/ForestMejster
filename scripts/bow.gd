@@ -82,7 +82,7 @@ func _on_pull_pick_dropped(_pickable):
 
 func _on_arrow_snap_zone_has_picked_up(what):
 	arrow_snap_zone.enabled = false
-	
+	what.collision_layer=0
 	pass # Replace with function body.
 
 
