@@ -6,6 +6,9 @@ var speed = 1.0   # Speed of movement
 var angle = 0.0   # Current angle
 # Center of rotation
 var center_of_rotation = Vector3(-8.85, 0, -8.2)  # Example position, adjust as needed
+# Initial position of the node
+var initial_position := Vector3()
+
 var is_moving = true
 var tent_instance = null
 var kipsas_collision = null
@@ -14,6 +17,8 @@ func _ready():
 	var puntukas = get_node("/root/Staging/Scene/Main/Puntukas")
 	puntukas.kipsas_toggle_movement.connect(_on_Bezdukas_toggle_movement)
 	kipsas_collision = get_node("Cube/BezdukasDissapearingBody/CollisionShape3D")
+		# Store the initial position of the node
+	initial_position = self.global_transform.origin
 
 func _on_Bezdukas_toggle_movement():
 	is_moving = !is_moving  # Toggle the movement state
@@ -21,7 +26,7 @@ func _on_Bezdukas_toggle_movement():
 	if !is_moving:
 		# Instantiate the Tent node
 		if is_instance_valid(kipsas_collision):
-			tent_instance = preload("res://scenes/tent.tscn").instantiate()
+			tent_instance = preload("res://scenes/rock_small_v_1.tscn").instantiate()
 			tent_instance.global_transform.origin = self.global_transform.origin
 			get_tree().get_root().add_child(tent_instance)
 			tent_instance.visible = true
@@ -41,13 +46,12 @@ func _on_Bezdukas_toggle_movement():
 
 func _process(delta):
 	pass
-#	if is_moving:
-		#Jeigu norit normalu movementa implementuot rasot cia movemento koda ar kazka..
-		# Update angle based on time and speed
-#		angle += speed * delta
-#		# Calculate new position in the circular path
-#		var x = center_of_rotation.x + radius * cos(angle)
-#		var y = center_of_rotation.y  # No change in y-coordinate
-#		var z = center_of_rotation.z + radius * sin(angle)
-#		# Set the position of the Kipsas node
-#		self.global_transform.origin = Vector3(x, y, z)
+	if is_moving:
+# Update angle based on time and speed
+		angle += speed * delta
+		# Calculate new position in the circular path relative to initial position
+		var x = initial_position.x + radius * cos(angle)
+		var y = initial_position.y  # No change in y-coordinate
+		var z = initial_position.z + radius * sin(angle)
+		# Set the position of the node
+		self.global_transform.origin = Vector3(x, y, z)
