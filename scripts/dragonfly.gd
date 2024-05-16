@@ -17,3 +17,7 @@ func _process(delta):
 
 	if global_transform.origin.y <= minDepth:
 		global_transform.origin.y = minDepth
+	
+	if$AudioStreamPlayer3D.playing == false:
+		$AudioStreamPlayer3D.play()
+		
