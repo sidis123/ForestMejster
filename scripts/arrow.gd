@@ -42,4 +42,3 @@ func _on_Arrow_body_entered(body):
 		#arrow_instance.global_transform.origin = global_transform.origin + offset
 		#get_tree().get_root().add_child(arrow_instance)  # Add the new Steak node to the scene tree
 		queue_free()
-

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=69 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -43,6 +43,7 @@
 [ext_resource type="AudioStream" uid="uid://dmgmim828cyrk" path="res://Audio/testFire.mp3" id="41_36ag6"]
 [ext_resource type="AudioStream" uid="uid://m308xudgckly" path="res://Audio/Forestmejster_backing_track.mp3" id="42_krcic"]
 [ext_resource type="AudioStream" uid="uid://p4wp17ln30qd" path="res://Audio/birdsTest.mp3" id="43_67go0"]
+[ext_resource type="PackedScene" uid="uid://bkj6ty5kdth1w" path="res://scenes/quiver.tscn" id="44_nghe1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0xy5"]
 sky_top_color = Color(0, 0.207843, 0.4, 1)
@@ -436,13 +437,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19516, 2.0236, 6.29467)
 transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.22441, 1.43331, -5.83129)
 
 [node name="Arrow01" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.21138, 1.46724, -5.31122)
+transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.38282, 1.73432, -0.837944)
 
 [node name="Arrow02" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.16819, 1.46724, -5.17635)
+transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.38, 1.68558, -0.905433)
 
 [node name="Arrow03" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -3.12688, 1.46724, -5.04736)
+transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.37942, 1.66057, -0.98651)
 
 [node name="holding_stick" parent="." instance=ExtResource("25_70mbh")]
 transform = Transform3D(-0.507218, 0, 1.08753, 0, 1.2, 0, -1.08753, 0, -0.507218, 19.2952, 0.178752, 8.45364)
@@ -1870,5 +1871,8 @@ unit_size = 20.0
 max_db = -20.0
 pitch_scale = 0.7
 autoplay = true
+
+[node name="Quiver" parent="." instance=ExtResource("44_nghe1")]
+transform = Transform3D(0.166648, 0, 0.986016, 0, 1, 0, -0.986016, 0, 0.166648, -4.6085, 0.747348, 3.18201)
 
 [editable path="Campfire2"]
