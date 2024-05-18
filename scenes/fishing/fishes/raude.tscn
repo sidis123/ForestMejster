@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://b562tmnadvtpm"]
+[gd_scene load_steps=24 format=3 uid="uid://b562tmnadvtpm"]
 
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_05afi"]
 [ext_resource type="Script" path="res://scripts/fishing/fish.gd" id="2_8ijpg"]
+[ext_resource type="Script" path="res://scripts/cooking.gd" id="3_br8fl"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/objects/highlight/highlight_visible.gd" id="4_58u5g"]
 [ext_resource type="Material" uid="uid://nuogvh1u6wye" path="res://resources/highlight_material.tres" id="4_ta3bu"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="5_opqo2"]
@@ -254,6 +255,7 @@ shape = SubResource("ConvexPolygonShape3D_n3fmu")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bayo3")
 skeleton = NodePath("")
+script = ExtResource("3_br8fl")
 
 [node name="XRToolsHighlightVisible" type="Node3D" parent="." index="2"]
 script = ExtResource("4_58u5g")
