@@ -1,43 +1,23 @@
 class_name Bucket
-extends PickableDispenser
+extends RigidBody3D
 
-## The queue containing the types of fish in the order they've been added
-var _fish_queue : Array[Fish.FishType] = []
+@onready var handle : XRToolsPickable = get_node("../Handle")
 
-var _fish : Fish = null
-
-func _process(_delta):
-	if _fish and not _fish.is_picked_up():
-		_fish_queue.append(_fish.type)
-		_fish.queue_free()
-
-## Test if this object can dispense a pickup
-func can_pick_up(by: Node3D) -> bool:
-	return _fish_queue.size() > 0
+# Remember some state so we can return to it when the user drops the object
+@onready var original_collision_mask : int = collision_mask
+@onready var original_collision_layer : int = collision_layer
 
 
-## Instantiate the scene with the last fish type
-func _get_dispensable_instance():
-	var fish_type = _fish_queue.pop_back()
-	# NOTE: very manual matching of type to index in the array of dispensed scenes
-	match fish_type:
-		Fish.FishType.Kuoja:
-			return dispensed_scenes[0].instantiate()
-		Fish.FishType.Lynas:
-			return dispensed_scenes[1].instantiate()
-		Fish.FishType.Raude:
-			return dispensed_scenes[2].instantiate()
-		_:
-			return null
+func _ready():
+	handle.picked_up.connect(_on_picked_up)
+	handle.dropped.connect(_on_dropped)
 
 
-## Save a ref to a fish that enters the bucket
-func _on_body_entered(body):
-	if body is Fish:
-		_fish = body as Fish
+func _on_picked_up(by: Node3D):
+	collision_layer = 0b0000_0000_0000_0001_0000_0000_0000_0000 #held object
+	collision_mask = 0 # collisions disabled
 
 
-## Remove the ref
-func _on_body_exited(body):
-	if body == _fish:
-		_fish = null
+func _on_dropped(by: Node3D):
+	collision_layer = original_collision_layer
+	collision_mask = original_collision_mask
