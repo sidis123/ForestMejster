@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Forestmejster"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/staging.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
 XrSimulator="*res://addons/xr-simulator/XRSimulator.tscn"
+PauseManager="*res://scripts/pause_manager.gd"
 
 [display]
 

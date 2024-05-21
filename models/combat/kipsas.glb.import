@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://crawqmd2rqxeo"
-path="res://.godot/imported/bucket.glb-74f3b09f2715fb4af96614e2ec538888.scn"
+uid="uid://bc682mys2jjhu"
+path="res://.godot/imported/kipsas.glb-3c9c68cc0428575a22ef451414002b2f.scn"
 
 [deps]
 
-source_file="res://models/fishing/bucket.glb"
-dest_files=["res://.godot/imported/bucket.glb-74f3b09f2715fb4af96614e2ec538888.scn"]
+source_file="res://models/combat/kipsas.glb"
+dest_files=["res://.godot/imported/kipsas.glb-3c9c68cc0428575a22ef451414002b2f.scn"]
 
 [params]
 

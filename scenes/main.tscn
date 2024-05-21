@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=68 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://ba037obqitk4x" path="res://scenes/steak.tscn" id="20_j76k0"]
 [ext_resource type="PackedScene" uid="uid://cyankqflrjy48" path="res://scenes/kuoka.tscn" id="21_oum4y"]
 [ext_resource type="PackedScene" uid="uid://baqn44ngm0jv1" path="res://scenes/bow.tscn" id="22_6ivd3"]
-[ext_resource type="PackedScene" uid="uid://ch54hnpbw88c8" path="res://scenes/arrow.tscn" id="23_tu57t"]
 [ext_resource type="PackedScene" uid="uid://y3a42o7ap8gf" path="res://models/fishing/holding_stick.glb" id="25_70mbh"]
 [ext_resource type="ArrayOccluder3D" uid="uid://butpll6j410pf" path="res://baking/main.occ" id="27_0bpkh"]
 [ext_resource type="PackedScene" uid="uid://b562tmnadvtpm" path="res://scenes/fishing/fishes/raude.tscn" id="27_75el0"]
@@ -398,8 +397,7 @@ transform = Transform3D(0.280918, 0, -0.959732, 0, 1, 0, 0.959732, 0, 0.280918, 
 transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.9292, 0.806023, 8.08755)
 
 [node name="Bucket" parent="." instance=ExtResource("10_ym32v")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 19.7135, 0.351842, 6.17818)
-collision_mask = 131079
+transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 19.7135, 0.540002, 6.17818)
 
 [node name="Dock" parent="." instance=ExtResource("5_2qenr")]
 transform = Transform3D(-0.96202, 0, -1.17897, 0, 1.52166, 0, 1.17897, 0, -0.96202, 13.8459, 0.236316, 2.87496)
@@ -436,15 +434,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.19516, 2.0236, 6.29467)
 [node name="Bow" parent="." instance=ExtResource("22_6ivd3")]
 transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.22441, 1.43331, -5.83129)
 
-[node name="Arrow01" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.38282, 1.73432, -0.837944)
-
-[node name="Arrow02" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.38, 1.68558, -0.905433)
-
-[node name="Arrow03" parent="." instance=ExtResource("23_tu57t")]
-transform = Transform3D(0.0244519, -0.999699, -0.00181838, 0.996946, 0.0245194, -0.0741386, 0.0741609, -1.16402e-10, 0.997246, -3.37942, 1.66057, -0.98651)
-
 [node name="holding_stick" parent="." instance=ExtResource("25_70mbh")]
 transform = Transform3D(-0.507218, 0, 1.08753, 0, 1.2, 0, -1.08753, 0, -0.507218, 19.2952, 0.178752, 8.45364)
 
@@ -480,7 +469,6 @@ transform = Transform3D(0.576432, 0, 0.817145, 0, 1, 0, -0.817145, 0, 0.576432, 
 
 [node name="Bezdukas" parent="." instance=ExtResource("30_3pdq3")]
 transform = Transform3D(1.35276, 0, -1.04602, 0, 1.71, 0, 1.04602, 0, 1.35276, -3.8052, 1.92744, 12.3579)
-visible = false
 
 [node name="BezdukasDissapearing" parent="." instance=ExtResource("31_qaiy5")]
 transform = Transform3D(0.962306, -0.105453, -0.250691, 0.105382, 0.994337, -0.013744, 0.25072, -0.0131924, 0.967969, -13.0433, 2.24827, 8.41476)

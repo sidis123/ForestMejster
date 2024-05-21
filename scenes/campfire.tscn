@@ -10,7 +10,7 @@ points = PackedVector3Array(-2.31182, 0.0297946, -2.75587, 2.73947, 0.560095, -0
 _data = [Vector2(0.00724638, 0), 0.0, 0.0, 0, 0, Vector2(0.26087, 0.868132), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_xp4k0"]
+[sub_resource type="CurveTexture" id="CurveTexture_ukbj6"]
 curve = SubResource("Curve_y7syp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pnupm"]
@@ -26,9 +26,9 @@ linear_accel_min = 1.0
 linear_accel_max = 4.0
 scale_min = 0.0
 scale_max = 2.0
-scale_curve = SubResource("CurveTexture_xp4k0")
+scale_curve = SubResource("CurveTexture_ukbj6")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s5ly"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r8ewe"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
@@ -41,7 +41,7 @@ particles_anim_v_frames = 5
 particles_anim_loop = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_al4w5"]
-material = SubResource("StandardMaterial3D_4s5ly")
+material = SubResource("StandardMaterial3D_r8ewe")
 
 [node name="Campfire" instance=ExtResource("1_jjwqh")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
