@@ -1821,9 +1821,9 @@ light_data = ExtResource("37_pkovv")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 22.2761, -2.12732, 16.2179)
 occluder = SubResource("QuadOccluder3D_2rw52")
 
-[node name="Node" type="Node" parent="."]
+[node name="Sounds" type="Node" parent="."]
 
-[node name="FireSound" type="AudioStreamPlayer3D" parent="Node"]
+[node name="FireSound" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.921321, 1.02295, -1.28601)
 stream = ExtResource("41_36ag6")
 attenuation_model = 2
@@ -1832,7 +1832,7 @@ autoplay = true
 max_distance = 7.0
 panning_strength = 2.23
 
-[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="Node"]
+[node name="BackgroundMusic" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7205, 0.988377, 7.17808)
 stream = ExtResource("42_krcic")
 attenuation_model = 2
@@ -1842,7 +1842,7 @@ max_db = -10.0
 autoplay = true
 panning_strength = 0.2
 
-[node name="BirdSound1" type="AudioStreamPlayer3D" parent="Node"]
+[node name="BirdSound1" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8906, -12.1504)
 stream = ExtResource("43_67go0")
 attenuation_model = 1
@@ -1852,7 +1852,7 @@ max_db = -5.0
 autoplay = true
 panning_strength = 2.0
 
-[node name="BirdSound2" type="AudioStreamPlayer3D" parent="Node"]
+[node name="BirdSound2" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1375, 11.0491, 17.7839)
 stream = SubResource("AudioStreamMP3_w4eib")
 attenuation_model = 1
@@ -1863,7 +1863,7 @@ pitch_scale = 0.62
 autoplay = true
 panning_strength = 2.0
 
-[node name="WindSound" type="AudioStreamPlayer3D" parent="Node"]
+[node name="WindSound" type="AudioStreamPlayer3D" parent="Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3314, 1.73836, 9.92586)
 stream = SubResource("AudioStreamMP3_3165m")
 volume_db = -25.0
@@ -1873,6 +1873,6 @@ pitch_scale = 0.7
 autoplay = true
 
 [node name="Quiver" parent="." instance=ExtResource("44_nghe1")]
-transform = Transform3D(0.166648, 0, 0.986016, 0, 1, 0, -0.986016, 0, 0.166648, -4.6085, 0.747348, 3.18201)
+transform = Transform3D(0.975296, 0, -0.220901, 0, 1, 0, 0.220901, 0, 0.975296, 0.178856, 0.619671, -5.92659)
 
 [editable path="Campfire2"]
