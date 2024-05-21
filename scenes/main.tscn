@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=70 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://dmgmim828cyrk" path="res://Audio/testFire.mp3" id="41_36ag6"]
 [ext_resource type="PackedScene" path="res://scenes/puntukass.tscn" id="42_e20bc"]
 [ext_resource type="AudioStream" uid="uid://m308xudgckly" path="res://Audio/Forestmejster_backing_track.mp3" id="42_krcic"]
+[ext_resource type="PackedScene" uid="uid://bc04w1qogmn4t" path="res://scenes/dragonfly.tscn" id="42_lcci2"]
 [ext_resource type="AudioStream" uid="uid://p4wp17ln30qd" path="res://Audio/birdsTest.mp3" id="43_67go0"]
 [ext_resource type="PackedScene" path="res://scenes/kipsas.tscn" id="43_qvl1d"]
 [ext_resource type="PackedScene" uid="uid://bkj6ty5kdth1w" path="res://scenes/quiver.tscn" id="44_nghe1"]
@@ -314,6 +315,9 @@ points = PackedVector3Array(-1.82644, 0.858512, 0.112288, -0.51602, -0.0786095, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h7ysq"]
 points = PackedVector3Array(-1.82644, 0.858512, 0.112288, -0.51602, -0.0786095, -0.261674, 0.419526, 0.858512, 1.79755, -0.328764, 11.9034, 0.673927, 1.91721, 0.858512, 0.486946, -0.51602, 1.23266, -1.75961, 1.16818, 0.858512, -1.57228, -1.26468, 1.045, 1.42289, -0.703275, 9.09439, -0.261674, 0.419526, 7.40898, -0.823313, -1.45193, 1.045, -1.19762, 0.0453811, 11.5269, 0.673927, 1.54269, 2.54275, -0.635984, 1.16818, 1.41914, 1.42289, -1.82644, 1.41914, 0.673927, -0.51602, 0.858512, 1.79755, 0.419526, -0.0786095, 0.299617, -0.141508, 2.35626, -1.75961, -1.63919, 2.54275, -0.635984, 0.23227, 10.5921, 0.112288, -0.51602, 10.5921, -0.0743449, -1.07742, 0.858512, -1.57228, 1.91721, 1.045, 0.673927, 0.419526, -0.0786095, -0.449003, -0.328764, -0.0786095, 0.486946, 0.980927, 4.0405, -1.19762, -0.328764, 9.28205, -0.449003, 0.23227, 2.35626, -1.75961, 0.0453811, 1.6068, 1.79755, -1.07742, 1.23266, -1.57228, -0.51602, 10.9651, 0.299617, 0.0453811, 10.7798, -0.0743449)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_s3h5u"]
+points = PackedVector3Array(-1.82644, 0.858512, 0.112288, -0.51602, -0.0786095, -0.261674, 0.419526, 0.858512, 1.79755, -0.328764, 11.9034, 0.673927, 1.91721, 0.858512, 0.486946, -0.51602, 1.23266, -1.75961, 1.16818, 0.858512, -1.57228, -1.26468, 1.045, 1.42289, -0.703275, 9.09439, -0.261674, 0.419526, 7.40898, -0.823313, -1.45193, 1.045, -1.19762, 0.0453811, 11.5269, 0.673927, 1.54269, 2.54275, -0.635984, 1.16818, 1.41914, 1.42289, -1.82644, 1.41914, 0.673927, -0.51602, 0.858512, 1.79755, 0.419526, -0.0786095, 0.299617, -0.141508, 2.35626, -1.75961, -1.63919, 2.54275, -0.635984, 0.23227, 10.5921, 0.112288, -0.51602, 10.5921, -0.0743449, -1.07742, 0.858512, -1.57228, 1.91721, 1.045, 0.673927, 0.419526, -0.0786095, -0.449003, -0.328764, -0.0786095, 0.486946, 0.980927, 4.0405, -1.19762, -0.328764, 9.28205, -0.449003, 0.23227, 2.35626, -1.75961, 0.0453811, 1.6068, 1.79755, -1.07742, 1.23266, -1.57228, -0.51602, 10.9651, 0.299617, 0.0453811, 10.7798, -0.0743449)
+
 [node name="Main" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_0wkb3")
@@ -424,6 +428,21 @@ transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 
 
 [node name="Fish" parent="Fishing" instance=ExtResource("16_0iknb")]
 transform = Transform3D(0.102128, 0.142949, -0.984447, 0.993327, -0.0679778, 0.0931779, -0.0536008, -0.987393, -0.148938, -3.94829, 1.52375, -4.81116)
+
+[node name="Dragonfly" parent="Fishing" instance=ExtResource("42_lcci2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6287, 4.42691, 11.112)
+
+[node name="Dragonfly4" parent="Fishing" instance=ExtResource("42_lcci2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0279, 0.800877, 7.65154)
+
+[node name="Dragonfly3" parent="Fishing" instance=ExtResource("42_lcci2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.461, 2.76877, -2.20121)
+
+[node name="Dragonfly2" parent="Fishing" instance=ExtResource("42_lcci2")]
+transform = Transform3D(0.125091, 0, -0.992145, 0, 1, 0, 0.992145, 0, 0.125091, 22.9643, 0.219542, 10.571)
+
+[node name="Dragonfly5" parent="Fishing" instance=ExtResource("42_lcci2")]
+transform = Transform3D(0.125091, 0, -0.992145, 0, 1, 0, 0.992145, 0, 0.125091, 23.8542, 2.29363, 3.094)
 
 [node name="FishingRod" parent="." instance=ExtResource("18_ap21l")]
 transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.9292, 0.806023, 8.08755)
@@ -864,12 +883,6 @@ lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
-[node name="_MeshInstance3D_41421" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(-0.0855541, 0.0597994, 1.53843, -0.113235, 1.53639, -0.0660171, -1.53542, -0.116638, -0.0808531, -10.3123, 1.59484, 14.0512)
-lod_bias = 0.001
-mesh = ExtResource("30_4omla")
-skeleton = NodePath("../../instances2")
-
 [node name="_MeshInstance3D_41422" type="MeshInstance3D" parent="Trees"]
 transform = Transform3D(-1.56653, -0.0114277, 0.373882, 0.00206104, 1.60953, 0.0578307, -0.374051, 0.0567278, -1.5655, -4.2392, -1.6069, 26.6346)
 lod_bias = 0.001
@@ -973,13 +986,13 @@ mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_43923" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(-1.75323, 0.0970663, 0.23668, 0.0989956, 1.76901, 0.00782011, -0.235879, 0.0209622, -1.7559, 11.4673, 0.988307, -8.16893)
+transform = Transform3D(-1.75323, 0.0970663, 0.23668, 0.0989956, 1.76901, 0.00782011, -0.235879, 0.0209622, -1.7559, 12.1268, 1.17657, -10.1604)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_43924" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(1.09548, -0.110219, -1.65687, 0.0238047, 1.98578, -0.11636, 1.66036, 0.0442503, 1.09484, 4.45066, 2.04967, -11.0422)
+transform = Transform3D(1.09548, -0.110219, -1.65687, 0.0238047, 1.98578, -0.11636, 1.66036, 0.0442503, 1.09484, 6.45124, 2.04967, -11.0422)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
@@ -1027,7 +1040,7 @@ mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_44553" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(1.263, 0.0152099, 1.49058, 0.0415364, 1.95256, -0.0551185, -1.49008, 0.06732, 1.26189, 10.7678, -0.0059846, -4.88496)
+transform = Transform3D(1.263, 0.0152099, 1.49058, 0.0415364, 1.95256, -0.0551185, -1.49008, 0.06732, 1.26189, 10.77, -0.0059846, -6.42388)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
@@ -1177,7 +1190,7 @@ mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_45820" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(-1.94916, 0, -1.23108, 0, 1.56753, 0, 1.92277, 0, -1.24798, -11.4862, 0.460702, 15.7231)
+transform = Transform3D(-2.73134, 0, 0.121599, 0, 1.56753, 0, -0.189916, 0, -1.74878, -11.4862, 0.460702, 15.7231)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
@@ -1249,7 +1262,7 @@ mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_47378" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(-0.220309, 0.0614014, -1.93911, 0.0620883, 1.9508, 0.0547173, 1.93909, -0.0554871, -0.222063, -9.87417, 0.725259, -0.707677)
+transform = Transform3D(0.23716, 0.0361576, -1.55821, 0.0501325, 1.57515, 0.0441809, 1.55782, -0.0561948, 0.235797, -9.87417, 0.725259, -0.343275)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
@@ -1841,7 +1854,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.32527, 0.585384, 6.30085)
 transform = Transform3D(0.768412, 0.603639, 0.212519, -0.61775, 0.786375, 0, -0.167119, -0.131283, 0.977157, -15.7065, 2.33476, 9.63661)
 
 [node name="Map_Borders" type="StaticBody3D" parent="Clutter"]
-visible = false
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Clutter/Map_Borders"]
 transform = Transform3D(-0.510364, -0.013019, 1.48912, -0.0648142, 1.57284, -0.00846268, -1.48776, -0.0640547, -0.510459, -1.31896, 0.104818, 7.04092)
@@ -1862,5 +1874,9 @@ shape = SubResource("ConvexPolygonShape3D_q4oge")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Clutter/Map_Borders"]
 transform = Transform3D(-1.64464, 0.0439734, 0.700009, 0.0757838, 1.78513, 0.0659114, -0.697283, 0.0902986, -1.64391, 3.2749, -0.276617, 5.20941)
 shape = SubResource("ConvexPolygonShape3D_h7ysq")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Clutter/Map_Borders"]
+transform = Transform3D(1.263, 0.0152099, 1.49058, 0.0415364, 1.95256, -0.0551185, -1.49008, 0.06732, 1.26189, 10.77, -0.0059846, -6.42388)
+shape = SubResource("ConvexPolygonShape3D_s3h5u")
 
 [editable path="Campfire2"]
