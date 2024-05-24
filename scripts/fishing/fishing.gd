@@ -55,13 +55,13 @@ var fishing_in_progress: bool = false
 @onready var distraction_timer: Timer = get_node("DistractionTimer");
 
 ## The fishing rod container.
-@onready var fishing_rod: FishingRod = get_node("/root/Staging/Scene/Main/FishingRod/FishingRod")
+@onready var fishing_rod: FishingRod = get_node("../../FishingRod/FishingRod")
 
 ## The fishing float.
-@onready var fishing_float: FishingFloat = get_node("/root/Staging/Scene/Main/FishingRod/FishingFloat")
+@onready var fishing_float: FishingFloat = get_node("../../FishingRod/FishingFloat")
 
 ## The player (needed to target the fish).
-@onready var player: XROrigin3D = get_node("/root/Staging/Scene/Main/XROrigin3D")
+@onready var player: XROrigin3D = get_node("../../XROrigin3D")
 
 @onready var water_mesh: MeshInstance3D = get_node("../")
 

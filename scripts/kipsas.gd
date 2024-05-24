@@ -1,6 +1,6 @@
 extends Node3D
 # Variables to control circular motion
-var radius = 4  # Radius of the circular path
+var radius = 2  # Radius of the circular path
 var speed = 1.0   # Speed of movement
 # Variables to track circular motion
 var angle = 0.0   # Current angle
@@ -14,7 +14,7 @@ var tent_instance = null
 var kipsas_collision = null
 
 func _ready():
-	var puntukas = get_node("/root/Staging/Scene/Main/Puntukas")
+	var puntukas = get_node("/root/Staging/Scene/Main/Combat/Puntukass")
 	puntukas.kipsas_toggle_movement.connect(_on_Bezdukas_toggle_movement)
 	kipsas_collision = get_node("Cube/BezdukasDissapearingBody/CollisionShape3D")
 		# Store the initial position of the node

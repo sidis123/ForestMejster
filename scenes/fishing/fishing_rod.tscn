@@ -75,11 +75,11 @@ closed_pose = ExtResource("5_lecea")
 script = ExtResource("6_0ucvv")
 closed_pose = ExtResource("8_3q68x")
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_kpn3o"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_1u14h"]
 material = ExtResource("13_ahgwm")
 top_radius = 0.001
 bottom_radius = 0.001
-height = 1.0
+height = 0.096655
 
 [node name="Container" type="Node3D"]
 
@@ -135,7 +135,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0537452, -0.932214)
 [node name="Line" parent="FishingRod" node_paths=PackedStringArray("start_point", "end_point") instance=ExtResource("12_1hf0y")]
 transform = Transform3D(1, 0, 0, 0, 0.995849, -0.0908993, 0, 0.0908993, 0.995849, 0, -0.101873, -0.936607)
 top_level = true
-mesh = SubResource("CylinderMesh_kpn3o")
+mesh = SubResource("CylinderMesh_1u14h")
 skeleton = NodePath("../..")
 radius = 0.001
 material = ExtResource("13_ahgwm")
