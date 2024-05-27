@@ -36,11 +36,11 @@
 [ext_resource type="LightmapGIData" uid="uid://dnqt8gneyb7xw" path="res://baking/main.lmbake" id="37_pkovv"]
 [ext_resource type="PackedScene" uid="uid://dl0cfseyaqjnb" path="res://models/nature/rocks/Rock_table.glb" id="39_waqj3"]
 [ext_resource type="AudioStream" uid="uid://dmgmim828cyrk" path="res://Audio/testFire.mp3" id="41_36ag6"]
-[ext_resource type="PackedScene" path="res://scenes/puntukass.tscn" id="42_e20bc"]
+[ext_resource type="PackedScene" uid="uid://gcllbgl1kvjo" path="res://scenes/puntukass.tscn" id="42_e20bc"]
 [ext_resource type="AudioStream" uid="uid://m308xudgckly" path="res://Audio/Forestmejster_backing_track.mp3" id="42_krcic"]
 [ext_resource type="PackedScene" uid="uid://bc04w1qogmn4t" path="res://scenes/dragonfly.tscn" id="42_lcci2"]
 [ext_resource type="AudioStream" uid="uid://p4wp17ln30qd" path="res://Audio/birdsTest.mp3" id="43_67go0"]
-[ext_resource type="PackedScene" path="res://scenes/kipsas.tscn" id="43_qvl1d"]
+[ext_resource type="PackedScene" uid="uid://ck6ejwcuacjby" path="res://scenes/kipsas.tscn" id="43_qvl1d"]
 [ext_resource type="PackedScene" uid="uid://bkj6ty5kdth1w" path="res://scenes/quiver.tscn" id="44_nghe1"]
 
 [sub_resource type="QuadOccluder3D" id="QuadOccluder3D_2rw52"]
