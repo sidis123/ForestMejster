@@ -35,8 +35,8 @@
 [ext_resource type="Script" path="res://scenes/path.gd" id="35_tn4ue"]
 [ext_resource type="PackedScene" uid="uid://dqvf6q0mr7t3r" path="res://models/nature/bushes/bush_big.glb" id="37_glhvr"]
 [ext_resource type="LightmapGIData" uid="uid://dnqt8gneyb7xw" path="res://baking/main.lmbake" id="37_pkovv"]
+[ext_resource type="PackedScene" uid="uid://bg5ho2o5jcc5d" path="res://scenes/final_Bezdukas.tscn" id="39_bk6hs"]
 [ext_resource type="PackedScene" uid="uid://dl0cfseyaqjnb" path="res://models/nature/rocks/Rock_table.glb" id="39_waqj3"]
-[ext_resource type="PackedScene" uid="uid://bfkad5vcvyxuw" path="res://scenes/temp_bezdukas_walking.tscn" id="40_mhxtj"]
 [ext_resource type="AudioStream" uid="uid://dmgmim828cyrk" path="res://Audio/testFire.mp3" id="41_36ag6"]
 [ext_resource type="PackedScene" uid="uid://gcllbgl1kvjo" path="res://scenes/puntukass.tscn" id="42_e20bc"]
 [ext_resource type="AudioStream" uid="uid://m308xudgckly" path="res://Audio/Forestmejster_backing_track.mp3" id="42_krcic"]
@@ -1869,24 +1869,24 @@ curve = SubResource("Curve3D_d5pxh")
 [node name="PathFollow3D" type="PathFollow3D" parent="Combat/Path3D"]
 transform = Transform3D(-0.861767, -0.025265, -0.50666, 0, 0.998752, -0.0498038, 0.507287, -0.0429195, -0.860701, -4.52619, 0.479301, 7.57836)
 
-[node name="Bezdukas1" parent="Combat/Path3D/PathFollow3D" instance=ExtResource("40_mhxtj")]
-transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0, 0, 0)
+[node name="bezdukas" parent="Combat/Path3D/PathFollow3D" instance=ExtResource("39_bk6hs")]
+transform = Transform3D(0.645, 0, 0, 0, 0.645, 4.14278e-09, 0, -4.14278e-09, 0.645, 0, -0.0510688, 0.00254631)
 
 [node name="Path3D2" type="Path3D" parent="Combat"]
 curve = SubResource("Curve3D_d1bjj")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Combat/Path3D2"]
-transform = Transform3D(0.402495, 0.0345836, 0.914747, -0.0514195, 0.998558, -0.0151267, -0.913971, -0.0409484, 0.403689, -6.68579, 0.458003, 7.30124)
+transform = Transform3D(0.402495, 0.0345836, 0.914747, -0.0514195, 0.998558, -0.0151267, -0.913971, -0.0409484, 0.403688, -6.68579, 0.458003, 7.30124)
 progress = 4.97762
 
-[node name="Bezdukas2" parent="Combat/Path3D2/PathFollow3D" instance=ExtResource("40_mhxtj")]
-transform = Transform3D(0.205, 9.31323e-10, -7.45058e-09, 4.65661e-10, 0.205, -9.31323e-09, 9.68575e-08, 1.11759e-08, 0.205, 0.243405, -0.197478, -0.0559425)
+[node name="bezdukas" parent="Combat/Path3D2/PathFollow3D" instance=ExtResource("39_bk6hs")]
+transform = Transform3D(0.645, 0, 0, 0, 0.645, 4.14278e-09, 0, -4.14278e-09, 0.645, 0, -0.0510688, 0.00254631)
 
 [node name="Path3D3" type="Path3D" parent="Combat"]
 curve = SubResource("Curve3D_oq0cm")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Combat/Path3D3"]
-transform = Transform3D(-0.68611, -0.0195524, -0.727234, 0.000423707, 0.999625, -0.0272758, 0.727496, -0.0190223, -0.685847, -6.71668, 0.476368, 8.3103)
+transform = Transform3D(-0.68611, -0.0195524, -0.727234, 0.000423707, 0.999624, -0.0272758, 0.727496, -0.0190223, -0.685847, -6.71668, 0.476368, 8.3103)
 progress = 2.58736
 
 [node name="kipsas4" parent="Combat/Path3D3/PathFollow3D" instance=ExtResource("43_qvl1d")]
@@ -1906,7 +1906,7 @@ transform = Transform3D(-1.56805, -1.86265e-09, 0.231186, 1.49012e-08, 1.585, 5.
 curve = SubResource("Curve3D_lv1rs")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Combat/Path3D5"]
-transform = Transform3D(0.290639, 0.039984, 0.955995, -0.202115, 0.979142, 0.0204941, -0.93524, -0.199177, 0.292659, -6.03183, 0.432114, 7.65736)
+transform = Transform3D(0.290639, 0.039984, 0.955994, -0.202115, 0.979142, 0.0204941, -0.93524, -0.199177, 0.292659, -6.03183, 0.432114, 7.65736)
 progress = 25.3485
 
 [node name="kipsas4" parent="Combat/Path3D5/PathFollow3D" instance=ExtResource("43_qvl1d")]

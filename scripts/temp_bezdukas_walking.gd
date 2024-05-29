@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 	var puntukas = get_node("/root/Staging/Scene/Main/Combat/Puntukass")
 	puntukas.kipsas_toggle_movement.connect(_on_Bezdukas_toggle_movement)
-	kipsas_collision = get_node("BezdukasArmature/Skeleton3D/Bezdukas7Rigged/BezdukasNotDissapearingBody/CollisionShape3D")
+	kipsas_collision = get_node("BezdukasArmature/Skeleton3D/BezdukasMesh/BezdukasNotDissapearingBody/CollisionShape3D")
 
 # Called when the movement state is toggled.
 func _on_Bezdukas_toggle_movement():
