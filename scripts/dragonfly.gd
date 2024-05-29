@@ -1,8 +1,9 @@
-extends RigidBody3D
+class_name Dragonfly
+extends Node3D
 
-var speed = 6
-var maxDistance = 6.0
-var minDepth = 0.22
+@export var speed = 6
+@export var maxDistance = 6.0
+@export var minDepth = 0.22
 var direction = Vector3(1, 0, 0)
 var traveledDistance = 0.0
 
@@ -17,7 +18,3 @@ func _process(delta):
 
 	if global_transform.origin.y <= minDepth:
 		global_transform.origin.y = minDepth
-	
-	if$AudioStreamPlayer3D.playing == false:
-		$AudioStreamPlayer3D.play()
-		
