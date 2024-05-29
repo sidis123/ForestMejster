@@ -6,7 +6,7 @@ var path_follow2: PathFollow3D
 var path_follow3: PathFollow3D
 var path_follow4: PathFollow3D
 var path_follow5: PathFollow3D
-var move_speed: float = 3.0
+var move_speed: float = 1
 var is_movement_enabled: bool = true
 
 # Called when the node enters the scene tree for the first time.
