@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 	var puntukas = get_node("/root/Staging/Scene/Main/Combat/Puntukass")
 	puntukas.kipsas_toggle_movement.connect(_on_Bezdukas_toggle_movement)
-	kipsas_collision = get_node("KipsasArmature/Skeleton3D/KipsasMesh/BezdukasDissapearingBody/CollisionShape3D")
+	kipsas_collision = get_node("BezdukasArmature/Skeleton3D/BezdukasMesh/BezdukasNotDissapearingBody/CollisionShape3D")
 
 # Called when the movement state is toggled.
 func _on_Bezdukas_toggle_movement():
@@ -40,16 +40,14 @@ func _on_Bezdukas_toggle_movement():
 		#animation_player.play("[stop]")
 	else:
 		# Remove the Tent node from the scene
-		if is_instance_valid(kipsas_collision):
-			if tent_instance:
-				tent_instance.queue_free()
+		if tent_instance:
+			tent_instance.queue_free()
 		# Restore position
-			self.global_transform.origin = initial_position
-			self.visible = true
-			if is_instance_valid(kipsas_collision):
-				kipsas_collision.disabled = false
+		self.global_transform.origin = initial_position
+		self.visible = true
+		kipsas_collision.disabled = false
 		# Play walking animation when moving
-			animation_player.play("Walking")
+		animation_player.play("Walking")
 
 func _physics_process(delta: float) -> void:
 	if is_moving and animation_player.current_animation != "Walking":
