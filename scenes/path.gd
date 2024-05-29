@@ -29,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	if is_movement_enabled and path_follow != null and path_follow.visible:  # Only move if enabled and visible
 		path_follow.progress -= move_speed * delta
 		path_follow1.progress -= move_speed * delta
-		path_follow2.progress -= move_speed * delta
-		path_follow3.progress -= move_speed * delta
-		path_follow4.progress -= move_speed * delta
-		path_follow5.progress -= move_speed * delta
+		path_follow2.progress += move_speed * delta
+		path_follow3.progress += move_speed * delta
+		path_follow4.progress += move_speed * delta
+		path_follow5.progress += move_speed * delta
 # Called when the movement state is toggled.
 func _on_Bezdukas_toggle_movement():
 	is_movement_enabled = !is_movement_enabled
