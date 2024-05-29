@@ -1906,7 +1906,7 @@ transform = Transform3D(-0.562068, -0.043164, 0.233059, -0.0432735, 0.608406, 0.
 curve = SubResource("Curve3D_lv1rs")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Combat/Path3D5"]
-transform = Transform3D(0.290639, 0.039984, 0.955994, -0.202115, 0.979141, 0.0204941, -0.93524, -0.199177, 0.292659, -6.03183, 0.432114, 7.65736)
+transform = Transform3D(0.290639, 0.039984, 0.955994, -0.202115, 0.979141, 0.020494, -0.93524, -0.199177, 0.292659, -6.03183, 0.432114, 7.65736)
 progress = 25.3485
 
 [node name="kipsas final" parent="Combat/Path3D5/PathFollow3D" instance=ExtResource("40_wa0sj")]
