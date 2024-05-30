@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=79 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -46,6 +46,8 @@
 [ext_resource type="PackedScene" uid="uid://bsmyjjetapi4p" path="res://scenes/combat/creature.tscn" id="43_2bcqx"]
 [ext_resource type="AudioStream" uid="uid://p4wp17ln30qd" path="res://Audio/birdsTest.mp3" id="43_67go0"]
 [ext_resource type="PackedScene" uid="uid://bkj6ty5kdth1w" path="res://scenes/quiver.tscn" id="44_nghe1"]
+[ext_resource type="PackedScene" uid="uid://gvyk1si63evv" path="res://scenes/flowers.tscn" id="47_kirqo"]
+[ext_resource type="PackedScene" uid="uid://b2wwpdu2ao0np" path="res://scenes/bushes2.tscn" id="48_1ny86"]
 
 [sub_resource type="QuadOccluder3D" id="QuadOccluder3D_2rw52"]
 size = Vector2(205.386, 80.7806)
@@ -1959,5 +1961,9 @@ transform = Transform3D(0.33, 0, 0, 0, 0.00987624, 0.329852, 0, -0.329852, 0.009
 
 [node name="Rock_small_v10" parent="Clutter" instance=ExtResource("34_jwjut")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -5.68596, 0.487846, 11.148)
+
+[node name="Flowers" parent="." instance=ExtResource("47_kirqo")]
+
+[node name="Bushes" parent="." instance=ExtResource("48_1ny86")]
 
 [editable path="Campfire2"]
