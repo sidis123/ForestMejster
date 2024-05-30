@@ -395,7 +395,7 @@ transform = Transform3D(-1.21918, 0, -0.443855, 0, 1, 0, 0.490106, 0, -1.10413, 
 [node name="Fishing" type="Node" parent="."]
 
 [node name="holding_stick" parent="Fishing" instance=ExtResource("25_70mbh")]
-transform = Transform3D(-0.507218, 0, 1.08753, 0, 1.2, 0, -1.08753, 0, -0.507218, 19.2952, 0.178752, 8.45364)
+transform = Transform3D(-0.634024, 0, 1.35942, 0, 1.5, 0, -1.35942, 0, -0.634024, 18.7515, 0.178752, 8.37013)
 
 [node name="Fish_mock2" parent="Fishing" instance=ExtResource("14_h3ydf")]
 transform = Transform3D(0.676658, 0, 0.736298, 0, 1, 0, -0.736298, 0, 0.676658, 32.4772, -4.56082, 25.2337)
@@ -443,7 +443,7 @@ transform = Transform3D(0.125091, 0, -0.992145, 0, 1, 0, 0.992145, 0, 0.125091, 
 transform = Transform3D(-0.137841, 0, 0.0812398, 0, 0.16, 0, -0.0812398, 0, -0.137841, 16.472, -0.846111, 3.36842)
 
 [node name="FishingRod" parent="." instance=ExtResource("18_ap21l")]
-transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.9292, 0.806023, 8.08755)
+transform = Transform3D(-0.915531, -0.0327862, -0.400908, 0.208503, 0.813645, -0.542686, 0.343991, -0.580438, -0.738082, 18.4199, 0.748272, 7.76648)
 
 [node name="XROrigin3D" parent="." instance=ExtResource("1_e77tj")]
 transform = Transform3D(0.563786, 0, 0.825921, 0, 1, 0, -0.825921, 0, 0.563786, 0.420892, 0.832159, 1.23314)
