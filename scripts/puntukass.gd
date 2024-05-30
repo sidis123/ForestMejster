@@ -1,6 +1,6 @@
 extends Node3D
 
-signal kipsas_toggle_movement
+signal toggle_creature_movement
 
 var time_accumulator = 0.0
 var interval = 5.0
@@ -13,7 +13,7 @@ var puntukas_position = Vector3(-3.622, 0.812, 16.042)  # Replace with the actua
 func _process(delta):
 	time_accumulator += delta
 	if time_accumulator >= interval:
-		emit_signal("kipsas_toggle_movement")
+		toggle_creature_movement.emit()
 		degam = !degam
 		time_accumulator = 0.0
 	
