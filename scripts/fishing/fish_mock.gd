@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+@onready var water : MeshInstance3D = get_node("/root/Staging/Scene/Main/Water")
+
 var speed = 1.5
 var maxDistance = 7.0
 var minDepth = -5
@@ -18,3 +20,6 @@ func _process(delta):
 
 	if global_transform.origin.y <= minDepth:
 		global_transform.origin.y = minDepth
+		
+	if global_position.y >= water.global_position.y:
+		global_position.y = water.global_position.y

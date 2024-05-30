@@ -67,7 +67,11 @@ var fishing_in_progress: bool = false
 
 @onready var water_shader: ShaderMaterial
 
-@onready var distraction_fish: DistractionFish = get_node("DistractionFish")
+@onready var distraction_kuoja: DistractionFish = get_node("DistractionKuoja")
+
+@onready var distraction_raude: DistractionFish = get_node("DistractionRaude")
+
+@onready var distraction_lynas: DistractionFish = get_node("DistractionLynas")
 
 @onready var distraction_wind: DistractionWind = get_node("DistractionWind")
 
@@ -87,8 +91,12 @@ func _ready():
 	if water_mesh:
 		water_shader = water_mesh.get_surface_override_material(0)
 	
-	if distraction_fish:
-		distractions.append(distraction_fish)
+	if distraction_kuoja:
+		distractions.append(distraction_kuoja)
+	if distraction_raude:
+		distractions.append(distraction_raude)
+	if distraction_lynas:
+		distractions.append(distraction_lynas)
 	if distraction_wind:
 		distractions.append(distraction_wind)
 		
