@@ -5,7 +5,8 @@
 [sub_resource type="Curve3D" id="Curve3D_2omr6"]
 
 [sub_resource type="Gradient" id="Gradient_d1bre"]
-colors = PackedColorArray(0.270222, 0.270222, 0.270222, 1, 0.856067, 0.856067, 0.856067, 1)
+offsets = PackedFloat32Array(0.156627, 0.626506)
+colors = PackedColorArray(0.147672, 0.147672, 0.147672, 1, 0.609331, 0.60933, 0.60933, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_irvfp"]
 gradient = SubResource("Gradient_d1bre")
@@ -14,11 +15,11 @@ gradient = SubResource("Gradient_d1bre")
 lifetime_randomness = 0.2
 emission_shape_offset = Vector3(0, -0.2, 0)
 emission_shape = 1
-emission_sphere_radius = 0.01
+emission_sphere_radius = 0.8
 direction = Vector3(0, 1, 0)
-spread = 30.0
-initial_velocity_min = 14.0
-initial_velocity_max = 16.0
+spread = 20.0
+initial_velocity_min = 12.0
+initial_velocity_max = 14.0
 damping_min = 2.0
 damping_max = 3.0
 scale_max = 1.2
@@ -43,10 +44,9 @@ curve = SubResource("Curve3D_2omr6")
 [node name="CreatureContainer" type="Node3D" parent="MovementPath/PathFollow3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MovementPath/PathFollow3D/CreatureContainer"]
-visible = false
 emitting = false
 amount = 10
-lifetime = 0.5
+lifetime = 0.4
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_yea6j")

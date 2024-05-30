@@ -1858,7 +1858,7 @@ autoplay = true
 transform = Transform3D(-0.964617, 0, -0.263654, 0, 1, 0, 0.263654, 0, -0.964617, -3.62221, 0.811652, 16.0418)
 
 [node name="Quiver" parent="Combat" instance=ExtResource("44_nghe1")]
-transform = Transform3D(0.975296, 0, -0.220901, 0, 1, 0, 0.220901, 0, 0.975296, 0.178856, 0.619671, -5.92659)
+transform = Transform3D(0.975296, 0, -0.220901, 0, 1, 0, 0.220901, 0, 0.975296, -5.87977, 0.469176, 5.5495)
 
 [node name="Bow" parent="Combat" instance=ExtResource("22_6ivd3")]
 transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.22441, 1.43331, -5.83129)

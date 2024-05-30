@@ -31,13 +31,14 @@ extends Node3D
 # Variables contained in this scene
 @onready var creature_container : Node3D = get_node("MovementPath/PathFollow3D/CreatureContainer")
 
-#@onready var particles = get_node("MovementPath/PathFollow3D/CreatureContainer/GPUParticles3D")
+@onready var particles = get_node("MovementPath/PathFollow3D/CreatureContainer/GPUParticles3D")
 
 @onready var path_follow = get_node("MovementPath/PathFollow3D")
 
 # Vriables contained in the creature scene
 @onready var animation_player: AnimationPlayer
 
+var is_dead : bool = false
 var is_moving : bool = false
 var creature : Node3D
 var object : Node3D
@@ -63,8 +64,8 @@ func _ready() -> void:
 	creature.scale = creature_scale
 	creature_container.add_child(creature)
 	
-	var creature_hitbox : CreatureHitbox = creature.get_node("StaticBody3D")
-	if !creature_hitbox or creature_hitbox == null:
+	var creature_hitbox = creature.get_node("StaticBody3D")
+	if not creature_hitbox or creature_hitbox == null or not creature_hitbox is CreatureHitbox:
 		push_warning("A hitbox for the creature should be provided")
 	else:
 		creature_hitbox.hit_by_arrow.connect(_on_hit)
@@ -100,14 +101,19 @@ func _ready() -> void:
 	is_moving = true
 
 func _physics_process(delta: float) -> void:
-	if is_moving:
+	if not is_dead and is_moving:
 		path_follow.progress -= move_speed * delta
+	if is_dead and particles.emitting == false:
+		queue_free()
 
 ## Called when the movement state is toggled
 func _on_toggle_movement():
+	if is_dead:
+		return
+	
 	is_moving = !is_moving  # Toggle the movement state
 	
-	#particles.emitting = true # emit the particles
+	particles.emitting = true # emit the particles
 	
 	if !is_moving:
 		# Pause the walking animation
@@ -137,4 +143,7 @@ func _set_animation_playback_speed(new_value : float):
 
 func _on_hit():
 	# Just despawn everythig when hit
-	queue_free()
+	particles.emitting = true
+	is_dead = true
+	creature.queue_free()
+	object.queue_free()
