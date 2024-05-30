@@ -1,29 +1,24 @@
-[gd_scene load_steps=81 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=76 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
-[ext_resource type="PackedScene" uid="uid://bdmtj8pyblxl5" path="res://scenes/pickable_cube.tscn" id="3_5rs3s"]
 [ext_resource type="Environment" uid="uid://edotw462mqao" path="res://resources/environment.tres" id="3_uue1d"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="3_x6jvw"]
 [ext_resource type="PackedScene" uid="uid://b5gug5ecibfou" path="res://scenes/pause_menu.tscn" id="4_s7kne"]
-[ext_resource type="PackedScene" uid="uid://b340ibw6xj170" path="res://scenes/dock.tscn" id="5_2qenr"]
 [ext_resource type="Shader" path="res://shaders/Low_poly_water.gdshader" id="6_65b7g"]
 [ext_resource type="PackedScene" uid="uid://ca0ohfqspp2pg" path="res://scenes/fishing/fishing_water.tscn" id="8_mty1l"]
 [ext_resource type="PackedScene" uid="uid://qat0jalvcswc" path="res://scenes/tent.tscn" id="8_tg55q"]
 [ext_resource type="PackedScene" uid="uid://0rctt4pnv5n2" path="res://scenes/tutorial.tscn" id="10_rt4mo"]
 [ext_resource type="PackedScene" uid="uid://482xli6khdjt" path="res://scenes/fishing/bucket.tscn" id="10_ym32v"]
 [ext_resource type="PackedScene" uid="uid://coi25buc88g6d" path="res://scenes/fishing/fish_mock.tscn" id="14_h3ydf"]
-[ext_resource type="PackedScene" uid="uid://cyj6ve2el24kr" path="res://scenes/fishing/fish.tscn" id="16_0iknb"]
 [ext_resource type="PackedScene" uid="uid://h2oii34vo11w" path="res://scenes/wood.tscn" id="16_20otq"]
 [ext_resource type="PackedScene" uid="uid://bcoan783pbvdq" path="res://scenes/fishing/fishing_rod.tscn" id="18_ap21l"]
+[ext_resource type="PackedScene" uid="uid://d1df0epcleg23" path="res://scenes/fishing/dock.tscn" id="18_r5c2f"]
 [ext_resource type="PackedScene" uid="uid://cxrkhelrxrmfk" path="res://scenes/wokas.tscn" id="19_qtg8e"]
 [ext_resource type="PackedScene" uid="uid://ba037obqitk4x" path="res://scenes/steak.tscn" id="20_j76k0"]
 [ext_resource type="PackedScene" uid="uid://baqn44ngm0jv1" path="res://scenes/bow.tscn" id="22_6ivd3"]
 [ext_resource type="PackedScene" uid="uid://y3a42o7ap8gf" path="res://models/fishing/holding_stick.glb" id="25_70mbh"]
 [ext_resource type="ArrayOccluder3D" uid="uid://butpll6j410pf" path="res://baking/main.occ" id="27_0bpkh"]
-[ext_resource type="PackedScene" uid="uid://b562tmnadvtpm" path="res://scenes/fishing/fishes/raude.tscn" id="27_75el0"]
-[ext_resource type="PackedScene" uid="uid://cx3om4goiitmd" path="res://scenes/fishing/fishes/lynas.tscn" id="28_p4c3x"]
-[ext_resource type="PackedScene" uid="uid://ct2g57qsopix7" path="res://scenes/fishing/fishes/kuoja.tscn" id="29_b1q8n"]
 [ext_resource type="ArrayMesh" uid="uid://b6yqjvidi8vai" path="res://resources/fir_3_LOD0.mesh" id="30_4omla"]
 [ext_resource type="PackedScene" uid="uid://bp5tb8du3d72d" path="res://scenes/campfire_v2.tscn" id="30_8ne4e"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cywsm2vxwaog6" path="res://baking/trees.occ" id="31_3dcog"]
@@ -387,18 +382,6 @@ directional_shadow_mode = 0
 
 [node name="Tutorial" type="Node" parent="."]
 
-[node name="PickableCube0" parent="Tutorial" instance=ExtResource("3_5rs3s")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -2.11094, 1.47727, -5.2127)
-ranged_grab_method = 2
-
-[node name="PickableCube1" parent="Tutorial" instance=ExtResource("3_5rs3s")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -2.36055, 1.48106, -5.27949)
-ranged_grab_method = 2
-
-[node name="PickableCube2" parent="Tutorial" groups=["fire_wood"] instance=ExtResource("3_5rs3s")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.91187, 1.46599, -5.51839)
-ranged_grab_method = 2
-
 [node name="TutorialViewport" parent="Tutorial" instance=ExtResource("3_x6jvw")]
 transform = Transform3D(0.939615, 0, 0.342234, 0, 1, 0, -0.342234, 0, 0.939615, -2.37178, 2.76162, -5.86571)
 screen_size = Vector2(4, 2)
@@ -441,21 +424,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4086, -3.951, 15.2789)
 [node name="Bucket" parent="Fishing" instance=ExtResource("10_ym32v")]
 transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 19.7135, 0.540002, 6.17818)
 
-[node name="Dock" parent="Fishing" instance=ExtResource("5_2qenr")]
-transform = Transform3D(-0.96202, 0, -1.17897, 0, 1.52166, 0, 1.17897, 0, -0.96202, 13.8459, 0.236316, 2.87496)
-
-[node name="Raude" parent="Fishing" instance=ExtResource("27_75el0")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.6907, 0.430009, 8.44339)
-
-[node name="Lynas" parent="Fishing" instance=ExtResource("28_p4c3x")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 17.4111, 0.450616, 8.62984)
-
-[node name="Kuoja" parent="Fishing" instance=ExtResource("29_b1q8n")]
-transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 16.9901, 0.394965, 8.69161)
-
-[node name="Fish" parent="Fishing" instance=ExtResource("16_0iknb")]
-transform = Transform3D(0.102128, 0.142949, -0.984447, 0.993327, -0.0679778, 0.0931779, -0.0536008, -0.987393, -0.148938, -3.94829, 1.52375, -4.81116)
-
 [node name="Dragonfly" parent="Fishing" instance=ExtResource("42_lcci2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6287, 4.42691, 11.112)
 
@@ -470,6 +438,9 @@ transform = Transform3D(0.125091, 0, -0.992145, 0, 1, 0, 0.992145, 0, 0.125091, 
 
 [node name="Dragonfly5" parent="Fishing" instance=ExtResource("42_lcci2")]
 transform = Transform3D(0.125091, 0, -0.992145, 0, 1, 0, 0.992145, 0, 0.125091, 23.8542, 2.29363, 3.094)
+
+[node name="Dock" parent="Fishing" instance=ExtResource("18_r5c2f")]
+transform = Transform3D(-0.137841, 0, 0.0812398, 0, 0.16, 0, -0.0812398, 0, -0.137841, 16.472, -0.846111, 3.36842)
 
 [node name="FishingRod" parent="." instance=ExtResource("18_ap21l")]
 transform = Transform3D(-0.75208, -0.202545, -0.627176, 0.145399, 0.877171, -0.457635, 0.642833, -0.43537, -0.630254, 18.9292, 0.806023, 8.08755)
@@ -1843,7 +1814,7 @@ transform = Transform3D(-0.964617, 0, -0.263654, 0, 1, 0, 0.263654, 0, -0.964617
 transform = Transform3D(0.975296, 0, -0.220901, 0, 1, 0, 0.220901, 0, 0.975296, -5.87977, 0.469176, 5.5495)
 
 [node name="Bow" parent="Combat" instance=ExtResource("22_6ivd3")]
-transform = Transform3D(0.952353, 0, 0.304997, 0, 1, 0, -0.304997, 0, 0.952353, -1.22441, 1.43331, -5.83129)
+transform = Transform3D(0.870913, 0, -0.491436, 0, 1, 0, 0.491436, 0, 0.870913, -2.24175, 1.43331, -5.5218)
 
 [node name="Creatures" type="Node" parent="Combat"]
 

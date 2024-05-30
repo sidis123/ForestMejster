@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b562tmnadvtpm" path="res://scenes/fishing/fishes/raude.tscn" id="10_ykq3w"]
 [ext_resource type="Script" path="res://scripts/fishing/bucket_dispenser.gd" id="11_m0lc8"]
 [ext_resource type="Texture2D" uid="uid://dhsl6v35xtvtg" path="res://models/fishing/bucket_WaterColor.jpg" id="13_ak2s1"]
-[ext_resource type="Material" uid="uid://dpw3deidqw7yx" path="res://resources/water_particles.tres" id="15_ktd27"]
+[ext_resource type="Material" uid="uid://cbrnqu12cdpor" path="res://resources/water_particles.tres" id="15_ktd27"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v43pv"]
 margin = 0.01
@@ -227,27 +227,33 @@ mesh = SubResource("ArrayMesh_1hall")
 skeleton = NodePath("")
 
 [node name="GrabPointHandLeft" parent="Handle" instance=ExtResource("2_tawm8")]
-transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0.08, 0.552437, 0.05)
+transform = Transform3D(-1, -8.74228e-08, 4.37114e-08, 4.37114e-08, 1.91069e-15, 1, -8.74228e-08, 1, 1.91069e-15, 0, 0.483, 0.05)
+visible = true
 hand_pose = SubResource("Resource_egaf3")
 
 [node name="GrabPointHandLeft2" parent="Handle" instance=ExtResource("2_tawm8")]
 transform = Transform3D(-3.66595e-08, -2.38069e-08, -1, -0.544639, 0.838671, 0, 0.838671, 0.544639, -4.37114e-08, 0.075, 0.475, -0.19)
+visible = true
 hand_pose = SubResource("Resource_egaf3")
 
 [node name="GrabPointHandLeft3" parent="Handle" instance=ExtResource("2_tawm8")]
 transform = Transform3D(-3.66595e-08, -2.38069e-08, 1, -0.544639, 0.838671, 0, -0.838671, -0.544639, -4.37114e-08, -0.075, 0.475, 0.19)
+visible = true
 hand_pose = SubResource("Resource_egaf3")
 
 [node name="GrabPointHandRight" parent="Handle" instance=ExtResource("5_oxjma")]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.08, 0.552437, 0.05)
+transform = Transform3D(-1, -1.50996e-07, -6.60024e-15, 0, -4.37114e-08, 1, -1.50996e-07, 1, 4.37114e-08, 0, 0.483, 0.05)
+visible = true
 hand_pose = SubResource("Resource_p45jf")
 
 [node name="GrabPointHandRight2" parent="Handle" instance=ExtResource("5_oxjma")]
 transform = Transform3D(-3.66595e-08, 2.38069e-08, 1, 0.544639, 0.838671, 0, -0.838671, 0.544639, -4.37114e-08, -0.075, 0.475, -0.19)
+visible = true
 hand_pose = SubResource("Resource_p45jf")
 
 [node name="GrabPointHandRight3" parent="Handle" instance=ExtResource("5_oxjma")]
 transform = Transform3D(-3.66595e-08, 2.38069e-08, -1, 0.544639, 0.838671, 0, 0.838671, -0.544639, -4.37114e-08, 0.075, 0.475, 0.19)
+visible = true
 hand_pose = SubResource("Resource_p45jf")
 
 [node name="XRToolsHighlightVisible" type="Node3D" parent="Handle"]
