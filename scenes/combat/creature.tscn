@@ -11,6 +11,7 @@ colors = PackedColorArray(0.270222, 0.270222, 0.270222, 1, 0.856067, 0.856067, 0
 gradient = SubResource("Gradient_d1bre")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yea6j"]
+lifetime_randomness = 0.2
 emission_shape_offset = Vector3(0, -0.2, 0)
 emission_shape = 1
 emission_sphere_radius = 0.01
@@ -29,7 +30,7 @@ vertex_color_use_as_albedo = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_q4b2b"]
 material = SubResource("StandardMaterial3D_wwyui")
-size = Vector3(0.8, 0.8, 0.8)
+size = Vector3(0.6, 0.6, 0.6)
 
 [node name="Creature" type="Node3D"]
 script = ExtResource("1_xxa1m")
@@ -42,9 +43,10 @@ curve = SubResource("Curve3D_2omr6")
 [node name="CreatureContainer" type="Node3D" parent="MovementPath/PathFollow3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MovementPath/PathFollow3D/CreatureContainer"]
+visible = false
 emitting = false
 amount = 10
-lifetime = 0.8
+lifetime = 0.5
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_yea6j")

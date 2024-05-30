@@ -30,9 +30,9 @@ extends Node3D
 
 # Variables contained in this scene
 @onready var creature_container : Node3D = get_node("MovementPath/PathFollow3D/CreatureContainer")
-#@onready var hidden_mesh_instance : MeshInstance3D = get_node("MovementPath/PathFollow3D/CreatureContainer/HiddenMeshInstance")
-#@onready var collision = get_node("MovementPath/PathFollow3D/CreatureContainer/CollisionArea/CollisionShape3D")
-@onready var particles = get_node("MovementPath/PathFollow3D/CreatureContainer/GPUParticles3D")
+
+#@onready var particles = get_node("MovementPath/PathFollow3D/CreatureContainer/GPUParticles3D")
+
 @onready var path_follow = get_node("MovementPath/PathFollow3D")
 
 # Vriables contained in the creature scene
@@ -62,6 +62,12 @@ func _ready() -> void:
 	creature = creature_scene.instantiate()
 	creature.scale = creature_scale
 	creature_container.add_child(creature)
+	
+	var creature_hitbox : CreatureHitbox = creature.get_node("StaticBody3D")
+	if !creature_hitbox or creature_hitbox == null:
+		push_warning("A hitbox for the creature should be provided")
+	else:
+		creature_hitbox.hit_by_arrow.connect(_on_hit)
 	
 	# Add the object to the scene
 	object = object_scene.instantiate()
@@ -94,7 +100,6 @@ func _ready() -> void:
 	is_moving = true
 
 func _physics_process(delta: float) -> void:
-	print(animation_player.is_playing())
 	if is_moving:
 		path_follow.progress -= move_speed * delta
 
@@ -102,7 +107,7 @@ func _physics_process(delta: float) -> void:
 func _on_toggle_movement():
 	is_moving = !is_moving  # Toggle the movement state
 	
-	particles.emitting = true # emit the particles
+	#particles.emitting = true # emit the particles
 	
 	if !is_moving:
 		# Pause the walking animation
@@ -128,3 +133,8 @@ func _set_animation_playback_speed(new_value : float):
 	animation_playback_speed = new_value
 	if animation_player:
 		animation_player.speed_scale = new_value
+
+
+func _on_hit():
+	# Just despawn everythig when hit
+	queue_free()

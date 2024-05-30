@@ -1870,7 +1870,6 @@ creature_scene = ExtResource("39_bk6hs")
 creature_scale = Vector3(0.8, 0.8, 0.8)
 animation_playback_speed = 2.0
 movement_path_curve = SubResource("Curve3D_d5pxh")
-move_speed = 3.0
 object_scene = ExtResource("41_j1t3h")
 object_scale = Vector3(1.2, 1.2, 1.2)
 
