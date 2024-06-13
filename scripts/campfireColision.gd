@@ -4,12 +4,14 @@ var timer = 0
 @export var stopTime = 10  # Stop emitting particles after 10 seconds
 @export var fade_duration = 5  # Duration over which the particles fade out
 var light_node: OmniLight3D
+var cooking_area: Area3D
 var fade_timer = 0.0  # Timer for fading out
 var fading_out = false  # Indicates if fading out is in progress
 
 func _ready():
 	start_timer()
 	light_node = $OmniLight3D
+	cooking_area=$CookingArea
 
 func start_timer():
 	timer = stopTime
@@ -42,6 +44,7 @@ func update_fade(delta):
 			fire_particles.emitting = false
 			if light_node:
 				light_node.visible = false
+			cooking_area.monitoring = false
 	else:
 		print("Fire particles node not found!")
 
@@ -61,6 +64,7 @@ func reset_timer():
 		if light_node:
 			light_node.light_energy = 2.616  # Reset energy to full
 			light_node.visible = true
+		cooking_area.monitoring = true
 		print("Particles and light restarted")
 	else:
 		print("Fire particles node not found!")
