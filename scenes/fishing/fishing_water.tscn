@@ -37,14 +37,18 @@ one_shot = true
 
 [node name="DistractionKuoja" parent="." instance=ExtResource("2_c7rp6")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -15.2739)
+visible = false
 
 [node name="DistractionRaude" parent="." instance=ExtResource("3_wl1pp")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -13.2512)
+visible = false
 
 [node name="DistractionLynas" parent="." instance=ExtResource("4_pwytj")]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -15.2951)
+visible = false
 
 [node name="DistractionWind" parent="." instance=ExtResource("3_6f0le")]
+visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_water_entered"]
 [connection signal="body_exited" from="." to="." method="_on_water_exited"]
