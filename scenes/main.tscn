@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=77 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -46,7 +46,6 @@
 [ext_resource type="PackedScene" uid="uid://h4roksm87ytx" path="res://scenes/cooking/lid.tscn" id="46_vwkmn"]
 [ext_resource type="PackedScene" uid="uid://gvyk1si63evv" path="res://scenes/flowers.tscn" id="47_kirqo"]
 [ext_resource type="PackedScene" uid="uid://b2wwpdu2ao0np" path="res://scenes/bushes2.tscn" id="48_1ny86"]
-[ext_resource type="PackedScene" uid="uid://cx3om4goiitmd" path="res://scenes/fishing/fishes/lynas.tscn" id="48_o35im"]
 
 [sub_resource type="QuadOccluder3D" id="QuadOccluder3D_2rw52"]
 size = Vector2(205.386, 80.7806)
@@ -1582,177 +1581,177 @@ mesh = ExtResource("33_cbqye")
 [node name="instances3" type="Node3D" parent="Water_plants/Meshes"]
 
 [node name="@MeshInstance3D@58288" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.113138, 0, 0.00526026, 0, 0.11326, 0, -0.00526026, 0, -0.113138, 33.3452, -0.366136, -10.2942)
+transform = Transform3D(-0.113138, 0, 0.00526026, 0, 0.11326, 0, -0.00526026, 0, -0.113138, 33.3452, -1.00681, -10.2942)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58289" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0781461, 0, -0.157095, 0, 0.175458, 0, 0.157095, 0, -0.0781461, 37.2101, -0.366136, -5.70686)
+transform = Transform3D(-0.0781461, 0, -0.157095, 0, 0.175458, 0, 0.157095, 0, -0.0781461, 37.2101, -1.00681, -5.70686)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58290" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.126817, 0, -0.0377149, 0, 0.132307, 0, 0.0377149, 0, -0.126817, 33.2327, -0.366136, -7.71268)
+transform = Transform3D(-0.126817, 0, -0.0377149, 0, 0.132307, 0, 0.0377149, 0, -0.126817, 33.2327, -1.00681, -7.71268)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58291" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.113431, 0, -0.15579, 0, 0.19271, 0, 0.15579, 0, 0.113431, 25.8304, -0.366136, -5.34597)
+transform = Transform3D(0.113431, 0, -0.15579, 0, 0.19271, 0, 0.15579, 0, 0.113431, 25.8304, -1.00681, -5.34597)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58292" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0991666, 0, 0.107698, 0, 0.1464, 0, -0.107698, 0, -0.0991666, 43.2201, -0.366135, -2.73209)
+transform = Transform3D(-0.0991666, 0, 0.107698, 0, 0.1464, 0, -0.107698, 0, -0.0991666, 43.2201, -1.00681, -2.73209)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58293" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0955872, 0, 0.102781, 0, 0.140359, 0, -0.102781, 0, 0.0955872, 38.4839, -0.366136, -0.360868)
+transform = Transform3D(0.0955872, 0, 0.102781, 0, 0.140359, 0, -0.102781, 0, 0.0955872, 38.4839, -1.00681, -0.360868)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58294" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.176835, 0, -0.0293834, 0, 0.179259, 0, 0.0293834, 0, -0.176835, 32.7828, -0.366136, -0.188869)
+transform = Transform3D(-0.176835, 0, -0.0293834, 0, 0.179259, 0, 0.0293834, 0, -0.176835, 32.7828, -1.00681, -0.188869)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58295" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.157539, 0, -0.0816133, 0, 0.177424, 0, 0.0816133, 0, -0.157539, 28.2535, -0.366136, -1.59652)
+transform = Transform3D(-0.157539, 0, -0.0816133, 0, 0.177424, 0, 0.0816133, 0, -0.157539, 28.2535, -1.00681, -1.59652)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58296" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.163587, 0, 0.0676782, 0, 0.177034, 0, -0.0676782, 0, -0.163587, 22.9568, -0.366136, -1.63616)
+transform = Transform3D(-0.163587, 0, 0.0676782, 0, 0.177034, 0, -0.0676782, 0, -0.163587, 22.9568, -1.00681, -1.63616)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58297" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0205962, 0, 0.0989531, 0, 0.101074, 0, -0.0989531, 0, 0.0205962, 37.9587, -0.366136, 3.21632)
+transform = Transform3D(0.0205962, 0, 0.0989531, 0, 0.101074, 0, -0.0989531, 0, 0.0205962, 37.9587, -1.00681, 3.21632)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58298" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.14592, 0, -0.0732764, 0, 0.163286, 0, 0.0732764, 0, -0.14592, 30.6785, -0.366136, 4.10008)
+transform = Transform3D(-0.14592, 0, -0.0732764, 0, 0.163286, 0, 0.0732764, 0, -0.14592, 30.6785, -1.00681, 4.10008)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58299" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0953088, 0, 0.0667321, 0, 0.116348, 0, -0.0667321, 0, -0.0953088, 27.4693, -0.366136, 3.26187)
+transform = Transform3D(-0.0953088, 0, 0.0667321, 0, 0.116348, 0, -0.0667321, 0, -0.0953088, 27.4693, -1.00681, 3.26187)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58300" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.122884, 0, 0.0338581, 0, 0.127463, 0, -0.0338581, 0, -0.122884, 31.3926, -0.366136, 8.86799)
+transform = Transform3D(-0.122884, 0, 0.0338581, 0, 0.127463, 0, -0.0338581, 0, -0.122884, 31.3926, -1.00681, 8.86799)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58301" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0615023, 0, -0.084535, 0, 0.10454, 0, 0.084535, 0, 0.0615023, 23.4204, -0.366136, 20.054)
+transform = Transform3D(0.0615023, 0, -0.084535, 0, 0.10454, 0, 0.084535, 0, 0.0615023, 23.4204, -1.00681, 20.054)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58302" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0640979, 0, -0.181601, 0, 0.192581, 0, 0.181601, 0, 0.0640979, 17.9853, -0.366136, 18.2811)
+transform = Transform3D(0.0640979, 0, -0.181601, 0, 0.192581, 0, 0.181601, 0, 0.0640979, 17.9853, -1.00681, 18.2811)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58303" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.030402, 0, -0.102497, 0, 0.106911, 0, 0.102497, 0, 0.030402, 14.3996, -0.366136, 19.3361)
+transform = Transform3D(0.030402, 0, -0.102497, 0, 0.106911, 0, 0.102497, 0, 0.030402, 14.3996, -1.00681, 19.3361)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58304" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0851536, 0, 0.0932207, 0, 0.126259, 0, -0.0932207, 0, -0.0851536, 30.1719, -0.366136, 22.29)
+transform = Transform3D(-0.0851536, 0, 0.0932207, 0, 0.126259, 0, -0.0932207, 0, -0.0851536, 30.1719, -1.00681, 22.29)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58305" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.141944, 0, 0.0174627, 0, 0.143014, 0, -0.0174627, 0, -0.141944, 25.0077, -0.366136, 22.3425)
+transform = Transform3D(-0.141944, 0, 0.0174627, 0, 0.143014, 0, -0.0174627, 0, -0.141944, 25.0077, -1.00681, 22.3425)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58306" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0984211, 0, 0.13877, 0, 0.170129, 0, -0.13877, 0, 0.0984211, 20.7576, -0.366136, 25.2293)
+transform = Transform3D(0.0984211, 0, 0.13877, 0, 0.170129, 0, -0.13877, 0, 0.0984211, 20.7576, -1.00681, 25.2293)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58307" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.117275, 0, 0.0328417, 0, 0.121787, 0, -0.0328417, 0, -0.117275, 14.6217, -0.366136, 24.2196)
+transform = Transform3D(-0.117275, 0, 0.0328417, 0, 0.121787, 0, -0.0328417, 0, -0.117275, 14.6217, -1.00681, 24.2196)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58308" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0390991, 0, 0.0992588, 0, 0.106682, 0, -0.0992588, 0, 0.0390991, 8.29306, -0.366135, 24.5342)
+transform = Transform3D(0.0390991, 0, 0.0992588, 0, 0.106682, 0, -0.0992588, 0, 0.0390991, 8.29306, -1.00681, 24.5342)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58309" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.106065, 0, 0.14405, 0, 0.178886, 0, -0.14405, 0, -0.106065, 24.4311, -0.366136, 28.8214)
+transform = Transform3D(-0.106065, 0, 0.14405, 0, 0.178886, 0, -0.14405, 0, -0.106065, 24.4311, -1.00681, 28.8214)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58310" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0729643, 0, -0.121834, 0, 0.142012, 0, 0.121834, 0, 0.0729643, 20.6822, -0.366136, 27.5942)
+transform = Transform3D(0.0729643, 0, -0.121834, 0, 0.142012, 0, 0.121834, 0, 0.0729643, 20.6822, -1.00681, 27.5942)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58311" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.107825, 0, 0.0749608, 0, 0.131321, 0, -0.0749608, 0, -0.107825, 12.8778, -0.287256, 30.2078)
+transform = Transform3D(-0.107825, 0, 0.0749608, 0, 0.131321, 0, -0.0749608, 0, -0.107825, 12.8778, -0.927931, 30.2078)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58312" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.182284, 0, -0.0234583, 0, 0.183787, 0, 0.0234583, 0, -0.182284, 20.6634, -0.366135, 34.9218)
+transform = Transform3D(-0.182284, 0, -0.0234583, 0, 0.183787, 0, 0.0234583, 0, -0.182284, 20.6634, -1.00681, 34.9218)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58313" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.162685, 0, -0.0671965, 0, 0.176017, 0, 0.0671965, 0, 0.162685, 37.3078, -0.366136, 15.7486)
+transform = Transform3D(0.162685, 0, -0.0671965, 0, 0.176017, 0, 0.0671965, 0, 0.162685, 37.3078, -1.00681, 15.7486)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58314" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.0667012, 0, -0.0785878, 0, 0.103078, 0, 0.0785878, 0, 0.0667012, 36.8267, -0.366136, 22.0723)
+transform = Transform3D(0.0667012, 0, -0.0785878, 0, 0.103078, 0, 0.0785878, 0, 0.0667012, 36.8267, -1.00681, 22.0723)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58315" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.130019, 0, -0.149648, 0, 0.198241, 0, 0.149648, 0, -0.130019, 48.2962, -0.366135, 25.174)
+transform = Transform3D(-0.130019, 0, -0.149648, 0, 0.198241, 0, 0.149648, 0, -0.130019, 48.2962, -1.00681, 25.174)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58316" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.122724, 0, 0.0150595, 0, 0.123644, 0, -0.0150595, 0, -0.122724, 37.9366, -0.366136, 25.0493)
+transform = Transform3D(-0.122724, 0, 0.0150595, 0, 0.123644, 0, -0.0150595, 0, -0.122724, 37.9366, -1.00681, 25.0493)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58317" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0985273, 0, -0.106845, 0, 0.14534, 0, 0.106845, 0, -0.0985273, 30.9952, -0.366136, 27.1668)
+transform = Transform3D(-0.0985273, 0, -0.106845, 0, 0.14534, 0, 0.106845, 0, -0.0985273, 30.9952, -1.00681, 27.1668)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58318" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.106307, 0, 0.149279, 0, 0.183263, 0, -0.149279, 0, -0.106307, 25.9375, -0.366135, 26.9243)
+transform = Transform3D(-0.106307, 0, 0.149279, 0, 0.183263, 0, -0.149279, 0, -0.106307, 25.9375, -1.00681, 26.9243)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58319" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.185798, 0, -0.0609989, 0, 0.195555, 0, 0.0609989, 0, 0.185798, 42.8077, -0.366136, 31.986)
+transform = Transform3D(0.185798, 0, -0.0609989, 0, 0.195555, 0, 0.0609989, 0, 0.185798, 42.8077, -1.00681, 31.986)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58320" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.00482643, 0, -0.109447, 0, 0.109554, 0, 0.109447, 0, -0.00482643, 36.1647, -0.366136, 30.411)
+transform = Transform3D(-0.00482643, 0, -0.109447, 0, 0.109554, 0, 0.109447, 0, -0.00482643, 36.1647, -1.00681, 30.411)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58321" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(-0.0468, 0, 0.189315, 0, 0.195014, 0, -0.189315, 0, -0.0468, 33.286, -0.366136, 30.9144)
+transform = Transform3D(-0.0468, 0, 0.189315, 0, 0.195014, 0, -0.189315, 0, -0.0468, 33.286, -1.00681, 30.9144)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
 [node name="@MeshInstance3D@58322" type="MeshInstance3D" parent="Water_plants/Meshes/instances3"]
-transform = Transform3D(0.154894, 0, -0.0911256, 0, 0.179711, 0, 0.0911256, 0, 0.154894, 37.321, 0.727778, 35.0721)
+transform = Transform3D(0.154894, 0, -0.0911256, 0, 0.179711, 0, 0.0911256, 0, 0.154894, 37.321, 0.0871029, 35.0721)
 lod_bias = 0.02
 mesh = ExtResource("34_4gx3r")
 
@@ -1946,9 +1945,6 @@ transform = Transform3D(-0.214906, 0, -0.976635, 0, 1, 0, 0.976635, 0, -0.214906
 
 [node name="Lid" parent="." instance=ExtResource("46_vwkmn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5283, 1.21558, -4.94514)
-
-[node name="Lynas" parent="." instance=ExtResource("48_o35im")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40858, 1.04063, -1.08252)
 
 [connection signal="area_entered" from="Campfire2/CookingArea" to="Skillet/Skillet" method="_on_cooking_area_area_entered"]
 [connection signal="area_exited" from="Campfire2/CookingArea" to="Skillet/Skillet" method="_on_cooking_area_area_exited"]
