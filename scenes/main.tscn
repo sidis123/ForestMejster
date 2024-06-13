@@ -62,17 +62,17 @@ render_priority = 0
 shader = ExtResource("6_65b7g")
 shader_parameter/triangleHeight = 0.5
 shader_parameter/triangleSpeed = 0.5
-shader_parameter/primaryColor = Color(0, 0.607843, 0.47451, 1)
-shader_parameter/secondaryColor = Color(0.901961, 0.909804, 0.996078, 1)
+shader_parameter/primaryColor = Color(3.27289e-06, 0.676622, 0.529454, 1)
+shader_parameter/secondaryColor = Color(0.0493971, 0.494221, 0.670911, 1)
 shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.41
+shader_parameter/roughness = 0.612
 shader_parameter/waveDirection1 = Vector2(2, 0)
 shader_parameter/waveDirection2 = Vector2(0, 1)
 shader_parameter/timeScale = 0.025
-shader_parameter/deepWaterColor = Color(0.176471, 0.501961, 0.333333, 1)
-shader_parameter/shallowWaterColor = Color(0.345098, 0.670588, 0.65098, 1)
-shader_parameter/attenuationCoefficient = 2.0
-shader_parameter/depthOffset = -0.75
+shader_parameter/deepWaterColor = Color(0.285704, 0.777533, 0.523833, 1)
+shader_parameter/shallowWaterColor = Color(0.166632, 0.377332, 0.365186, 1)
+shader_parameter/attenuationCoefficient = 3.0
+shader_parameter/depthOffset = -1.0
 shader_parameter/edgeScale = 1.0
 shader_parameter/nearPlane = 1.0
 shader_parameter/farPlane = 100.0
@@ -400,28 +400,31 @@ transform = Transform3D(-1.21918, 0, -0.443855, 0, 1, 0, 0.490106, 0, -1.10413, 
 transform = Transform3D(-0.634024, 0, 1.35942, 0, 1.5, 0, -1.35942, 0, -0.634024, 18.7515, 0.178752, 8.37013)
 
 [node name="Fish_mock2" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(0.676658, 0, 0.736298, 0, 1, 0, -0.736298, 0, 0.676658, 32.4772, -4.56082, 25.2337)
+transform = Transform3D(-0.882127, 0, 0.471012, 0, 1, 0, -0.471012, 0, -0.882127, 32.4772, -0.929412, 25.2337)
 
 [node name="Fish_mock3" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(0.864494, 0, 0.502643, 0, 1, 0, -0.502643, 0, 0.864494, 27.9467, -4.03361, 19.712)
+transform = Transform3D(0.864494, 0, 0.502643, 0, 1, 0, -0.502643, 0, 0.864494, 23.0904, -1.50363, 6.47072)
 
 [node name="Fish_mock5" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(0.984805, 0, -0.173665, 0, 1, 0, 0.173665, 0, 0.984805, 25.9428, -7.33244, 18.6086)
+transform = Transform3D(0.984805, 0, -0.173665, 0, 1, 0, 0.173665, 0, 0.984805, 25.9428, -1.95384, 18.6086)
 
 [node name="Fish_mock6" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(-0.84051, 0, -0.541796, 0, 1, 0, 0.541796, 0, -0.84051, 31.6339, -4.909, 11.8281)
+transform = Transform3D(-0.84051, 0, -0.541796, 0, 1, 0, 0.541796, 0, -0.84051, 31.6339, -1.55759, 11.8281)
+
+[node name="Fish_mock10" parent="Fishing" instance=ExtResource("14_h3ydf")]
+transform = Transform3D(-0.84051, 0, -0.541796, 0, 1, 0, 0.541796, 0, -0.84051, 20.1896, -1.11641, 14.3969)
 
 [node name="Fish_mock7" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(-0.901546, 0, -0.432684, 0, 1, 0, 0.432684, 0, -0.901546, 33.3174, -2.30672, 7.87277)
+transform = Transform3D(-0.97613, 0, 0.217189, 0, 1, 0, -0.217189, 0, -0.97613, 33.3174, -1.40738, 7.87277)
 
 [node name="Fish_mock8" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(0.870982, 0, 0.491314, 0, 1, 0, -0.491314, 0, 0.870982, 21.1104, -5.06889, 12.8079)
+transform = Transform3D(0.870982, 0, 0.491314, 0, 1, 0, -0.491314, 0, 0.870982, 27.746, -1.17235, 4.67736)
 
 [node name="Fish_mock9" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(0.576432, 0, 0.817145, 0, 1, 0, -0.817145, 0, 0.576432, 20.0848, -1.49086, 17.3126)
+transform = Transform3D(0.576432, 0, 0.817145, 0, 1, 0, -0.817145, 0, 0.576432, 25.7752, -1.49086, 11.4459)
 
 [node name="Fish_mock" parent="Fishing" instance=ExtResource("14_h3ydf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4086, -3.951, 15.2789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7224, -1.02162, 15.7706)
 
 [node name="Bucket" parent="Fishing" instance=ExtResource("10_ym32v")]
 transform = Transform3D(0.906684, 0, 0.421811, 0, 1, 0, -0.421811, 0, 0.906684, 19.7135, 0.540002, 6.17818)

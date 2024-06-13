@@ -36,10 +36,13 @@ one_shot = true
 one_shot = true
 
 [node name="DistractionKuoja" parent="." instance=ExtResource("2_c7rp6")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -15.2739)
 
 [node name="DistractionRaude" parent="." instance=ExtResource("3_wl1pp")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -13.2512)
 
 [node name="DistractionLynas" parent="." instance=ExtResource("4_pwytj")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, -15.2951)
 
 [node name="DistractionWind" parent="." instance=ExtResource("3_6f0le")]
 
