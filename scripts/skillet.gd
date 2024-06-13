@@ -27,7 +27,7 @@ func _ready():
 		
 	# Initialize timers
 	add_child(cooking_timer)
-	cooking_timer.wait_time = 30.0
+	cooking_timer.wait_time = 25.0
 	cooking_timer.one_shot = true
 	cooking_timer.connect("timeout", Callable(self, "_on_cooking_timer_timeout"))
 	
@@ -46,7 +46,6 @@ func _on_area_body_entered(body):
 			body.linear_velocity = Vector3.ZERO
 			# Remove angular velocity
 			body.angular_velocity = Vector3.ZERO
-			print(body.rotation.z)
 			if body.rotation.z < 0:
 				body.get_node("Mesh2")._start_cooking()
 				body.get_node("Mesh2").connect("cooking_completed", Callable(self, "_on_cooking_completed"))
@@ -66,7 +65,6 @@ func _on_area_body_entered(body):
 
 func _on_area_body_exited(body):
 	if body.is_in_group("Cookable"):
-		print(body.rotation.z)
 		if body.rotation.z < 0:
 			body.get_node("Mesh2")._stop_cooking()
 		else:
@@ -77,14 +75,11 @@ func _on_area_body_exited(body):
 		fish_state = FishState.NORMAL
 		print("Cooking stopped")
 		emit_signal("stop_cooking")
-		
-		# Stop cooking timer and start outside timer
-		cooking_timer.stop()
-		outside_timer.start()
 
 func _on_cooking_area_area_entered(area):
 	skillet_in_cooking_area = true
 	cooking_timer.start()
+	outside_timer.stop()
 	for body in area.get_overlapping_bodies():
 		if body.is_in_group("Cookable"):
 			# Set fish state to ON_BLIUDAS
@@ -93,7 +88,6 @@ func _on_cooking_area_area_entered(area):
 			body.linear_velocity = Vector3.ZERO
 			# Remove angular velocity
 			body.angular_velocity = Vector3.ZERO
-			print(body.rotation.z)
 			if body.rotation.z < 0:
 				body.get_node("Mesh2")._start_cooking()
 				body.get_node("Mesh2").connect("cooking_completed", Callable(self, "_on_cooking_completed"))
@@ -114,7 +108,6 @@ func _on_cooking_area_area_exited(area):
 	smoke_particles.emitting = false
 	for body in area.get_overlapping_bodies():
 		if body.is_in_group("Cookable"):
-			print(body.rotation.z)
 			if body.rotation.z < 0:
 				body.get_node("Mesh2")._stop_cooking()
 			else:
@@ -125,12 +118,11 @@ func _on_cooking_area_area_exited(area):
 			emit_signal("stop_cooking")
 
 func _on_cooking_completed():
-	print("Cooking completed!")
 	steam_particles.emitting = false
 	smoke_particles.emitting = true
 
 func _on_cooking_timer_timeout():
-	print("The skillet has been in the cooking area for 30 seconds.")
+	print("The skillet has been in the cooking area for 25 seconds.")
 	fire_particles.emitting = true
 
 func _on_outside_timer_timeout():
