@@ -1,6 +1,6 @@
 extends XRToolsPickable
 
-const STAKE = preload("res://scenes/steak.tscn") 
+#const STAKE = preload("res://scenes/steak.tscn") 
 const force_factor = 0.1
 @onready var combat_node = get_node("../../")
 
@@ -24,7 +24,7 @@ const force_factor = 0.1
 func _on_Arrow_body_entered(body):
 	if body.has_method("on_hit_by_arrow"):
 		body.on_hit_by_arrow()
-		var steak_instance = STAKE.instantiate()
-		steak_instance.global_transform.origin = global_transform.origin 
-		combat_node.add_child(steak_instance)  # Add the new Steak node to the scene tree
+		#var steak_instance = STAKE.instantiate()
+		#steak_instance.global_transform.origin = global_transform.origin 
+		#combat_node.add_child(steak_instance)  # Add the new Steak node to the scene tree
 		queue_free()

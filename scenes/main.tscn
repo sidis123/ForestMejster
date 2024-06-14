@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=78 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://p4wp17ln30qd" path="res://Audio/birdsTest.mp3" id="43_67go0"]
 [ext_resource type="PackedScene" uid="uid://ck41s7q3i5tt0" path="res://models/nature/rocks/small/Rock_small_v3.glb" id="44_es8te"]
 [ext_resource type="PackedScene" uid="uid://bkj6ty5kdth1w" path="res://scenes/quiver.tscn" id="44_nghe1"]
+[ext_resource type="PackedScene" uid="uid://wt3xvamdtofe" path="res://scenes/log.tscn" id="45_5njgx"]
 [ext_resource type="PackedScene" uid="uid://c6wf68pe71k2a" path="res://scenes/cooking/skillet.tscn" id="45_6wdpy"]
 [ext_resource type="PackedScene" uid="uid://h4roksm87ytx" path="res://scenes/cooking/lid.tscn" id="46_vwkmn"]
 [ext_resource type="PackedScene" uid="uid://gvyk1si63evv" path="res://scenes/flowers.tscn" id="47_kirqo"]
@@ -1267,13 +1268,13 @@ mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_47379" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(1.54228, -0.11183, -0.144856, 0.118076, 1.54734, 0.0625915, 0.139812, -0.0731684, 1.54506, -7.46906, -0.325767, 3.2971)
+transform = Transform3D(1.54228, -0.11183, -0.144856, 0.118076, 1.54734, 0.0625915, 0.139812, -0.0731684, 1.54506, -7.85953, -0.325767, 3.08236)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
 
 [node name="_MeshInstance3D_47380" type="MeshInstance3D" parent="Trees"]
-transform = Transform3D(-0.510364, -0.013019, 1.48912, -0.0648142, 1.57284, -0.00846268, -1.48776, -0.0640547, -0.510459, -1.31896, 0.104818, 7.04092)
+transform = Transform3D(-0.510364, -0.013019, 1.48912, -0.0648142, 1.57284, -0.00846268, -1.48776, -0.0640547, -0.510459, -1.04476, 0.104818, 7.4028)
 lod_bias = 0.001
 mesh = ExtResource("30_4omla")
 skeleton = NodePath("../../instances2")
@@ -1813,10 +1814,10 @@ autoplay = true
 transform = Transform3D(-0.964617, 0, -0.263654, 0, 1, 0, 0.263654, 0, -0.964617, -3.62221, 0.811652, 16.0418)
 
 [node name="Quiver" parent="Combat" instance=ExtResource("44_nghe1")]
-transform = Transform3D(0.975296, 0, -0.220901, 0, 1, 0, 0.220901, 0, 0.975296, -5.87977, 0.469176, 5.5495)
+transform = Transform3D(0.472375, -0.129003, 0.871906, 0.354164, 0.933638, -0.0537402, -0.807112, 0.334183, 0.486716, -5.20111, 0.542516, 4.47996)
 
 [node name="Bow" parent="Combat" instance=ExtResource("22_6ivd3")]
-transform = Transform3D(0.870913, 0, -0.491436, 0, 1, 0, 0.491436, 0, 0.870913, -2.24175, 1.43331, -5.5218)
+transform = Transform3D(0.778921, 0.536711, -0.324378, -2.36044e-08, 0.517251, 0.855834, 0.62712, -0.666628, 0.402898, -4.36068, 1.14276, 5.25058)
 
 [node name="Creatures" type="Node" parent="Combat"]
 
@@ -1889,11 +1890,11 @@ transform = Transform3D(0.768412, 0.603639, 0.212519, -0.61775, 0.786375, 0, -0.
 [node name="Map_Borders" type="StaticBody3D" parent="Clutter"]
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Clutter/Map_Borders"]
-transform = Transform3D(-0.510364, -0.013019, 1.48912, -0.0648142, 1.57284, -0.00846268, -1.48776, -0.0640547, -0.510459, -1.31896, 0.104818, 7.04092)
+transform = Transform3D(-0.510364, -0.013019, 1.48912, -0.0648142, 1.57284, -0.00846268, -1.48776, -0.0640547, -0.510459, -1.15947, 0.104818, 7.24427)
 shape = SubResource("ConvexPolygonShape3D_wcubf")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Clutter/Map_Borders"]
-transform = Transform3D(1.54228, -0.11183, -0.144856, 0.118076, 1.54734, 0.0625915, 0.139812, -0.0731684, 1.54506, -7.46906, -0.325767, 3.2971)
+transform = Transform3D(1.54228, -0.11183, -0.144856, 0.118076, 1.54734, 0.0625915, 0.139812, -0.0731684, 1.54506, -7.65366, -0.325767, 3.31135)
 shape = SubResource("ConvexPolygonShape3D_hcpp5")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Clutter/Map_Borders"]
@@ -1939,6 +1940,9 @@ transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -5.68596, 0.487846, 
 [node name="Flowers" parent="Clutter" instance=ExtResource("47_kirqo")]
 
 [node name="Bushes" parent="Clutter" instance=ExtResource("48_1ny86")]
+
+[node name="Log" parent="Clutter" instance=ExtResource("45_5njgx")]
+transform = Transform3D(0.00955997, -0.645596, -0.354206, 0.599924, 0.0101126, 0.00582402, -0.000222552, -0.472338, 0.484257, -2.78092, 0.983794, 7.1089)
 
 [node name="Skillet" parent="." instance=ExtResource("45_6wdpy")]
 transform = Transform3D(-0.214906, 0, -0.976635, 0, 1, 0, 0.976635, 0, -0.214906, -1.20625, 1.39732, -6.01796)
