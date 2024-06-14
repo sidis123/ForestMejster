@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dqmlp2hfmrh7m"]
+[gd_scene load_steps=79 format=3 uid="uid://dqmlp2hfmrh7m"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/staging/scene_base.gd" id="1_0wkb3"]
 [ext_resource type="PackedScene" uid="uid://bsotifvyxaf5u" path="res://scenes/player.tscn" id="1_e77tj"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cirviy7nnojqm" path="res://models/nature/bushes/bush_small.glb" id="32_1c0df"]
 [ext_resource type="ArrayMesh" uid="uid://bffw5ionewh8" path="res://resources/lily_pad.mesh" id="32_p55uf"]
 [ext_resource type="ArrayMesh" uid="uid://ba21yn7gcpbro" path="res://resources/reed.mesh" id="33_cbqye"]
+[ext_resource type="Script" path="res://scripts/combat/creature_manager.gd" id="33_f4c4m"]
 [ext_resource type="PackedScene" uid="uid://cj0af44eyc5lh" path="res://models/nature/bushes/stump.glb" id="33_qiqs6"]
 [ext_resource type="ArrayMesh" uid="uid://nll4edetaqqw" path="res://resources/watergrass.mesh" id="34_4gx3r"]
 [ext_resource type="PackedScene" uid="uid://cafexsdximroi" path="res://models/nature/rocks/small/Rock_small_v1.glb" id="34_jwjut"]
@@ -1694,6 +1695,12 @@ transform = Transform3D(0.472375, -0.129003, 0.871906, 0.354164, 0.933638, -0.05
 transform = Transform3D(0.778921, 0.536711, -0.324378, -2.36044e-08, 0.517251, 0.855834, 0.62712, -0.666628, 0.402898, -4.36068, 1.14276, 5.25058)
 
 [node name="Creatures" type="Node" parent="Combat"]
+script = ExtResource("33_f4c4m")
+creature_scene = ExtResource("43_2bcqx")
+bezdukas_scene = ExtResource("39_bk6hs")
+kipsas_scene = ExtResource("40_wa0sj")
+movement_path_curves = Array[Curve3D]([SubResource("Curve3D_d5pxh"), SubResource("Curve3D_d1bjj"), SubResource("Curve3D_oq0cm"), SubResource("Curve3D_obhfm"), SubResource("Curve3D_lv1rs"), SubResource("Curve3D_3e827")])
+object_scenes = Array[PackedScene]([ExtResource("34_jwjut"), ExtResource("42_aju2i"), ExtResource("44_es8te")])
 
 [node name="Bezdukas1" parent="Combat/Creatures" instance=ExtResource("43_2bcqx")]
 creature_scene = ExtResource("39_bk6hs")
