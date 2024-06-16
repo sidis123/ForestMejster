@@ -1,6 +1,8 @@
 class_name Creature
 extends Node3D
 
+signal died
+
 @export_category("Creature")
 
 ## The scene used as the creature
@@ -63,10 +65,12 @@ func _ready() -> void:
 	creature = creature_scene.instantiate()
 	creature.scale = creature_scale
 	creature_container.add_child(creature)
+	particles.emitting = true
 	
 	var creature_hitbox = creature.get_node("StaticBody3D")
 	if not creature_hitbox or creature_hitbox == null or not creature_hitbox is CreatureHitbox:
-		push_warning("A hitbox for the creature should be provided")
+		#push_warning("A hitbox for the creature should be provided")
+		pass
 	else:
 		creature_hitbox.hit_by_arrow.connect(_on_hit)
 	
@@ -83,6 +87,7 @@ func _ready() -> void:
 	# Set the movement path
 	var movement_path : Path3D = get_node("MovementPath")
 	movement_path.curve = movement_path_curve
+	path_follow.progress = randf_range(0, 1)
 	
 	
 	animation_player = creature.get_node("AnimationPlayer")
@@ -100,10 +105,12 @@ func _ready() -> void:
 	
 	is_moving = true
 
+
 func _physics_process(delta: float) -> void:
 	if not is_dead and is_moving:
 		path_follow.progress -= move_speed * delta
 	if is_dead and particles.emitting == false:
+		died.emit()
 		queue_free()
 
 ## Called when the movement state is toggled

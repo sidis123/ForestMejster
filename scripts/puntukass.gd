@@ -27,7 +27,7 @@ func _process(delta):
 			eye1.emitting = true
 			eye2.emitting = true
 			if distance_to_player <= max_distance and not sound_player.playing:  # Play sound if within distance
-				sound_player.play(0.3)
+				sound_player.play(0.2)
 		else:
 			eye1.emitting = false
 			eye2.emitting = false
